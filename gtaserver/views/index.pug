@@ -1,0 +1,35 @@
+doctype html
+//
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+    and open the template in the editor.
+
+html
+    head
+        title GTA
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", type="text/css", href="/stylesheets/style.css")
+        script(src="https://unpkg.com/vue")
+
+    body
+        header
+            h1 Graphical Tagging Application
+        form#sample(action="/", method="POST")
+            h2  Sample Form 1
+            p.displayData First Name: {{ firstName }},
+            p.displayData Last Name: {{lastName}},
+            p.displayData Email Address {{email}}
+            br
+            input(v-model="firstName", type="text", name="firstName", placeholder="First Name...")
+            br
+            input(v-model="lastName", type="text", name="lastName", placeholder="Last Name...")
+            br
+            input(v-model="email", type="text", name="emailName", placeholder="Email...")
+            br
+            input(v-model="password", type="password", name="passwordName", placeholder="Password...")
+            br
+            input(v-model="confirmPassword", type="password", name="confirmPassord", placeholder="Password...")
+            br
+            input#submitButton(type="submit", value="Submit")
+        script(src="vue.js")
