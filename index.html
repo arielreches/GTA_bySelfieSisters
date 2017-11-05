@@ -21,11 +21,11 @@ and open the template in the editor.
             <p class = "displayData">First Name: {{ firstName }}, </p>
             <p class = "displayData">Last Name: {{lastName}}, </p>
             <p class = "displayData">Email Address {{email}}</p><br>         
-            <input v-model="firstName" type = "text" placeholder="First Name..."><br>
-            <input v-model="lastName" type = "text" placeholder="Last Name..."><br>
-            <input v-model="email" type = "text" placeholder="Email..."><br>
-            <input v-model="password" type = "password" placeholder="Password..."><br>
-            <input v-model="confirmPassword" type = "password" placeholder="Password..."><br>
+            <input v-model="firstName" type = "text" name="firstName" placeholder="First Name..."><br>
+            <input v-model="lastName" type = "text" name="lastName" placeholder="Last Name..."><br>
+            <input v-model="email" type = "text" name="emailName" placeholder="Email..."><br>
+            <input v-model="password" type = "password" name="passwordName" placeholder="Password..."><br>
+            <input v-model="confirmPassword" type = "password" name="confirmPassord" placeholder="Password..."><br>
             <input id = "submitButton" type = "submit" value="Submit">
         </form>
         
