@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/vue"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id = "nav">
+        <div class="bar">
+            <ul class = "ulnavbar">
+                <li class = "linavbar" v-for="tags in tagList"><a class = "navbar" href="#" v-on:click="makeActive(tags.name)">     {{tags.name}}   </a></li>
+            </ul>
+        </div>
+       
+        <div class = "input1">
+            <p>You Chose <b>{{tagName}}</b></p>
+            <div>
+                <form id = "inputForm">
+                    <input type="text" v-model="searchString" placeholder="Enter your search terms" />
+                </form>
+             </div>
+
+            <p>Displaying Results For: {{searchString}}, In: {{tagName}}</p>
+        </div>
+
+
+
+        <ul>
+            <li v-for="article in filteredArticles">
+                <div class = "listContainer">
+                    <a class = "text" v-for="thing in article">{{thing}}   </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
+<script>
+
+    var nav = new Vue({
+        el: "#nav",
+
+        data:{
+
+            tagName:'companyName',
+
+            searchString: '',
+
+            otherString: '',
+
+            tagList:[
+                {
+                    name:"companyName"
+                },
+                {
+                    name:"systemName"
+                },
+                {
+                    name:"serialNumber"
+                },
+                {
+                    name:"productFamily"
+                },
+                {
+                    name:"model"
+                },
+                {
+                    name:"osVersion"
+                },
+                {
+                    name:"patches"
+                },
+                {
+                    name:"cpgCount"
+                }
+            ],
+            articles: [
+                {
+                    "companyName":"Arkon",
+                    "systemName":"Everyman",
+                    "serialNumber":"1",
+                    "productFamily":"7000",
+                    "model":"7400",
+                    "osVersion":"3.2.2.530 (MU3)",
+                    "patches":"P39",
+                    "cpgCount":"81",
+
+                },
+                {
+                    "companyName":"Sigyn",
+                    "systemName":"Jarella",
+                    "serialNumber":"2",
+                    "productFamily":"7000",
+                    "model":"7200",
+                    "osVersion":"3.2.2.390 (MU2)",
+                    "patches":"P11:P14:P15",
+                    "cpgCount":"6",
+
+                },
+                {
+                    "companyName":"Scarlet Beetle",
+                    "systemName":"Thunderfist",
+                    "serialNumber":"3",
+                    "productFamily":"7000",
+                    "model":"7400",
+                    "osVersion":"3.2.2.390 (MU2)",
+                    "patches":"P11:P14:P15:P19:P22:P24",
+                    "cpgCount":"3",
+
+                },
+                {
+                    "companyName":"Karima Shapanda",
+                    "systemName":"Wyatt Wingfoot",
+                    "serialNumber":"4",
+                    "productFamily":"7000",
+                    "model":"7200c",
+                    "osVersion":"3.2.2.612 (MU4)",
+                    "patches":"P56:P59:P74:P84:P85:P90",
+                    "cpgCount":"21",
+
+                },
+                {
+                    "companyName":"Ghost Dancer",
+                    "systemName":"Jared Corbo",
+                    "serialNumber":"5",
+                    "productFamily":"8000",
+                    "model":"8440",
+                    "osVersion":"3.2.2.612 (MU4)",
+                    "patches":"P51:P56:P58:P59:P60:P73:P80",
+                    "cpgCount":"9",
+
+                },
+                {
+                    "companyName":"Max",
+                    "systemName":"Contrary",
+                    "serialNumber":"6",
+                    "productFamily":"7000",
+                    "model":"7200c",
+                    "osVersion":"3.2.2.390 (MU2)",
+                    "patches":"P11:P14:P15:P19:P20:P38:P46",
+                    "cpgCount":"18",
+
+                }
+            ]
+        },
+        computed: {
+            // A computed property that holds only those articles that match the searchString.
+            filteredArticles: function () {
+                var articles_array = this.articles,
+                    searchString = this.searchString;
+
+                if(!searchString){
+                    return articles_array;
+                }
+                else {
+
+                    if(this.tagName=="companyName"){
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+
+                                for(var property in item) {
+                                    this.otherString = property;
+                                    var thing = item[property];
+                                    console.log(thing);
+                                }
+
+
+                                if (item.companyName.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="systemName"){
+
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.systemName.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="serialNumber"){
+                        t
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.serialNumber.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="productFamily"){
+                        th
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.productFamily.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="model"){
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.model.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="osVersion"){
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.osVersion.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else if(this.tagName=="patches"){
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.patches.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+                    else{
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(
+                            function (item) {
+                                if (item.cpgCount.toLowerCase().indexOf(searchString) !== -1) {
+                                    return item;
+                                }
+                            })
+                    }
+
+                }
+
+                // Return an array with the filtered data.
+                return articles_array;
+            }
+        },
+        methods: {
+            makeActive: function (item) {
+                this.tagName = item;
+                var form = document.getElementById("inputForm");
+                form.reset();
+                this.searchString='';
+            },
+        }
+    });
+</script>
+<style>
+    ul.ulnavbar {
+        list-style-type: none;
+        margin: 0;
+        padding: 1%;
+        overflow: hidden;
+        background-color: #333;
+        margin: auto;
+        width:500px;
+        border:solid;
+        border-color:darkslategrey;
+    }
+
+    li.linavbar {
+        float: left;
+        /* border-right:1px solid #bbb; */
+        /* border-bottom:1px solid #bbb; */
+        border:1px solid #bbb;
+    }
+
+    /* li.linavbar:last-child {
+        border-right: none;
+    } */
+
+    li.linavbar a.navbar {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a.navbar:hover {
+        background-color: #111;
+    }
+
+    .input1{
+        font-family: inherit;
+        border:solid;
+        border-color:darkslategrey;
+        
+        background-color:#5c9bb7;
+        box-shadow: 0 1px 1px #ccc;
+        width: 500px;
+        padding: 1%;
+        margin: auto;
+        position:relative;
+    }
+    input{
+        background:#fff no-repeat 13px 13px;
+        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU5NEY0RTlFMTA4NzExRTM5RTEzQkFBQzMyRjkyQzVBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU5NEY0RTlGMTA4NzExRTM5RTEzQkFBQzMyRjkyQzVBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTk0RjRFOUMxMDg3MTFFMzlFMTNCQUFDMzJGOTJDNUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTk0RjRFOUQxMDg3MTFFMzlFMTNCQUFDMzJGOTJDNUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4DjA/RAAABK0lEQVR42pTSQUdEURjG8dOY0TqmPkGmRcqYD9CmzZAWJRHVRIa0iFYtM6uofYaiEW2SRJtEi9YxIklp07ZkWswu0v/wnByve7vm5ee8M+85zz1jbt9Os+WiGkYdYxjCOx5wgFeXUHmtBSzpcCGa+5BJTCjEP+0nKWAT8xqe4ArPGEEVC1hHEbs2oBwdXkM7mj/JLZrad437sCGHOfUtcziutuYu2v8XUFF/4f6vMK/YgAH1HxkBYV60AR31gxkBYd6xAeF3VzMCwvzOBpypX8V4yuFRzX2d2gD/l5yjH4fYQEnzkj4fae5rJulF2sMXVrAsaTWttRFu4Osb+1jEDT71/ZveyhouTch2fINQL9hKefKjuYFfuznXWzXMTabyrvfyIV3M4vhXgAEAUMs7K0J9UJAAAAAASUVORK5CYII=);
+
+        border: none;
+
+        line-height: 19px;
+        padding: 11px 0;
+
+        border-radius: 2px;
+        box-shadow: 0 2px 8px #c4c4c4 inset;
+        text-align: left;
+        font-size: 14px;
+        font-family: inherit;
+        
+        color: #738289;
+        font-weight: bold;
+        outline: none;
+        text-indent: 40px;
+
+        width:100%;
+        margin:auto;
+    }
+
+
+
+
+    div.listContainer{
+        border-left-style:solid;
+        border-bottom-style:solid;
+        border-top-style:solid;
+        border-width: 5px;
+        border-color:grey;
+
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-top:2.5%;
+        padding-bottom: 2.5%;
+        background-color:#333;
+        width:500px;
+        margin:auto;
+
+        font:15px/1.3 'Open Sans', sans-serif;
+    }
+    ul{
+        list-style-position:outside;
+        text-align: left;
+        padding: 0;
+        list-style-type: none;
+    }
+    a.text{
+        font-weight: bold;
+        padding:2%;
+        color:white;
+    }
+</style>
