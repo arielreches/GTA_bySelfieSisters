@@ -9,6 +9,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     res.render('index',{ title: 'post' });
+    var user = {'first name' : req.body.firstName, 'last name': req.body.lastName, 'email': req.body.email,
+        'password' : req.body.password, 'confirm password': req.body.confirmPassword};
+
+    console.log(user);
 
 });
 
