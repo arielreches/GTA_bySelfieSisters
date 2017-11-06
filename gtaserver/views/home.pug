@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        script(src="https://unpkg.com/vue")
+        meta(charset="UTF-8")
+        link(rel='stylesheet', type='text/css', href='/stylesheets/home_style.css')
+        title Title
+    body
+        #nav
+            .bar
+                ul.ulnavbar
+                    li.linavbar(v-for="tags in tagList")
+                        a.navbar(href="#", v-on:click="makeActive(tags.name)")      {{tags.name}}
+            .input1
+                p
+                    | You Chose
+                    b {{tagName}}
+                div
+                    form#inputForm
+                        input(type="text", v-model="searchString", placeholder="Enter your search terms")
+                p Displaying Results For: {{searchString}}, In: {{tagName}}
+            ul
+                li(v-for="article in filteredArticles")
+                    .listContainer
+                        a.text(v-for="thing in article") {{thing}}
+
+    script(src='/javascripts/vue.js')
