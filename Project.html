@@ -45,7 +45,7 @@
 
         data:{
 
-            tagName:'companyName',
+            tagName:"companyName",
 
             searchString: '',
 
@@ -149,113 +149,25 @@
         computed: {
             // A computed property that holds only those articles that match the searchString.
             filteredArticles: function () {
-                var articles_array = this.articles,
-                    searchString = this.searchString;
+                var articles_array = this.articles;
+                var searchString = this.searchString;
+
+                var tag = this.tagName;
+                console.log(tag);
 
                 if(!searchString){
                     return articles_array;
                 }
                 else {
-
-                    if(this.tagName=="companyName"){
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-
-                                for(var property in item) {
-                                    this.otherString = property;
-                                    var thing = item[property];
-                                    console.log(thing);
-                                }
-
-
-                                if (item.companyName.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="systemName"){
-
-
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.systemName.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="serialNumber"){
-                        t
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.serialNumber.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="productFamily"){
-                        th
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.productFamily.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="model"){
-
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.model.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="osVersion"){
-
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.osVersion.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else if(this.tagName=="patches"){
-
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.patches.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-                    else{
-
-                        searchString = searchString.trim().toLowerCase();
-
-                        articles_array = articles_array.filter(
-                            function (item) {
-                                if (item.cpgCount.toLowerCase().indexOf(searchString) !== -1) {
-                                    return item;
-                                }
-                            })
-                    }
-
+                    searchString = searchString.trim().toLowerCase();
+                    articles_array = articles_array.filter(
+                        function (item) {
+                            if (item[tag].toLowerCase().indexOf(searchString) !== -1) {
+                                return item;
+                            }
+                        }
+                    )
                 }
-
                 // Return an array with the filtered data.
                 return articles_array;
             }
