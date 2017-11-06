@@ -1,50 +1,77 @@
-
+/* 
+    Created on : Nov 5, 2017, 11:28:12 AM
+    Author     : quinn
+*/
 body,html{
-  margin: 0px;
-  font-family: Helvetica;
+    margin: 0px;
+    font-family: Helvetica;
 }
-header{
-  background-color: black;
-  color: white;
-  height: 100px;
+header{    
+    background-color: black;
+    color: white; 
+    height: 75px;    
+    //background-image: url("logo.png");
+}
+header img{
+    height: 50px;
+    width: 50px;
 }
 h1{
-  margin-top: 0px;
+    margin: 0px;
 }
-
+h2{
+    margin-bottom: 10px;
+}
 #sample {
-  padding: 5px;
-  background-color: royalblue;
-  color: white;
-  width: 25%;
-  text-align: center;
+    padding: 5px;
+    background-color: royalblue;
+    color: white;
+    width: 50%;
+    text-align: center;      
 }
 
 #sample p {
-  font-size: 14px;
-  display: inline-block;
-  margin: 2px;
+    font-size: 14px;    
+    display: inline-block;
+    margin: 2px;
 }
+#sample > p{
+    color: black;
+    margin-bottom: 15px;
+}
+
 #sample input{
-  margin-bottom: 10px;
-  margin-top:2px;
+    margin-bottom: 10px;
+    margin-top:2px;
 }
 
-#submitButton{
-  margin-top: 5px;
-  cursor: pointer;
-  border-style:solid;
-  border-color: white;
-  background-color: royalblue;
-  color: white;
+#submitButton{    
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border-width: 1px;
+    height: 25px;
+    width: 60px;
+    border-style:solid;    
+    border-color: white;
+    background-color: royalblue;
+    color: white;    
 }
-#submitButton:hover{
-  border-color: royalblue;
-  background-color: white;
-  color: royalblue;
+#submitButton:hover{     
+    border-color: royalblue;
+    background-color: white;
+    color: royalblue;    
 }
 
-.displayData {
-  color: black;
-  padding:0px;
+#displayData p{     
+    padding:0px;    
+}
+#displayData {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+#displayData span{
+    color:black;
+    font-size: 16px;
+    font-weight: bold;
 }
