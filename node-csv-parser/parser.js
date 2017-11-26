@@ -3,7 +3,7 @@ var parse = require('csv-parse')
 var MongoClient = require('mongodb').MongoClient;
 
 //changes depending on user.
-var url = "mongodb://localhost:27017/mydb";
+var url = "";
 
 //this seems to read the file
 fs.readFile("IHopeThisWorks.csv", function (err, bytes, buffer) {
