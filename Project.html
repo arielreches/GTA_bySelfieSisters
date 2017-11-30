@@ -8,11 +8,13 @@
 <body>
 
     <div id = "nav">
-        <div class="bar">
+        <!-- <div class="bar">
             <ul class = "ulnavbar">
-                <li class = "linavbar" v-for="tags in tagList"><a class = "navbar" href="#" v-on:click="makeActive(tags.name)">     {{tags.name}}   </a></li>
+                <li class = "linavbar" v-for="tags in tagList">
+                    <a class = "navbar" href="#" v-on:click="makeActive(tags.name)">     {{tags.name}}   </a>
+                </li>
             </ul>
-        </div>
+        </div> -->
        
         <div class = "input1">
             <p>You Chose <b>{{tagName}}</b></p>
@@ -25,13 +27,13 @@
             <p>Displaying Results For: {{searchString}}, In: {{tagName}}</p>
         </div>
 
-
-
-
-
         <table>
             <tr >
-                <th class="topPortion" v-for="tag in tagList">{{tag.name}}:</th>
+                <th class="topPortion" v-for="tag in tagList" >
+                    <!-- <div class="ulnavbar"> -->
+                        <a class = "navbar" href="#" v-on:click="makeActive(tag.name)">{{tag.name}}:</a>
+                    <!-- </div> -->
+                </th>
             </tr>
             <tr v-for= "article in filteredArticles">
                 <th class="bottomPortion" v-for="thing in article">{{thing}}</th>
@@ -45,6 +47,7 @@
 <script>
 
     var nav = new Vue({
+        
         el: "#nav",
 
         data:{
@@ -187,57 +190,23 @@
     });
 </script>
 <style>
-    ul.ulnavbar {
-        list-style-type: none;
-        overflow: hidden;
 
-        background-color: rgb(68, 68, 68);
-        border:solid;
-        border-bottom:white;
-        border-color:black;
-
-        padding: 1%;
-
-        margin: auto;
-        width:75%;
+    #nav{
+        padding-left: 10%;
+        margin:auto;
+        padding-right:10%;
     }
-
-    li.linavbar {
-        float: left;
-        border:1px solid #bbb;
-    }
-
-    li.linavbar a.navbar {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    li a.navbar:hover {
-        background-color: #111;
-    }
-
-
-
-
-
-
-
-
 
     .input1{
         font-family: inherit;
         border:solid;
         border-color:black;
-        
         background-color:lightgray;
-        /* box-shadow: 0 1px 1px #ccc; */
-        width: 75%;
-        padding: 1%;
-        margin: auto;
-        /* position:relative; */
+
+        padding-top: 1%;
+        padding-bottom:1%;
+        padding-left:1%;
+
     }
     input{
         background:#fff no-repeat 13px 13px;
@@ -266,22 +235,28 @@
 
 
 
-
-
     table{
         border: 2px solid black;
-        width:77.5%;
-        margin:auto;
-        /* padding:1%;  */
+        width:100%;
+
     }
     th.topPortion{
-        padding-bottom: 2.5%;
-        padding-top: 2.5%;
-        border-style: solid;
         border-color:#111;
-
+        font-family: "Times New Roman", Times, serif;
         background-color: #333;
         color:white;
+
+    }
+    a.navbar {
+        display: block;
+        color: white;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom:20px;
+        text-decoration: none;
+    }
+    a.navbar:hover {
+        background-color: #111;
     }
     th.bottomPortion{
         padding-top: 2.5%;
@@ -293,4 +268,7 @@
         font-weight: bold;
 
     }
+
+
+
 </style>
