@@ -1,3 +1,8 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
 /* 
     Created on : Nov 5, 2017, 11:28:12 AM
     Author     : quinn
@@ -22,7 +27,7 @@ h1{
 h2{
     margin-bottom: 10px;
 }
-#sample {
+.form {
     padding: 5px;
     background-color: royalblue;
     color: white;
@@ -30,22 +35,25 @@ h2{
     text-align: center;      
 }
 
-#sample p {
+.form p {
     font-size: 14px;    
     display: inline-block;
     margin: 2px;
 }
-#sample > p{
+form > p{    
     color: black;
-    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 
-#sample input{
+.form input{
     margin-bottom: 10px;
     margin-top:2px;
 }
 
-#submitButton{    
+#signup {
+    display:none;
+}
+.button{    
     margin-top: 5px;
     cursor: pointer;
     border-radius: 4px;
@@ -57,21 +65,16 @@ h2{
     background-color: royalblue;
     color: white;    
 }
-#submitButton:hover{     
+.button:hover{     
     border-color: royalblue;
     background-color: white;
     color: royalblue;    
 }
 
-#displayData p{     
-    padding:0px;    
+#toggleMessage {
+    color: black;   
+    cursor: pointer;
 }
-#displayData {
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-#displayData span{
-    color:black;
-    font-size: 16px;
-    font-weight: bold;
+#toggleMessage:hover{
+    text-decoration: underline;
 }
