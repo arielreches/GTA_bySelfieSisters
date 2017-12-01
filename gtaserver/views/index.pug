@@ -8,36 +8,39 @@ html
     title GTA
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
-    link(link rel="icon", type="image/png", href="https://i.imgur.com/sM81cRp.png")
-    script(src='https://unpkg.com/vue')
+    link(rel='stylesheet', type='text/css', href='style.css')
+    script(src='/javascripts/vue.js')
   body
     header
       h1 Graphical Tagging Application
-    form#sample(action='/', method='POST')
-      h2 Sample Form 1
-      p Enter the following data to create a sample form submission to the server.
-      br
-      input(v-model='firstName', type='text', name='firstName', placeholder='First Name...')
-      br
-      input(v-model='lastName', type='text', name='lastName', placeholder='Last Name...')
-      br
-      input(v-model='email', type='text', name='email', placeholder='Email...')
-      br
-      input(v-model='password', type='password', name='password', placeholder='Password...')
-      br
-      input(v-model='confirmPassword', type='password', name='confirmPassword', placeholder='Password...')
-      br
-      input#submitButton(type='submit', value='Submit')
-      #displayData
-        p
-          span First Name:
-          | {{ firstName }}
-        p
-          span Last Name:
-          | {{lastName}}
-        p
-          span Email Address:
-          | {{email}}
+    .form
+      form#signin(action='/singin', method='POST')
+        h2(onclick='changeColor()') Sign In
+        p Sign in to your account
         br
-    script(src='/javascripts/vue.js')
+        input(type='text', name='emailName', placeholder='Email...')
+        br
+        input(type='password', name='passwordName', placeholder='Password...')
+        br
+        input.button(type='submit', value='Sign In')
+        br
+      form#signup(action='/signup', method='POST')
+        h2(onclick='changeColor()') Sign Up
+        p Enter the following to get started
+        br
+        input(type='text', name='firstName', placeholder='First Name...')
+        br
+        input(type='text', name='lastName', placeholder='Last Name...')
+        br
+        input(type='text', name='username', placeholder='Username...')
+        br
+        input(type='text', name='emailName', placeholder='Email...')
+        br
+        input(type='password', name='passwordName', placeholder='Password...')
+        br
+        input(type='password', name='confirmPassord', placeholder='Confirm Password...')
+        br
+        input.button(type='submit', value='Sign Up')
+        br
+      br
+      p#toggleMessage(onclick="displayForm('signup')") Don't have an account? Sign Up.
