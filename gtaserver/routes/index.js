@@ -3,16 +3,18 @@ var url = "mongodb://localhost:27017/GTADatabase";
 var express = require('express');
 var router = express.Router();
 
-
 router.get('', function(req, res, next) {
+  return res.redirect('signin');
+});
+
+router.get('/signin', function(req, res, next) {
   res.render('index', { title: 'Graphical Tagging Application' });
 
 });
 
-router.post('', function(req, res, next) {
+router.post('/signin', function(req, res, next) {
 
 //Sign in page
-var correct = false;
   MongoClient.connect(url, function(err, db) {
     db.collection('CredentialCollection', function(err, collection) {
       collection.findOne({'username' : req.body.username}, function(err, doc) {
@@ -20,7 +22,7 @@ var correct = false;
         if(doc){
           console.log("Username Exists!");
 	        if((doc.password) == (req.body.password)){
-            console.log("Password works!!!");
+            console.log("Password works!");
             return res.redirect('home');
           } else{
             console.log("Password incorrect!");
