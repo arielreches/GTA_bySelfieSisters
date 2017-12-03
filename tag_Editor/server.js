@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 
 app.set("view engine","pug");
 
-//change these values to suit your environment
+//change these values to reflect your environment
 var url = "mongodb://localhost:27017/mydb";
 var collection="TheThingThatContainsAllOfTheImportantCSV_Stuff";
 var port=3000;
@@ -19,6 +19,7 @@ var port=3000;
 
 
 MongoClient.connect(url, function(err, db){
+    console.log("made it asdfasd")
     if(err){
         console.log("connection error");
         throw err;
@@ -53,12 +54,12 @@ MongoClient.connect(url, function(err, db){
 
                     holder = [];
                     for(obj in results){
-                        collection = {};
+                        temp = {};
                         for(name in key){
-                            collection[key[name]]=results[obj][key[name]];
+                            temp[key[name]]=results[obj][key[name]];
                         }
-                        holder[obj]=collection;
-                        collection={};
+                        holder[obj]=temp;
+                        temp={};
                     }
 
                     idHolder=[];
@@ -92,7 +93,7 @@ app.post("/", function(req,res){
         }
         else{
             console.log("connection good");
-            db.collection("TheThingThatContainsAllOfTheImportantCSV_Stuff").find().toArray(function(err,results){
+            db.collection(collection).find().toArray(function(err,results){
                 if(err){
                     throw err;
                 }
@@ -106,7 +107,7 @@ app.post("/", function(req,res){
                             delete newObj["_id"];
                             console.log(newObj);
 
-                            db.collection('TheThingThatContainsAllOfTheImportantCSV_Stuff').updateOne(oldObj,newObj,function(err,res){
+                            db.collection(collection).updateOne(oldObj,newObj,function(err,res){
                                 if(err){
                                     throw err;
                                 }
@@ -125,5 +126,5 @@ app.post("/", function(req,res){
             
         }
     })
-    res.redirect('http://localhost:3000/');
+    res.redirect('http://localhost:'+port);
 })
