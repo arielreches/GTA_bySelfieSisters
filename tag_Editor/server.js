@@ -17,16 +17,14 @@ var port=3000;
 
 
 
-
 MongoClient.connect(url, function(err, db){
-    console.log("made it asdfasd")
     if(err){
-        console.log("connection error");
+        console.log("front end: connection error");
         throw err;
     }
     //if we're connected to the database...
     else{
-        console.log("connection success");
+        console.log("front end: connection success");
 
         //start up the web app on port 3000
         app.listen(port,function(){
@@ -37,13 +35,13 @@ MongoClient.connect(url, function(err, db){
         app.get("/",function(req, res){
             db.collection(collection).find().toArray(function(err, results) {
                 if(err){
-                    console.log("collection error");
+                    console.log("front end: collection error");
                     throw err;
                 }
                 else{
+                    console.log("front end: collection good");
 
 
-                    // console.log(results);
                     var keys = Object.keys(results[0]);
                     var key = [keys.length-1];
                     var j = 0;
@@ -67,7 +65,7 @@ MongoClient.connect(url, function(err, db){
                         idHolder[obj]=results[obj]["_id"];
                     }
                     // console.log(idHolder);
-                    res.render('index', { title: 'Hey', keys:key, data:results} )
+                    res.render('index', { title: 'Hey', keys:key, data:results})
                 }
             });
         });
@@ -75,30 +73,74 @@ MongoClient.connect(url, function(err, db){
 });
 
 
+app.post("/addTag",function(req,res){
+    console.log("made it add tag");
+    newTagName = req.body["newTagName"];
+    console.log(newTagName);
+
+    if(newTagName==""){
+        console.log("unput can't be nothing")
+        res.redirect('http://localhost:'+port);
+    }
+    else{
+        addTagFunc(newTagName,res);
+    }
+})
+
+function addTagFunc(newTagName,res){
+    MongoClient.connect(url,function(err,db){
+        if(err){
+            throw err;
+        }
+        else{
+            console.log("add tag connection good");
+            db.collection(collection).find().toArray(function(err, results){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("add tag collection good");
+
+                    for(obj in results){
+                        old=results[obj];
+                        var update = Object.assign({}, old);
+                        delete update["_id"];
+                        update[newTagName]=""
+
+                        db.collection(collection).updateOne(old,update,function(err,res){
+                            if(err){
+                                throw err;
+                            }
+                            else{
+                                console.log("tag added to database")
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    })
+    res.redirect('http://localhost:'+port);
+}
+
 app.post("/", function(req,res){
 
-    console.log("made it")
-
-    console.log(req.params.id);
-
+    console.log("made it update tag");
     var newObj = req.body;
-
     console.log(newObj);
-
-
 
     MongoClient.connect(url, function(err,db){
         if(err){
             throw err;
         }
         else{
-            console.log("connection good");
+            console.log("update tag: connection good");
             db.collection(collection).find().toArray(function(err,results){
                 if(err){
                     throw err;
                 }
                 else{
-                    console.log("collection good");
+                    console.log("update tag: collection good");
                     for(obj in results){
                         var oldObj = results[obj];
                         if(oldObj["_id"].equals(newObj["_id"])){
@@ -112,13 +154,13 @@ app.post("/", function(req,res){
                                     throw err;
                                 }
                                 else{
-                                    console.log("1 document updated");
+                                    console.log("1 tag updated");
                                 }
                             })
 
                         }
                         else{
-                            console.log("no");
+                            // console.log("no");
                         }
                     }
                 }
