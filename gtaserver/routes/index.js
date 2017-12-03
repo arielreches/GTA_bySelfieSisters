@@ -22,7 +22,7 @@ router.post('/signin', function(req, res, next) {
         if(doc){
           console.log("Username Exists!");
 	        if((doc.password) == (req.body.password)){
-            console.log("Password works!" + doc.firstName);
+            console.log("Password works!");
             req.session.firstName = doc.firstName;
             return res.redirect('home');
           } else{
@@ -30,6 +30,7 @@ router.post('/signin', function(req, res, next) {
             return res.redirect('signin');
             }
         } else{
+          console.log("Username incorrect!");
           return res.redirect('signin');
         }
        });
@@ -62,7 +63,6 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  console.log("SESSION: " + req.session.firstName);
   res.render('home', {test : req.session.firstName});
 });
 
