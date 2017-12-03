@@ -1,15 +1,15 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/GTADatabase";
 var express = require('express');
-var router = express.Router();
+var router = express.Route  r();
 
 
-router.get('/signin', function(req, res, next) {
+router.get('', function(req, res, next) {
   res.render('index', { title: 'Graphical Tagging Application' });
 
 });
 
-router.post('/signin', function(req, res, next) {
+router.post('', function(req, res, next) {
 
 //Sign in page
 var correct = false;
