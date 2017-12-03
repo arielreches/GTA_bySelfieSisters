@@ -22,7 +22,8 @@ router.post('/signin', function(req, res, next) {
         if(doc){
           console.log("Username Exists!");
 	        if((doc.password) == (req.body.password)){
-            console.log("Password works!");
+            console.log("Password works!" + doc.firstName);
+            req.session.firstName = doc.firstName;
             return res.redirect('home');
           } else{
             console.log("Password incorrect!");
@@ -40,14 +41,11 @@ router.post('/signin', function(req, res, next) {
 });
 
 
-
-
-
 //Sign up page
 
 router.post('/signup', function(req, res, next) {
-  var user = {'first name' : req.body.firstName, 'last name': req.body.lastName, 'username' : req.body.username, 'email': req.body.email,
-        'password' : req.body.password, 'confirm password': req.body.confirmPassword};
+  var user = {'firstName' : req.body.firstName, 'lastName': req.body.lastName, 'username' : req.body.username, 'email': req.body.email,
+        'password' : req.body.password, 'confirmPassword': req.body.confirmPassword};
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -64,7 +62,8 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  res.render('home');
+  console.log("SESSION: " + req.session.firstName);
+  res.render('home', {test : req.session.firstName});
 });
 
 
