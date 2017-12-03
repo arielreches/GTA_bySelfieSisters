@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/GTADatabase";
 var express = require('express');
-var router = express.Route  r();
+var router = express.Router();
 
 
 router.get('', function(req, res, next) {
