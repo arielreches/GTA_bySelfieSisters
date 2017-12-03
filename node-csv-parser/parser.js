@@ -1,12 +1,10 @@
 const fs = require('fs')
 var parse = require('csv-parse')
 var MongoClient = require('mongodb').MongoClient;
-
-//changes depending on user.
-var url = "";
+var url = "mongodb://localhost:27017/mydb";
 
 //this seems to read the file
-fs.readFile("IHopeThisWorks.csv", function (err, bytes, buffer) {
+fs.readFile("exampledata.csv", function (err, bytes, buffer) {
     if(err){
         //if error, cry and try again
         console.log("read error");
@@ -59,7 +57,7 @@ fs.readFile("IHopeThisWorks.csv", function (err, bytes, buffer) {
                         }
 
                         //by this time we have our data properly formated in to a dictionary for passing into the database
-                        db.collection("TheThingThatContainsAllOfTheImportantCSV-Stuff").insertOne(myobj, function(err, res) {
+                        db.collection("TheThingThatContainsAllOfTheImportantCSV_Stuff").insertOne(myobj, function(err, res) {
                             if (err){
                                 //if fail, give up
                                 console.log("Give the fuck up")
@@ -67,7 +65,7 @@ fs.readFile("IHopeThisWorks.csv", function (err, bytes, buffer) {
                             }
                             else{
                                 //give an encouraging message
-                                console.log("VAMOS. BOOMSHAKALAKA"+" "+i);
+                                console.log("VAMOS. BOOMSHAKALAKA");
                                 db.close();
                             }
                         });
