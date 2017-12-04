@@ -8,13 +8,13 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const app = express()
-app.use(morgan('combined')) // use morgan log generator
+app.use(morgan('combined')) // use morgan log generator to track requests
 app.use(bodyParser.json()) // parse json requests sent in
 app.use(cors()) // allow any host or client to access --needed for hosting on different domains
 
-app.get('/status', (req, res) => {
+app.post('/signup', (req, res) => {
   res.send({
-    message: 'hello world!'
+    message: `Your user at ${req.body.email} was registered`
   })
 })
 
