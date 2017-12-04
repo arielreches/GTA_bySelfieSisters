@@ -1,29 +1,61 @@
 doctype html
-html(lang="en")
+html
     head
-        script(src="https://unpkg.com/vue")
-        meta(charset="UTF-8")
-        link(rel='stylesheet', type='text/css', href='/stylesheets/home_style.css')
-        link(rel='icon', type='image/png', href='https://i.imgur.com/sM81cRp.png')
         title GTA
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        link(rel='stylesheet', type='text/css', href='/stylesheets/homepageStyle.css')
     body
-        h1 Welcome #{test}!
-        #nav
-            .bar
-                ul.ulnavbar
-                    li.linavbar(v-for="tags in tagList")
-                        a.navbar(href="#", v-on:click="makeActive(tags.name)")      {{tags.name}}
-            .input1
-                p
-                    | You Chose
-                    b {{tagName}}
-                div
-                    form#inputForm
-                        input(type="text", v-model="searchString", placeholder="Enter your search terms")
-                p Displaying Results For: {{searchString}}, In: {{tagName}}
-            ul
-                li(v-for="article in filteredArticles")
-                    .listContainer
-                        a.text(v-for="thing in article") {{thing}}
+        header
+            h1 Graphical Tagging Application
+            h2 Welcome #{test}!
+        ul.nav.nav-tabs
+            li.active
+                a(data-toggle='tab', href='#groups') Groups
+            li
+                a(data-toggle='tab', href='#systems') Systems
+            li
+                a(data-toggle='tab', href='#account') Account
+        #content.tab-content
+            #groups.tab-pane.fade.in.active
+                h3 System Groups
+                p Here are the Groups you are a member of.
+                button.btn.btn-primary(data-toggle='collapse', data-target='#demo') Create Group
+                #demo.collapse
+                    form#createGroup.form(action='/createGroup', method='POST')
+                        input(type='text', name='name', placeholder='Group Name...')
+                        br
+                        input(type='text', name='other', placeholder='Other Info...')
+                        br
+                        input(type='text', name='idk', placeholder='Not sure...')
+                        br
+                        select(name='usersDropdown')
+                            option(value='1') User 1
+                            option(value='2') User 2
+                            option(value='3') User 3
+                            option(value='4') User 4
+                        button
+                            span.glyphicon.glyphicon-plus
+                        br
+                        p#userList Running list of users:
+                        select(name='systems')
+                            option(value='1') System 1
+                            option(value='2') System 2
+                            option(value='3') System 3
+                            option(value='4') System 4
+                        button
+                            span.glyphicon.glyphicon-plus
+                        br
+                        p#userList Running list of systems:
+                        input.btn.btn-success(type='submit', value='Create')
+                        br
+            #systems.tab-pane.fade
+                h3 Systems
+                p Here are all of the systems.
+            #account.tab-pane.fade
+                h3 Account Overview
+                p Your account information.
 
-    script(src='/javascripts/home_script.js')
