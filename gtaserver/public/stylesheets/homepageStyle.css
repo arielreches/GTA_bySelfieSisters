@@ -31,3 +31,13 @@ h1 {
 #createGroup > input {
     margin: 5px;
 }
+#logout{
+    float:right;
+    margin: 5px;
+    color: white;
+    font-size: 20px;
+}
+#logout:hover{
+    text-decoration: none;
+    color: red;
+}
