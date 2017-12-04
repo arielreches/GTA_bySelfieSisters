@@ -3,6 +3,9 @@ var url = "mongodb://localhost:27017/GTADatabase";
 var express = require('express');
 var router = express.Router();
 
+router.get('', function(req, res, next) {
+  return res.redirect('signin');
+});
 
 router.get('/signin', function(req, res, next) {
   res.render('index', { title: 'Graphical Tagging Application' });
@@ -12,7 +15,6 @@ router.get('/signin', function(req, res, next) {
 router.post('/signin', function(req, res, next) {
 
 //Sign in page
-var correct = false;
   MongoClient.connect(url, function(err, db) {
     db.collection('CredentialCollection', function(err, collection) {
       collection.findOne({'username' : req.body.username}, function(err, doc) {
@@ -20,13 +22,15 @@ var correct = false;
         if(doc){
           console.log("Username Exists!");
 	        if((doc.password) == (req.body.password)){
-            console.log("Password works!!!");
+            console.log("Password works!");
+            req.session.firstName = doc.firstName;
             return res.redirect('home');
           } else{
             console.log("Password incorrect!");
             return res.redirect('signin');
             }
         } else{
+          console.log("Username incorrect!");
           return res.redirect('signin');
         }
        });
@@ -38,14 +42,11 @@ var correct = false;
 });
 
 
-
-
-
 //Sign up page
 
 router.post('/signup', function(req, res, next) {
-  var user = {'first name' : req.body.firstName, 'last name': req.body.lastName, 'username' : req.body.username, 'email': req.body.email,
-        'password' : req.body.password, 'confirm password': req.body.confirmPassword};
+  var user = {'firstName' : req.body.firstName, 'lastName': req.body.lastName, 'username' : req.body.username, 'email': req.body.email,
+        'password' : req.body.password, 'confirmPassword': req.body.confirmPassword};
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -62,7 +63,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  res.render('home');
+  res.render('home', {test : req.session.firstName});
 });
 
 

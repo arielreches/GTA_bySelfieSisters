@@ -15,16 +15,12 @@ html
     header
       h1 Graphical Tagging Application
     .form
-      form#signin(action='/signin', method='POST')
+      form#signin(action='signin', method='POST')
         h2(onclick='changeColor()') Sign In
         p Sign in to your account
-        br
         input(type='text', name='username', placeholder='Username...')
-        br
         input(type='password', name='password', placeholder='Password...')
-        br
         input.button(type='submit', value='Sign In')
-        br
       form#signup(action='/signup', method='POST')
         h2(onclick='changeColor()') Sign Up
         p Enter the following to get started
@@ -35,13 +31,10 @@ html
         br
         input(type='text', name='username', placeholder='Username...')
         br
-        input(type='text', name='emailName', placeholder='Email...')
+        input(type='text', name='email', placeholder='Email...')
         br
         input(type='password', name='password', placeholder='Password...')
         br
-        input(type='password', name='confirmPassord', placeholder='Confirm Password...')
-        br
+        input(type='password', name='confirmPassword', placeholder='Confirm Password...')
         input.button(type='submit', value='Sign Up')
-        br
-      br
       p#toggleMessage(onclick="displayForm('signup')") Don't have an account? Sign Up.
