@@ -18,13 +18,9 @@ html
       form#signin(action='signin', method='POST')
         h2(onclick='changeColor()') Sign In
         p Sign in to your account
-        br
         input(type='text', name='username', placeholder='Username...')
-        br
         input(type='password', name='password', placeholder='Password...')
-        br
         input.button(type='submit', value='Sign In')
-        br
       form#signup(action='/signup', method='POST')
         h2(onclick='changeColor()') Sign Up
         p Enter the following to get started
@@ -40,8 +36,5 @@ html
         input(type='password', name='password', placeholder='Password...')
         br
         input(type='password', name='confirmPassword', placeholder='Confirm Password...')
-        br
         input.button(type='submit', value='Sign Up')
-        br
-      br
       p#toggleMessage(onclick="displayForm('signup')") Don't have an account? Sign Up.

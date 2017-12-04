@@ -10,7 +10,6 @@ function displayForm(id){ //sets the form with this id to be visible and the oth
         document.getElementById("signup").style.display = "block";        
         document.getElementById("toggleMessage").setAttribute("onclick","displayForm('signin')");
         document.getElementById("toggleMessage").innerHTML = "Already have an account? Sign in.";
-        
     }else{
         document.getElementById("signup").style.display = "none";
         document.getElementById("signin").style.display = "block";        

@@ -10,34 +10,43 @@ and open the template in the editor.
 body,html{
     margin: 0px;
     font-family: Helvetica;
+    background-color: lightblue;
 }
-header{    
-    background-color: black;
-    color: white; 
-    height: 75px;    
-    //background-image: url("logo.png");
+
+header{  
+    background-color: #222222;
+    color: white;
+    padding-top: 15px;
+    border-bottom: large black;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, .5); 
+    height: 50px;    
+    text-align:left;
+    
 }
+
 header img{
     height: 50px;
     width: 50px;
 }
+
 h1{
+    font-size: 1.6em;
+    font-family: Helvetica;
+    font-weight: normal;
     margin: 0px;
+    margin-left: 15px;
 }
+
 h2{
     margin-bottom: 10px;
 }
+
 .form {
-    padding: 5px;
-    background-color: royalblue;
-    color: white;
-    width: 50%;
-    text-align: center;      
+    margin: 15px auto auto 0px;
 }
 
 .form p {
     font-size: 14px;    
-    display: inline-block;
     margin: 2px;
 }
 form > p{    
@@ -50,21 +59,47 @@ form > p{
     margin-top:2px;
 }
 
+#signin {
+    display:block;
+    height: 250px;
+    width: 200px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 8px 6px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: black;
+    width: 50%;
+    text-align: center;    
+    align-content: center;  
+    margin: 40px auto 0px;
+}
+
 #signup {
     display:none;
+    height: 400px;
+    width: 200px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 8px 6px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: black;
+    width: 50%;
+    text-align: center;    
+    align-content: center;  
+    margin: 40px auto 0px;
 }
 .button{    
-    margin-top: 5px;
+    display:block;
+    margin: 5px auto;
     cursor: pointer;
     border-radius: 4px;
     border-width: 1px;
-    height: 25px;
-    width: 60px;
+    height: 40px;
+    width: 80px;
     border-style:solid;    
     border-color: white;
     background-color: royalblue;
     color: white;    
 }
+
 .button:hover{     
     border-color: royalblue;
     background-color: white;
@@ -72,9 +107,12 @@ form > p{
 }
 
 #toggleMessage {
+    margin-top: 15px;
     color: black;   
     cursor: pointer;
+    text-align: center;
 }
+
 #toggleMessage:hover{
     text-decoration: underline;
 }
