@@ -122,7 +122,7 @@ router.get('/home', function(req, res, next) {
                       for (obj in results){
                           idHolder[obj]=results[obj]["_id"];
                       }
-                      // console.log(idHolder);
+                      console.log(req.session);
                       res.render('home', { test: req.session.firstName, keys:key, data:results} )
                   }
               });
