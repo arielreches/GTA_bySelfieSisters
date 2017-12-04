@@ -123,14 +123,12 @@ router.get('/home', function(req, res, next) {
                           idHolder[obj]=results[obj]["_id"];
                       }
                       // console.log(idHolder);
-                      res.render('home', { title: 'Hey', keys:key, data:results} )
+                      res.render('home', { test: req.session.firstName, keys:key, data:results} )
                   }
               });
 
       }
   });
-
-  // res.render('home', {test : req.session.firstName});
 });
 
 
