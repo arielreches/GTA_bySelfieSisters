@@ -38,6 +38,9 @@ router.post('/signin', function(req, res, next) {
             console.log("Password works!");
             req.session.firstName = doc.firstName;
             req.session.lastName = doc.lastName;
+            req.session.username = doc.username;
+            req.session.email = doc.email;
+            req.session._id = doc._id;
             return res.redirect('home');
 
           } else{
@@ -115,7 +118,16 @@ router.get('/home', function(req, res, next) {
 
                     console.log(capitalized)
 
-                    res.render('home', { UserName:capitalized, keys:key, data:results} )
+                    res.render('home', { 
+                        _id:req.session._id,
+                        firstName : Fname,
+                        lastName : req.session.lastName,
+                        userName : req.session.username,
+                        email : req.session.email,
+                        FullName : capitalized, 
+                        keys : key, 
+                        data : results
+                    })
                 }
             });
         }

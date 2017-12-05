@@ -12,7 +12,7 @@ html
         header
             a#logout.glyphicon.glyphicon-off(href='/signin')
             h1(style="padding-top:2%;padding-bottom:2%;") Graphical Tagging Application
-            h2(style="padding-bottom:2%;") Welcome: #{UserName}!
+            h2(style="padding-bottom:2%;") Welcome: #{FullName}!
         ul.nav.nav-tabs
             li.active
                 a(data-toggle='tab', href='#groups') Groups
@@ -101,6 +101,25 @@ html
                                     td
                                         input(type="submit",  value="Update")
             #account.tab-pane.fade
-                h3 Account Overview
-                p Your account information.
-                img(src="https://cdn.dribbble.com/users/135467/screenshots/3480075/purrito-generic.gif")
+                    div(style="padding-left:5%;padding-bottom:2%;")
+                    h3 Account Overview
+                    h4 Hi #{firstName}! Here's your account info. Purrito and/or spicy not withstanding.
+                    img(src="https://cdn.dribbble.com/users/135467/screenshots/3480075/purrito-generic.gif",class="img-responsive",width="400" height="80")
+                    //- form(action="/accountchange" method="POST")
+                    div(style="padding-right:75%;")
+                        div(class="form-group")
+                            h3="First Name:"
+                            input(type="text",value=firstName,name="firstName",id="usr",class="form-control",readonly)
+
+                        div
+                            h3="Last Name:"
+                            input(type="text",value=lastName,name="userName", class="form-control",readonly)
+                        div
+                            h3="User Name:"
+                            input(type="text",value=userName,name="username", class="form-control",readonly)
+                        div
+                            h3="Email:"
+                            input(type="text",value=email+"@fightme.com",name="email", class="form-control",readonly)
+                        input(type="hidden",value=_id,name="_id")
+
+                        div(style="padding-top:10%;")
