@@ -37,7 +37,6 @@ router.post('/signin', function(req, res, next) {
 	        if((doc.password) == (req.body.password)){
             console.log("Password works!");
             req.session.firstName = doc.firstName;
-            // func();
             return res.redirect('home');
 
           } else{
@@ -73,7 +72,7 @@ router.post('/signup', function(req, res, next) {
   });
 
   console.log(user);
-
+  req.session.firstName = req.body.firstName;
   res.redirect('home');
 });
 
