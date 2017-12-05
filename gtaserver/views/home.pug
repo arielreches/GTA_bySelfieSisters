@@ -12,7 +12,7 @@ html
         header
             a#logout.glyphicon.glyphicon-off(href='/signin')
             h1(style="padding-top:2%;padding-bottom:2%;") Graphical Tagging Application
-            h2(style="padding-top:2%;padding-bottom:2%;") Welcome: #{UserName}!
+            h2(style="padding-bottom:2%;") Welcome: #{UserName}!
         ul.nav.nav-tabs
             li.active
                 a(data-toggle='tab', href='#groups') Groups
@@ -54,7 +54,7 @@ html
                         input.btn.btn-success(type='submit', value='Create')
                         br
             #systems.tab-pane.fade
-                h1="Table of Systems"
+                h1(style="padding-top:2%;padding-bottom:2%;")="Table of Systems"
 
                 div(class="table table-responsive")
                     table(class="table table-hover")
