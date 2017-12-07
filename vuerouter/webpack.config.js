@@ -1,9 +1,12 @@
+var path = require('path')
 module.exports = {
     // This is the "main" file which should include all other modules
     entry: './src/main.js',
     // Where should the compiled file go?
     output: {
-      filename: 'bundle.js'
+    //  path: path.resolve(__dirname, "build"),
+    //  publicPath: "/assets/",
+      filename: "bundle.js"
     },
     resolve: {
     alias: {
