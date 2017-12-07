@@ -25,4 +25,4 @@ new Vue(Vue.util.extend({ router })).$mount('#app');
 import App from './App.vue';
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
-import CreateItem from './componenets/CreateItem.vue';
+import CreateItem from './components/CreateItem.vue';
