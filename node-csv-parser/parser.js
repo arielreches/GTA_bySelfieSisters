@@ -1,7 +1,7 @@
 const fs = require('fs')
 var parse = require('csv-parse')
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+var url = "mongodb://localhost:27017/GTADatabase";
 
 //this seems to read the file
 fs.readFile("exampledata.csv", function (err, bytes, buffer) {
@@ -12,7 +12,7 @@ fs.readFile("exampledata.csv", function (err, bytes, buffer) {
     }
     else{
         parse(bytes, {delimiter: ","}, function(err, rows ) {
-            
+
             //if the parser failed...
             if(err){
                 console.log("parser error");
@@ -57,7 +57,7 @@ fs.readFile("exampledata.csv", function (err, bytes, buffer) {
                         }
 
                         //by this time we have our data properly formated in to a dictionary for passing into the database
-                        db.collection("TheThingThatContainsAllOfTheImportantCSV_Stuff").insertOne(myobj, function(err, res) {
+                        db.collection("CSVFiles").insertOne(myobj, function(err, res) {
                             if (err){
                                 //if fail, give up
                                 console.log("Give the fuck up")
