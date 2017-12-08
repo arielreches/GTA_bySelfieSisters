@@ -16,8 +16,11 @@
 </style>
 
 <script>
+
+import axios from 'axios'
+
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
       form: {
@@ -30,7 +33,11 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      axios.post('http://localhost:3000/api/signin',
+      { name: this.form.user, pass: this.form.pass })
+        .then(function (response) {
+          console.log('saved successfully')
+        })
     }
   }
 }
