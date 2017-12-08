@@ -44,8 +44,8 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-router.post('/foo', function(req, res, next) {
-  console.log(req)
+router.post('http://localhost:3000/api/login', function(req, res, next) {
+  console.log('why')
 });
 
 module.exports = router;

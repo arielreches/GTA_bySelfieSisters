@@ -8,7 +8,7 @@
   <b-form-input v-model="form.pass"
                   type="password"
                   placeholder="Enter your Password"></b-form-input>
-  <b-button type="submit">Log In></b-button>
+  <b-button type="submit">Log In</b-button>
 </div>
 </template>
 
@@ -26,18 +26,18 @@ export default {
       form: {
         user: '',
         pass: ''
-      },
-      msg: 'Welcome to Your Vue.js App'
+      }
     }
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      axios.post('http://localhost:3000/api/signin',
-      { name: this.form.user, pass: this.form.pass })
-        .then(function (response) {
-          console.log('saved successfully')
-        })
+      axios.post('http://localhost:3000/api/login', {
+        user: 'test',
+        pass: 'why'
+      }).then(function () {
+        console.log('done')
+      })
     }
   }
 }
