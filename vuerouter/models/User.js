@@ -1,3 +1,5 @@
+//MongoDB System schema for storing in Database
+
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({

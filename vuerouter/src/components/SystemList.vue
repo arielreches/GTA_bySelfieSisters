@@ -10,27 +10,25 @@
 
 <script>
 export default {
+  name: 'SystemList',
   data () {
     return {
-      systems: [{name: 'Dumb', age: 'ugh', type: 'linux'},
-                {name: 'Dumb', age: 'ugh', type: 'linux'},
-                {name: 'Dumb', age: 'ugh', type: 'linux'},
-                {name: 'Dumb', age: 'ugh', type: 'linux'},
-                {name: 'Dumb', age: 'ugh', type: 'linux'}
-      ],
-      user: 'Ryan'
+      fields: {
+         companyName: { label: 'Company Name', sortable:true, 'class': 'text-center'},
+         systemName: { label: 'System Name', sortable:true},
+         model: {label: 'Model', sortable:true}  
+      }, 
+      systems: [],
+      errors: []
     }
   },
-  computed: {
-        /*
-        TODO: make backend to fetch systems data and user name
-        axios.get('URL', param id?)
-        .then(response => {
-            this.systems = response.data
-        })
-        axios.get()
-        .then(response => {
-            this.user = response.data
-        }) */
-  }
+  created () {
+    axios.get(`http://localhost:3000/system`)
+    .then(response => {
+      this.sytems = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
 }
