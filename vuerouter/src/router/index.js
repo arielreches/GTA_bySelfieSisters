@@ -7,7 +7,7 @@ import CreateBook from '@/components/CreateBook'
 import EditBook from '@/components/EditBook'
 */
 import Login from '@/components/Login'
-import Systems from '@/components/SystemList'
+import SystemList from '@/components/SystemList'
 
 Vue.use(Router)
 
@@ -46,8 +46,8 @@ export default new Router({
     },
     {
       path: '/systems',
-      name: 'Systems',
-      component: Systems
+      name: 'SystemList',
+      component: SystemList
     }
   ]
 })

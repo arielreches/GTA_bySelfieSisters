@@ -20,7 +20,6 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* SAVE BOOK */
-
 router.post('/', function(req, res, next) {
   User.create(req.body, function (err, post) {
     if (err) return next(err);
@@ -44,5 +43,6 @@ router.delete('/:id', function(req, res, next) {
     res.json(post);
   });
 });
+
 
 module.exports = router;
