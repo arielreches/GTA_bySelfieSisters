@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+/*
 import BookList from '@/components/BookList'
 import ShowBook from '@/components/ShowBook'
 import CreateBook from '@/components/CreateBook'
 import EditBook from '@/components/EditBook'
+*/
 import Login from '@/components/Login'
+import Systems from '@/components/SystemList'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    /*
     {
       path: '/',
       name: 'BookList',
@@ -30,10 +34,20 @@ export default new Router({
       name: 'EditBook',
       component: EditBook
     },
+    */
     {
-      path: '/foo',
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/systems',
+      name: 'Systems',
+      component: Systems
     }
   ]
 })
