@@ -41,7 +41,7 @@ export default {
       },
       systems: systems,
       errors: [],
-      msg: 'forrest'
+      msg: ''
     }
   },
   created () {

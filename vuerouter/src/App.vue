@@ -1,25 +1,4 @@
 <template>
-<!--
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img class="navbar-brand" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hewlett_Packard_Enterprise_logo.svg/1000px-Hewlett_Packard_Enterprise_logo.svg.png">
-    </div>
-    <div class="navbar-header">
-      <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png">
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a v-on:click="setSignIn" >Sign In</a></li>
-        <li><a v-on:click="setSignUp" >Sign Up</a></li>
-        <li><a v-on:click="about">About</a></li>
-        <li><a>Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
--->
 <div>
 <b-navbar type = "dark" class = "navbar navbar-inverse">
   <div>
@@ -49,6 +28,11 @@ export default {
 </script>
 
 <style>
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 .info {
   left: 250px;
   position: absolute;
