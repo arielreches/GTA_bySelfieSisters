@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET SINGLE USER BY ID */
+/* GET SINGLE USER BY LOGIN INFO */
 router.get('/login', function(req, res, next) {
   //use mongoose User var to find one user that matches the request, getting back password field
   User.findOne({'username': req.query.username}, 'password', function (err, user) {
