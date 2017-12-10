@@ -13,12 +13,12 @@ Group.find({}).populate('systemsIn').run(function(err, users) {
 
 just have to remember to update all object id references, including systems and users 
 */
-var BookSchema = new mongoose.Schema({
+var GroupSchema = new mongoose.Schema({
   name: String,
-  groupCreator: {type: Schema.ObjectId, ref: 'User'},
-  usersIn: [{type: Schema.ObjectId, ref: 'User'}],
-  systemsIn: [{type: Schema.ObjectId, ref: 'System'}],
+  groupCreator: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  usersIn: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  systemsIn: [{type: mongoose.Schema.ObjectId, ref: 'System'}],
   updated_date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('Group', GroupSchema);

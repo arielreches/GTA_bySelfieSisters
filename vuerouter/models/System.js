@@ -90,7 +90,7 @@ var SystemSchema = new mongoose.Schema({
   ssdWriteServiceTimeMillis: String,
   cpuAvgMax: String,
   Tag: String, //will be updated
-  Group: [{type: Schema.ObjectId, ref: 'Group'}],
+  Group: [{type: mongoose.Schema.ObjectId, ref: 'Group'}],
   updated_date: { type: Date, default: Date.now },
 });
 
