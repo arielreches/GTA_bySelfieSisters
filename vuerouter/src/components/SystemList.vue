@@ -4,7 +4,7 @@
       <h2>
         Systems List whats up {{ msg }} ??
         <b-link href="#/login">(login)</b-link>
-      </h2> <!--
+      </h2> <!-- Commented out cause webpack was angery
       <b-table striped hover :items="systems" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>

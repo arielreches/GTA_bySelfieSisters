@@ -13,8 +13,10 @@ router.get('/', function(req, res, next) {
 
 /* GET SINGLE USER BY ID */
 router.get('/login', function(req, res, next) {
+  //use mongoose User var to find one user that matches the request, getting back password field
   User.findOne({'username': req.query.username}, 'password', function (err, user) {
     if (err) return next(err)
+    //if passwords match
     if(req.query.password == user.password) {
       res.send('success')
     } else {
@@ -24,6 +26,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  //use mongoose User var to create a user instance in the db
   User.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post)

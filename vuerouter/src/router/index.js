@@ -6,6 +6,7 @@ import Signup from '@/components/Signup'
 
 Vue.use(Router)
 
+//define frontend routes
 export default new Router({
   routes: [
     {
