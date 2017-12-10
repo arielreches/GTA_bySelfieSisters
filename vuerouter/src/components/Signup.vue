@@ -3,23 +3,23 @@
   <h2>Hello World</h2>
   <b-form @submit="onSubmit">
     <div class='main-login'>
-      <h2> Login </h2>
+      <h2>Set up your account</h2>
       <div class='text-input'>
         <b-form-input v-model.trim="user.username"
                       type="text"
-                      placeholder="Enter your Username">
+                      placeholder="Username...">
         </b-form-input>
       </div>
       <div class='text-input'>
         <b-form-input v-model.trim="user.password"
                       type="password"
-                      placeholder="Enter your Password">
+                      placeholder="Password...">
         </b-form-input>
       </div>
         <div class='text-input'>
-          <b-form-input v-model.trim="user.password"
+          <b-form-input v-model.trim="user.confirmPassword"
                         type="password"
-                        placeholder="Confirm your Password">
+                        placeholder="Confirm password...">
           </b-form-input>
           <b-button class='button' type="submit">Log In</b-button>
         </div>
@@ -69,12 +69,16 @@ export default {
   },
   methods: {
     onSubmit (evt) {
-      evt.preventDefault()
-      // sends post request with this.user data
-      axios.post('http://localhost:3000/user', this.user)
-      .then(function (res) {
-        router.push('login')
-      })
+      if (this.user.password === this.user.confirmPassword) {
+        evt.preventDefault()
+        // sends post request with this.user data
+        axios.post('http://localhost:3000/user', this.user)
+        .then(function (res) {
+          router.push('systems')
+        })
+      } else {
+        alert('Passwords do not match.')
+      }
     }
   }
 }
