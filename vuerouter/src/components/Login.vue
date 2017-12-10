@@ -52,7 +52,7 @@
 
 import axios from 'axios'
 import router from '../router'
-//defined here to be able to use them both above and below
+// defined here to be able to use them both above and below
 var user = {
   username: '',
   password: ''
@@ -68,17 +68,17 @@ export default {
   methods: {
     login (evt) {
       evt.preventDefault()
-      //send HTTP GET request to /user/login with params of username and password
+      // send HTTP GET request to /user/login with params of username and password
       axios.get('http://localhost:3000/user/login', {
         params: {
           username: user.username,
           password: user.password
         }
-      }) //after sent
+      }) // after sent
       .then(function (res) {
-        var success = res.data //response.data passed from express server
+        var success = res.data // response.data passed from express server
         if (success === 'success') {
-          router.push('systems')//redirect to /systems on success
+          router.push('systems')// redirect to /systems on success
         } else {
           alert('Invalid Username and Password')
         }

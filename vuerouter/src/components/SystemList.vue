@@ -4,7 +4,7 @@
       <h2>
         Systems List whats up {{ msg }} ??
         <b-link href="#/login">(login)</b-link>
-      </h2> <!-- Commented out cause webpack was angery
+      </h2>
       <b-table striped hover :items="systems" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
@@ -14,7 +14,7 @@
         <li v-for="error of errors">
           {{error.message}}
         </li>
-      </ul>-->
+      </ul>
     </b-col>
   </b-row>
 </template>
@@ -36,19 +36,36 @@ export default {
         model: {label: 'Model', sortable: true},
         actions: {label: 'Action', 'class': 'text-center'}
       },
-      systems: [],
+      systems: [ {
+        companyName: 'Dell',
+        systemName: 'foo',
+        model: 'XPS'
+      },
+      {
+        companyName: 'Lenovo',
+        systemName: 'bar',
+        model: 'ideapad'
+      }],
       errors: [],
       msg: 'forrest'
     }
   },
-  created () {
-    axios.get(`http://localhost:3000/user`)
-    .then(response => {
-      this.user = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+  methods: {
+    details (item) {
+      console.log(item)
+    }
+  },
+  computed: {
+    created () {
+      axios.get(`http://localhost:3000/user`)
+      .then(response => {
+        this.user = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    }
   }
+  
 }
 </script>
