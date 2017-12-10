@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var System = require('../models/System.js');
 
 /* GET ALL SYSTEMS */
-router.get('/', function(req, res, next) {
+router.get('/init', function(req, res, next) {
   System.find(function (err, products) {
     if (err) return next(err);
     res.json(products);
@@ -31,7 +31,6 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE SYSTEM */
 router.put('/:id', function(req, res, next) {
-  console.log(req.body);
   System.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
