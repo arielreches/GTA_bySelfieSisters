@@ -51,9 +51,7 @@ export default {
       })
     },
     viewsystems () {
-      router.push({
-        name: 'SystemList'
-      })
+      router.push('SystemList')
     }
   }
 }

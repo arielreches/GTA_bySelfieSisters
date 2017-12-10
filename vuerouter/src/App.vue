@@ -1,11 +1,45 @@
 <template>
-  <b-container>
-    <b-navbar variant='dark' type='dark'>
-      <img src='../src/assets/sslogo.png' class='d-inline-block align-top' alt='GTA' height='20px' width='30px'>
-      <b-navbar-brand tag='h1' to='/systems' right >GTA By Selfie Sisters</b-navbar-brand>
-    </b-navbar>
-    <router-view/>
-  </b-container>
+<!--
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-brand" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hewlett_Packard_Enterprise_logo.svg/1000px-Hewlett_Packard_Enterprise_logo.svg.png">
+    </div>
+    <div class="navbar-header">
+      <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png">
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a v-on:click="setSignIn" >Sign In</a></li>
+        <li><a v-on:click="setSignUp" >Sign Up</a></li>
+        <li><a v-on:click="about">About</a></li>
+        <li><a>Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+-->
+<div>
+<b-navbar type = "dark" class = "navbar navbar-inverse">
+  <div>
+      <img class="navbar-brand" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hewlett_Packard_Enterprise_logo.svg/1000px-Hewlett_Packard_Enterprise_logo.svg.png">
+  </div>
+  <div class="navbar-header">
+      <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png">
+  </div>
+  <div class = "info">
+      <ul class="nav navbar-nav">
+        <li><a>About</a></li>
+        <li><a>Contact</a></li>
+      </ul>
+    </div>
+</b-navbar>
+<footer class="container-fluid text-center">
+  <small>Copyright &copy 2017 by Selfie Sisters</small>
+</footer>
+<router-view/>
+</div>
 </template>
 
 <script>
@@ -15,15 +49,56 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 30px;
+.info {
+  left: 250px;
+  position: absolute;
 }
-b-navbar {
-  width: 100%;
-  margin: 0px;
+footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+.navbar {
+    min-height:75px !important;
+    background-color: #f1f1f1;
+      border-color: #f1f1f1;
+      height: 75px;
+      margin-bottom: 0;
+      border-radius: 0;
+  }
+  .navbar-header {
+    left: 175px;
+    position: absolute;
+  }
+    .navbar-brand {
+    	height: 60px;
+      align: left;
+    }
+.navbar-nav {
+  display: inline !important;
 }
+a {
+  color: #9d9d9d !important;
+}
+li {
+  padding: 20px;
+  display: inline;
+}
+
+ul.nav li:hover {
+    cursor: pointer;
+}
+.btn-primary{
+  background-color: #03BE74;
+  border-color: #03BE74
+}
+.btn-primary:hover{
+  background: #029C5F;
+  border-color: #029C5F;
+}
+ul.nav a:hover { color: #03BE74 !important; }
 </style>

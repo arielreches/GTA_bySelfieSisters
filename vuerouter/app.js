@@ -2,7 +2,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');//Logs requests - useful 
+var logger = require('morgan');//Logs requests - useful
 var bodyParser = require('body-parser');
 
 // Routes required to access differnt endpoints - easier if used within variable as such
