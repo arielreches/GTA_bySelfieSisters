@@ -3,11 +3,12 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import SystemList from '@/components/SystemList'
 import Signup from '@/components/Signup'
-<<<<<<< HEAD
 import DummySystem from '@/components/DummySystem'
-=======
 import SystemView from '@/components/SystemView'
->>>>>>> 6b2513c1e865036cb5a31ecdbf59e555ab621467
+import EditBook from '@/components/EditBook'
+import CreateBook from '@/components/CreateBook'
+import BookList from '@/components/BookList'
+import ShowBook from '@/components/ShowBook'
 
 Vue.use(Router)
 
@@ -34,15 +35,34 @@ export default new Router({
       component: SystemList
     },
     {
-<<<<<<< HEAD
       path: '/dummysystem',
       name: 'DummySystem',
       component: DummySystem
-=======
+    },
+    {
       path: '/systemView',
       name: 'SystemView',
       component: SystemView
->>>>>>> 6b2513c1e865036cb5a31ecdbf59e555ab621467
+    },
+    {
+      path: '/editbook',
+      name: 'EditBook',
+      component: EditBook
+    },
+    {
+      path: '/showbook',
+      name: 'ShowBook',
+      component: ShowBook
+    },
+    {
+      path: '/createbook',
+      name: 'CreateBook',
+      component: CreateBook
+    },
+    {
+      path: '/booklist',
+      name: 'BookList',
+      component: BookList
     }
   ]
 })
