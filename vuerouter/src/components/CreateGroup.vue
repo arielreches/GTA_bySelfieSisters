@@ -41,7 +41,7 @@ export default {
     })
     .catch(e => {
       this.errors.push(e)
-    }),
+    })
     axios.get(`http://localhost:3000/user`)
     .then(response => {
       this.user = response.data
