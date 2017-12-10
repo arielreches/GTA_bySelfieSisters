@@ -1,24 +1,31 @@
 <template>
 <div>
-<b-form @submit="login">
+  <h2>Hello World</h2>
+<b-form @submit="onSubmit">
   <div class='main-login'>
     <h2> Login </h2>
     <div class='text-input'>
       <b-form-input v-model.trim="user.username"
                     type="text"
-                    placeholder="Enter your Username"></b-form-input>
+                    placeholder="Enter your Username">
+      </b-form-input>
     </div>
     <div class='text-input'>
       <b-form-input v-model.trim="user.password"
                     type="password"
-                    placeholder="Enter your Password"></b-form-input>
+                    placeholder="Enter your Password">
+      </b-form-input>
     </div>
+    <div class='text-input'>
+      <b-form-input v-model.trim="user.password"
+                    type="password"
+                    placeholder="Confirm your Password">
+      </b-form-input>
     <b-button class='button' type="submit">Log In</b-button>
   </div>
-  <router-link to='signup'>Click here to sign up</router-link>
+  </div>
 </b-form>
 </div>
-
 </template>
 
 <style>
@@ -53,34 +60,19 @@
 import axios from 'axios'
 import router from '../router'
 
-var user = {
-  username: '',
-  password: ''
-}
-
 export default {
-  name: 'Login',
+  name: 'Signup',
   data () {
     return {
-      user: user
+      user: {}
     }
   },
   methods: {
-    login (evt) {
+    onSubmit (evt) {
       evt.preventDefault()
-      axios.get('http://localhost:3000/user/login', {
-        params: {
-          username: user.username,
-          password: user.password
-        }
-      })
+      axios.post('http://localhost:3000/user', this.user)
       .then(function (res) {
-        var success = res.data
-        if (success === 'success') {
-          router.push('systems')
-        } else {
-          alert('Invalid Username and Password')
-        }
+        router.push('login')
       })
     }
   }

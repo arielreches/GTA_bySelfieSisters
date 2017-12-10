@@ -12,18 +12,21 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE USER BY ID */
-router.get('/:id', function(req, res, next) {
-  User.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+router.get('/login', function(req, res, next) {
+  User.findOne({'username': req.query.username}, 'password', function (err, user) {
+    if (err) return next(err)
+    if(req.query.password == user.password) {
+      res.send('success')
+    } else {
+      res.send('failure')
+    }
+  })
 });
 
-/* SAVE BOOK */
 router.post('/', function(req, res, next) {
   User.create(req.body, function (err, post) {
     if (err) return next(err);
-    res.json(post);
+    res.json(post)
   });
 });
 

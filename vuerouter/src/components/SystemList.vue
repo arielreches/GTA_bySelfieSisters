@@ -3,18 +3,18 @@
     <b-col cols="12">
       <h2>
         Systems List whats up {{ msg }} ??
-        <b-link href="#/">(login)</b-link>
-      </h2>
+        <b-link href="#/login">(login)</b-link>
+      </h2> <!--
       <b-table striped hover :items="systems" :fields="fields">
         <template slot="actions" scope="row">
-          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
+         <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
       </b-table>
       <ul v-if="errors && errors.length">
         <li v-for="error of errors">
           {{error.message}}
         </li>
-      </ul>
+      </ul>-->
     </b-col>
   </b-row>
 </template>
