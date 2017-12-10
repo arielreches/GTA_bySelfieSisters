@@ -53,6 +53,13 @@ export default {
   methods: {
     details (item) {
       console.log(item)
+      this.$router.push({
+        name: 'SystemView',
+        params: {
+          item
+        }
+      })
+      console.log(item)
     }
   },
   computed: {
@@ -66,6 +73,5 @@ export default {
       })
     }
   }
-  
 }
 </script>

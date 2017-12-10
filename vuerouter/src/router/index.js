@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import SystemList from '@/components/SystemList'
 import Signup from '@/components/Signup'
+import SystemView from '@/components/SystemView'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/systems',
       name: 'SystemList',
       component: SystemList
+    },
+    {
+      path: '/systemView',
+      name: 'SystemView',
+      component: SystemView
     }
   ]
 })

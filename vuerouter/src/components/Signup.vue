@@ -1,30 +1,30 @@
 <template>
 <div>
   <h2>Hello World</h2>
-<b-form @submit="onSubmit">
-  <div class='main-login'>
-    <h2> Login </h2>
-    <div class='text-input'>
-      <b-form-input v-model.trim="user.username"
-                    type="text"
-                    placeholder="Enter your Username">
-      </b-form-input>
+  <b-form @submit="onSubmit">
+    <div class='main-login'>
+      <h2> Login </h2>
+      <div class='text-input'>
+        <b-form-input v-model.trim="user.username"
+                      type="text"
+                      placeholder="Enter your Username">
+        </b-form-input>
+      </div>
+      <div class='text-input'>
+        <b-form-input v-model.trim="user.password"
+                      type="password"
+                      placeholder="Enter your Password">
+        </b-form-input>
+      </div>
+        <div class='text-input'>
+          <b-form-input v-model.trim="user.password"
+                        type="password"
+                        placeholder="Confirm your Password">
+          </b-form-input>
+          <b-button class='button' type="submit">Log In</b-button>
+        </div>
     </div>
-    <div class='text-input'>
-      <b-form-input v-model.trim="user.password"
-                    type="password"
-                    placeholder="Enter your Password">
-      </b-form-input>
-    </div>
-    <div class='text-input'>
-      <b-form-input v-model.trim="user.password"
-                    type="password"
-                    placeholder="Confirm your Password">
-      </b-form-input>
-    <b-button class='button' type="submit">Log In</b-button>
-  </div>
-  </div>
-</b-form>
+  </b-form>
 </div>
 </template>
 
