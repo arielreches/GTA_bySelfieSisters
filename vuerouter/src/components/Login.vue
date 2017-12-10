@@ -18,7 +18,6 @@
   <router-link to='signup'>Click here to sign up</router-link>
 </b-form>
 </div>
-
 </template>
 
 <style>
