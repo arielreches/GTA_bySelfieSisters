@@ -9,8 +9,8 @@
   </div>
   <div class = "info">
       <ul class="nav navbar-nav">
-        <li><a>About</a></li>
-        <li><a>Contact</a></li>
+        <li><a><router-link to='about'>About</router-link></a></li>
+        <li><a><router-link to='contact'>Contact</router-link></a></li>
       </ul>
     </div>
 </b-navbar>

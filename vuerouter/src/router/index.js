@@ -9,6 +9,8 @@ import EditBook from '@/components/EditBook'
 import CreateBook from '@/components/CreateBook'
 import BookList from '@/components/BookList'
 import ShowBook from '@/components/ShowBook'
+import About from '@/components/About'
+import Contact from '@/components/Contact'
 
 Vue.use(Router)
 
@@ -18,6 +20,16 @@ export default new Router({
     {
       path: '/',
       redirect: '/login'
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: Contact
     },
     {
       path: '/login',

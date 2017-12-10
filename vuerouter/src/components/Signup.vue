@@ -8,9 +8,10 @@
       </br>
       <b-form-input v-model.trim="user.password" type = "password"  placeholder="Create A New Password"></b-form-input>
       </br>
-      <b-form-input v-model.trim="user.confirmPassword" type = "password"  placeholder="Cnfirm Your Password"></b-form-input>
+      <b-form-input v-model.trim="user.confirmPassword" type = "password"  placeholder="Confirm Your Password"></b-form-input>
       </br>
-      <b-button class='button' type="submit">Log In</b-button>
+      <b-button id="loginButton" type="submit">Log In</b-button>
+      <router-link to='login'>Click here for login page</router-link>
     </div>
         </div>
     </div>
@@ -19,6 +20,10 @@
 </template>
 
 <style>
+#loginButton:hover {
+  background-color: #03BE74;
+  border-color: #03BE74
+}
   .main-login{
     padding-left: 35%;
     padding-right: 35%;
