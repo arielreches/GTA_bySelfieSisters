@@ -2,9 +2,9 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Systems List whats up {{ msg }} ??
-        <b-link href="#/login">(login)</b-link>
+        Systems List
       </h2>
+      <b-btn href="#/login">(Logout)</b-btn>
       <b-table striped hover :items="systems" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
