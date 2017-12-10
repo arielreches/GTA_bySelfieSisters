@@ -2,7 +2,7 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Systems List whats up {{ msg }} ??
+        Systems List {{ msg }} 
         <b-link href="#/login">(login)</b-link>
       </h2>
       <b-table striped hover :items="systems" :fields="fields">
@@ -41,7 +41,7 @@ export default {
       },
       systems: systems,
       errors: [],
-      msg: 'forrest'
+      msg: ''
     }
   },
   created () {
