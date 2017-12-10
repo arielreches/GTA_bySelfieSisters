@@ -36,16 +36,7 @@ export default {
         model: {label: 'Model', sortable: true},
         actions: {label: 'Action', 'class': 'text-center'}
       },
-      systems: [ {
-        companyName: 'Dell',
-        systemName: 'foo',
-        model: 'XPS'
-      },
-      {
-        companyName: 'Lenovo',
-        systemName: 'bar',
-        model: 'ideapad'
-      }],
+      systems: [],
       errors: [],
       msg: 'forrest'
     }
@@ -66,6 +57,5 @@ export default {
       })
     }
   }
-  
 }
 </script>
