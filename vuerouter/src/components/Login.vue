@@ -1,49 +1,35 @@
 <template>
 <div>
 <b-form @submit="login">
-  <div class='main-login'>
-    <h2> Login </h2>
-    <div class='text-input'>
-      <b-form-input v-model.trim="user.username"
-                    type="text"
-                    placeholder="Enter your Username"></b-form-input>
-    </div>
-    <div class='text-input'>
-      <b-form-input v-model.trim="user.password"
-                    type="password"
-                    placeholder="Enter your Password"></b-form-input>
-    </div>
-    <b-button class='button' type="submit">Log In</b-button>
-  </div>
+
+<div class = "login">
+  <h1>Sign In To Your Account</h1>
+  </br>
+
+  <b-form-input v-model.trim="user.username" type = "text"  placeholder="Enter your Username"></b-form-input>
+  </br>
+  <b-form-input v-model.trim="user.password" type="password" placeholder="Enter your Password"></b-form-input>
+  </br>
+  <b-button class='button' type="submit">Log In</b-button>
+
   <router-link to='signup'>Click here to sign up</router-link>
+</div>
+
+</form>
+
+  
+
 </b-form>
 </div>
+
+
 </template>
 
 <style>
-.main-login {
-  background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    margin: 30px auto;
-    width: 50%;
-    height: 400px;
-    background-color: royalblue;
-}
-
-.text-input {
-  margin: 10px auto;
-  width: 90%;
-}
-.h2 {
-  font-size: 2em;
-  text-decoration-color: white;
-  margin-left: 25%;
+.login {
+    padding-left: 35%;
+    padding-right: 35%;
+    padding-top: 10%;
 }
 </style>
 
