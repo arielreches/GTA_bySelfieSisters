@@ -50,8 +50,8 @@ export default {
         console.log('added')
       })
     },
-    viewsystems( ) {
-      router.push('SystemList')  
+    viewsystems () {
+      router.push('SystemList')
     }
   }
 }
