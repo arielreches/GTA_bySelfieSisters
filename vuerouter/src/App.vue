@@ -9,9 +9,15 @@
   </div>
   <div class = "info">
       <ul class="nav navbar-nav">
+        <li><a>Groups</a></li>
+        <li><a><router-link to='systems'>Systems</a></li>
         <li><a><router-link to='about'>About</router-link></a></li>
         <li><a><router-link to='contact'>Contact</router-link></a></li>
       </ul>
+      <ul class = "nav navbar-nav navbar-right"></ul>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
     </div>
 </b-navbar>
 <footer class="container-fluid text-center">
