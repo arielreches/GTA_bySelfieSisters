@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var book = require('./routes/book');
 var user = require('./routes/user');
 var system = require('./routes/system');
+var group = require('./routes/group');
 
 // app uses express as the server. Should be familiar.
 var app = express();
@@ -38,6 +39,9 @@ app.use('/user', user);
 //Setting up the Systems Endpoint
 app.use('/systems', express.static(path.join(__dirname, 'dist')));
 app.use('/system', system);
+
+app.use('/groups', express.static(path.join(__dirname, 'dist')));
+app.use('/group', system);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  groups: [{type: Schema.ObjectId, ref: 'Group'}] 
   updated_date: { type: Date, default: Date.now },
 });
 
