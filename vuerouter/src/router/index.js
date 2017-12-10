@@ -5,10 +5,13 @@ import SystemList from '@/components/SystemList'
 import Signup from '@/components/Signup'
 import DummySystem from '@/components/DummySystem'
 import SystemView from '@/components/SystemView'
+<<<<<<< HEAD
+=======
 import EditBook from '@/components/EditBook'
 import CreateBook from '@/components/CreateBook'
 import BookList from '@/components/BookList'
 import ShowBook from '@/components/ShowBook'
+>>>>>>> 17ff34948e1bc9dfebd289165a114be68b546538
 
 Vue.use(Router)
 
