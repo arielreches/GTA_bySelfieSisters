@@ -3,9 +3,8 @@
 <b-form @submit="login">
 
 <div class = "login">
-  <h1>Sign In To Your Account</h1>
+  <h1>Sign Into Your Account</h1>
   </br>
-
   <b-form-input v-model.trim="user.username" type = "text"  placeholder="Enter your Username"></b-form-input>
   </br>
   <b-form-input v-model.trim="user.password" type="password" placeholder="Enter your Password"></b-form-input>
