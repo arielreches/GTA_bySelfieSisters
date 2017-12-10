@@ -1,5 +1,5 @@
 <template>
-  <<b-row>
+  <b-row>
     <b-col cols="12">
       <h2>
         Vue System
