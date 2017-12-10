@@ -25,6 +25,9 @@
 <script>
 
 import axios from 'axios'
+import router from '../router'
+
+var systems = []
 
 export default {
   name: 'SystemList',
@@ -36,34 +39,19 @@ export default {
         model: {label: 'Model', sortable: true},
         actions: {label: 'Action', 'class': 'text-center'}
       },
-      systems: [ {
-        companyName: 'Dell',
-        systemName: 'foo',
-        model: 'XPS'
-      },
-      {
-        companyName: 'Lenovo',
-        systemName: 'bar',
-        model: 'ideapad'
-      }],
+      systems: systems,
       errors: [],
       msg: 'forrest'
     }
   },
-  methods: {
-    details (item) {
-      console.log(item)
-      this.$router.push({
-        name: 'SystemView',
-        params: {
-          item
-        }
+  created () {
+    axios.get('http://localhost:3000/system/init')
+      .then(response => {
+        this.systems = response.data
       })
-      console.log(item)
-    }
   },
   computed: {
-    created () {
+    loadUser () {
       axios.get(`http://localhost:3000/user`)
       .then(response => {
         this.user = response.data
@@ -71,6 +59,18 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+    }
+  },
+  methods: {
+    details (item) {
+      console.log(item)
+      router.push({
+        name: 'SystemView',
+        params: {
+          id: item._id
+        }
+      })
+      console.log(item)
     }
   }
 }
