@@ -12,13 +12,13 @@
     </div>
     <div class='text-input'>
       <b-form-input v-model.trim="system.systemName"
-                    type="password"
+                    type="text"
                     placeholder="Enter System Name">
       </b-form-input>
     </div>
     <div class='text-input'>
       <b-form-input v-model.trim="system.model"
-                    type="password"
+                    type="text"
                     placeholder="Enter system Model">
       </b-form-input>
     <b-button class='button' type="submit">Add to DB</b-button>
@@ -50,8 +50,10 @@ export default {
         console.log('added')
       })
     },
-    viewsystems( ) {
-      router.push('SystemList')  
+    viewsystems () {
+      router.push({
+        name: 'SystemList'
+      })
     }
   }
 }
