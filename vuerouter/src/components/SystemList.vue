@@ -6,6 +6,7 @@
         <b-link href="#/login">(login)</b-link>
       </h2>
       <b-btn href="#/login">Logout</b-btn>
+      <b-form-input type = "text"  placeholder="Search..."></b-form-input>
       <b-table striped hover :items="systems" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
