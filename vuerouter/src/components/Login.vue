@@ -10,14 +10,12 @@
   </br>
   <b-form-input v-model.trim="user.password" type="password" placeholder="Enter your Password"></b-form-input>
   </br>
-  <b-button class='button' type="submit">Log In</b-button>
+  <b-button id='loginButton' type="submit">Log In</b-button>
 
   <router-link to='signup'>Click here to sign up</router-link>
 </div>
 
 </form>
-
-  
 
 </b-form>
 </div>
@@ -31,6 +29,11 @@
     padding-right: 35%;
     padding-top: 10%;
 }
+#loginButton:hover {
+  background-color: #03BE74;
+  border-color: #03BE74
+}
+
 </style>
 
 <script>

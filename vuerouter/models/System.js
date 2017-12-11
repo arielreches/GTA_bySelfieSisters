@@ -11,27 +11,72 @@ var SystemSchema = new mongoose.Schema({
   osVersion: String,
   patches: String,
   cpgCount: String,
-  recommendedOsVersion: String,
-  locationRegion: String,
-  locationCountry: String,
+  recommended: {
+    osVersion: String,
+  },
+  location: {
+    region: String,
+    country: String,
+  },
   installDate: String,
   updated: String,
-  capacityTotalFreePct: String,
-  capacityTotalFreeTiB: String,
-  capacityTotalSizeTiB: String,
-  capacityTotalDedupeRatio: String,
-  nodeCount: String,
-  nodeCountOffline: String,
-  totalDiskCount: String,
-  totalDiskCountNormal: String,
-  totalDiskCountDegraded: String,
-  totalDiskCountFailed: String,
+  capacity: {
+    total: {
+      freePct: String,
+      freeTiB: String,
+      dedupeRatio: String,
+    }
+  },
+  nodes: {
+    nodeCount: String,
+    nodeCountOffline: String,
+    cpuAvgMax: String
+  },
+  disks: {
+    total: {
+      diskCount: String,
+      diskCountDiskNormal: String,
+      diskCountDegraded: String,
+      diskCountFailed: String
+    }
+  },
   contractStartDate: String,
   contractEndDate: String,
   batteryExpiry: String,
-  spVersion: String,
+  sp: {
+    spVersion: String,
+  },
   vvCount: String,
-  tdvvSizeTiB: String,
+  tpvvCount: String,
+  vvCountFull: String,
+  tdvvSizeTB: String,
+  performance: {
+    portBandwidthData: {
+      total: {
+        dataRateKBPSAvg: String,
+        iopsAvg: String,
+        iopsMax: String,
+      }
+    },
+    summary: {
+      portInfo: {
+        totalServiceTimeMillis: String,
+        readServiceTimeMillis: String,
+        writeServiceMillis: String,
+      },
+      delAckPct: String,
+      vvInfo: {
+        vvsByType: {
+          ssd: {
+            readBandwidthMBPS: String,
+            writeBandwidthMBPS: String,
+            readServiceTimeMillis: String,
+            writeServiceTimeMillis: String
+          }
+        }
+      }
+    }
+  },
   dataRateKBPSAvg: String,
   iopsAvg: String,
   iopsMax: String,
@@ -44,6 +89,8 @@ var SystemSchema = new mongoose.Schema({
   ssdReadservicewidthMBPS: String,
   ssdWriteServiceTimeMillis: String,
   cpuAvgMax: String,
+  Tag: String, //will be updated
+  Group: [{type: mongoose.Schema.ObjectId, ref: 'Group'}],
   updated_date: { type: Date, default: Date.now },
 });
 
