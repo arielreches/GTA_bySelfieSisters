@@ -10,8 +10,8 @@
       </br>
       <b-form-input v-model.trim="user.confirmPassword" type = "password"  placeholder="Confirm Your Password"></b-form-input>
       </br>
-      <b-button id="loginButton" type="submit">Log In</b-button>
-      <router-link to='login'>Click here for login page</router-link>
+      <b-button id="loginButton" type="submit">Sign Up</b-button>
+      <router-link to='login'>Click here to go back to login.</router-link>
     </div>
         </div>
     </div>

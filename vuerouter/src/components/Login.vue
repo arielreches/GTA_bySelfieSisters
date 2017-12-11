@@ -12,7 +12,7 @@
   </br>
   <b-button id='loginButton' type="submit">Log In</b-button>
 
-  <router-link to='signup'>Click here to sign up</router-link>
+  <router-link to='signup'>Not a GTA User? Click here to sign up.</router-link>
 </div>
 
 </form>
