@@ -8,7 +8,8 @@
       <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png">
   </div>
   <div class = "info">
-      <ul class="nav navbar-nav">
+        <li><a><router-link to='createGroup'>Groups</a></li>
+        <li><a><router-link to='systems'>Systems</a></li>
         <li><a><router-link to='about'>About</router-link></a></li>
         <li><a><router-link to='contact'>Contact</router-link></a></li>
       </ul>
