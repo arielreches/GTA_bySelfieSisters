@@ -11,17 +11,19 @@
         </template>
         <template slot="lead">
           Company Name: {{system.companyName}}<br>
-          System Name: {{system.model}}<br>
-        </template>
+          System Model: {{system.model}}<br>
+          OS Version: {{system.osVersion}}<br>
+          <template v-if='system.writeServiceTimeMillis != null'>
+          Write Service Time: {{system.writeServiceTimeMillis}}
+          </template>
         <hr class="my-4">
-        <b-btn variant="success" @click.stop="editbook(book._id)">Edit</b-btn>
+        <b-btn variant="success" @click.stop="editbook(book._id)">Add to Group</b-btn>
         <b-btn variant="danger" @click.stop="deletebook(book._id)">Delete</b-btn>
       </b-jumbotron>
     </b-col>
   </b-row>
 </template>
 <script>
-
 import axios from 'axios'
 
 var system = {}

@@ -3,6 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
 
+var currentUser = null;
+
 /* GET ALL USERS */
 router.get('/', function(req, res, next) {
   User.find(function (err, products) {
@@ -11,14 +13,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/curr', function(req, res, next) {
+  if(currentUser === null){
+    console.log('No user logged')
+  }
+  res.json(currentUser);
+})
+
 /* GET SINGLE USER BY LOGIN INFO */
 router.get('/login', function(req, res, next) {
   //use mongoose User var to find one user that matches the request, getting back password field
-  User.findOne({'username': req.query.username}, 'password', function (err, user) {
+  User.findOne({'username': req.query.username}, function (err, user) {
     if (err) return next(err)
     //if passwords match
     if(req.query.password == user.password) {
       res.send('success')
+      currentUser = user;
     } else {
       res.send('failure')
     }
