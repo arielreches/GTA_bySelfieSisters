@@ -2,7 +2,8 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Systems List
+        Hi, {{ msg }}!
+        <b-link href="#/login">(login)</b-link>
       </h2>
       <b-btn href="#/login">Logout</b-btn>
       <b-table striped hover :items="systems" :fields="fields">
@@ -28,6 +29,7 @@ import axios from 'axios'
 import router from '../router'
 
 var systems = []
+var msg = ''
 
 export default {
   name: 'SystemList',
@@ -41,7 +43,7 @@ export default {
       },
       systems: systems,
       errors: [],
-      msg: ''
+      msg: msg
     }
   },
   created () {
@@ -49,17 +51,14 @@ export default {
       .then(response => {
         this.systems = response.data
       })
-  },
-  computed: {
-    loadUser () {
-      axios.get(`http://localhost:3000/user`)
+    axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
-        this.user = response.data
+        console.log(response.data)
+        this.msg = response.data.username
       })
       .catch(e => {
         this.errors.push(e)
       })
-    }
   },
   methods: {
     details (item) {

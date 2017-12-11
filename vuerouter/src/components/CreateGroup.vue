@@ -8,8 +8,13 @@
       <b-form @submit="onSubmit">
             <ul id="example-1">
                 <li v-for="s in system">
-                    {{ s.companyName }}
-                    <p>{{ s._id }}</p>
+                        <b-form-checkbox id="checkbox1"
+                          v-model="status"
+                          value="accepted"
+                          unchecked-value="not_accepted">
+                          {{ s.companyName }}
+                        </b-form-checkbox>
+
                 </li>
             </ul>
             <ul id="example-2">
