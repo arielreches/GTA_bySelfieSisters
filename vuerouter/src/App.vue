@@ -12,6 +12,7 @@
         <li><a><router-link to='systems'>Systems</a></li>
         <li><a><router-link to='about'>About</router-link></a></li>
         <li><a><router-link to='contact'>Contact</router-link></a></li>
+        <li v-if="this.noLogout.includes(this.$route.path) === false"><a href = '#/login'>Logout</a></li>
       </ul>
     </div>
 </b-navbar>
@@ -24,11 +25,19 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      noLogout: ['/signup', '/login']
+    }
+  }
 }
 </script>
 
 <style>
+a:hover {
+  color: #00b187 !important
+}
 html {
     position: relative;
     min-height: 100%;
