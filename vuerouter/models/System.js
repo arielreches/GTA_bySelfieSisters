@@ -77,7 +77,7 @@ var SystemSchema = new mongoose.Schema({
       }
     }
   },
-  Tag: String, //will be updated
+  Tag: [], //will be updated
   Group: [{type: mongoose.Schema.ObjectId, ref: 'Group'}],
   updated_date: { type: Date, default: Date.now },
 });

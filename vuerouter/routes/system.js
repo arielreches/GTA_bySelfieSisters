@@ -21,6 +21,14 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.put('/:id/tag', function(req, res, next) {
+  console.log("put ran")
+  System.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    console.log(post);
+  })
+})
+
 /* SAVE SYSTEM */
 /* router.post('/', function(req, res, next) {
   System.create(req.body, function (err, post) {
@@ -32,9 +40,11 @@ router.get('/:id', function(req, res, next) {
 /* UPDATE SYSTEM */
 router.put('/:id', function(req, res, next) {
   System.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    console.log(post);
     if (err) return next(err);
     res.json(post);
   });
+  console.log(req.body);
 });
 
 /* DELETE SYSTEM */
