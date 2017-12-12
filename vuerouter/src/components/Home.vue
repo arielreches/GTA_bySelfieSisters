@@ -1,6 +1,7 @@
 <template>
   <b-row>
     <b-col cols="12">
+      <div style="padding-left:1%;padding-right:1%;padding-bottom:2%;padding-top:2%;">
       <h2>
         System Groups
       </h2>
@@ -17,31 +18,29 @@
               <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
               <b-collapse id="collapse1" class="mt-2">
                 <b-card>
-                  <form id="SystemsInput">
+                  <form id="SystemsInput" style="padding-right:75%;">
                     <b-form-input v-model="SystemSearch" type = "text" placeholder="Search For Systems"></b-form-input>
-                    <!-- <p>Value: {{ this.searchString }}</p> -->
-                  </form>
-                    
-                      <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="filteredSystems">
-                      </b-form-checkbox-group>
+                  </form>  
+                  <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="filteredSystems">
+                  </b-form-checkbox-group>
                 </b-card>
               </b-collapse><br>
 
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
                   <b-card>
-                    <form id="UsersInput">
+                    <form id="UsersInput" style="padding-right:75%;">
                       <b-form-input v-model="UserSearch" type = "text" placeholder="Search For Users"></b-form-input>
-                      <!-- <p>Value: {{ this.searchString }}</p> -->
                     </form>
-                       <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="filteredUsers">
-                      </b-form-checkbox-group>
+                    <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="filteredUsers">
+                    </b-form-checkbox-group>
                   </b-card>
                 </b-collapse><br>
                 <b-button type="submit" variant="primary">Create</b-button>
               </b-form>
           </b-card>
         </b-collapse>
+        </div>
         <b-table striped hover :items="getGroups" :fields="fields">
           <template slot="actions" scope="row">
             <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
@@ -175,18 +174,15 @@ export default {
       filteredUsers: function () {
         var articles_array = this.uoptions;
         var searchString = this.UserSearch;
-        // console.log(articles_array)
-        // for(var i =0 ; i < articles_array.length;i++)
-        // {
-        //   if(articles_array[i].text==null){
-        //     console.log("null")
-        //     console.log(articles_array[i])
-        //     continue;
-        //   }
-        //   console.log(articles_array[i].text)
-        // }
 
-        articles_array.splice(7, 1);
+        for(var i = 0 ; i < this.uoptions.length ; i++){
+          if(this.uoptions[i]["text"]==null){
+            console.log(i)
+            articles_array.splice(i,1);
+          }
+        }
+
+        // articles_array.splice(7, 1);
 
         if(!searchString){
             return articles_array;
