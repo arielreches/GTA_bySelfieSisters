@@ -3,11 +3,10 @@
     <b-col cols="12">
       <h2>
         Hi, {{ msg }}!
-        <b-link href="#/login">(login)</b-link>
       </h2>
-      <b-btn href="#/login">Logout</b-btn>
-      <b-form-input type = "text"  placeholder="Search..."></b-form-input>
-      <b-table striped hover :items="systems" :fields="fields">
+      <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
+      <p>Value: {{ this.searchString }}</p>
+      <b-table striped hover :items="filteredArticles" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
@@ -36,6 +35,7 @@ export default {
   name: 'SystemList',
   data () {
     return {
+      searchString: '',
       fields: {
         companyName: {label: 'Company Name', sortable: true, 'class': 'text-center'},
         systemName: {label: 'System Name', sortable: true},
@@ -61,6 +61,41 @@ export default {
         this.errors.push(e)
       })
   },
+  computed: {
+    // A computed property that holds only those articles that match the searchString.
+    filteredArticles: function () {
+        var articles_array = this.systems;
+        var searchString = this.searchString;
+
+        var tag = "companyName";
+
+        if(!searchString){
+            return articles_array;
+        }
+        else {
+            searchString = searchString.trim().toLowerCase();
+            articles_array = articles_array.filter(
+                function (item) {
+                    if (item.companyName.toLowerCase().indexOf(searchString) !== -1 || 
+                    item.systemName.toLowerCase().indexOf(searchString) !== -1 ||
+                    item.model.toLowerCase().indexOf(searchString) !== -1) {
+                       return item;
+                    }
+                }
+            )
+        }
+        // Return an array with the filtered data.
+        return articles_array;
+    }
+  },
+  methods: {
+      makeActive: function (item) {
+          this.tagName = item;
+          var form = document.getElementById("inputForm");
+          form.reset();
+          this.searchString='';
+      },
+        },
   methods: {
     details (item) {
       console.log(item)
