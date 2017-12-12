@@ -22,12 +22,12 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* SAVE SYSTEM */
-router.post('/', function(req, res, next) {
+/* router.post('/', function(req, res, next) {
   System.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
-});
+}); */
 
 /* UPDATE SYSTEM */
 router.put('/:id', function(req, res, next) {
