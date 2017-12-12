@@ -8,8 +8,8 @@
       <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png">
   </div>
   <div class = "info">
-        <li><a><router-link to='createGroup'>Groups</a></li>
-        <li><a><router-link to='systems'>Systems</a></li>
+        <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='createGroup'>Your Groups</a></li>
+        <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='systems'>Your Systems</a></li>
         <li><a><router-link to='about'>About</router-link></a></li>
         <li><a><router-link to='contact'>Contact</router-link></a></li>
         <li v-if="this.noLogout.includes(this.$route.path) === false"><a href = '#/login'>Logout</a></li>
