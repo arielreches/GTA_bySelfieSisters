@@ -13,13 +13,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// /* GET USER BY ID */
-// router.get('/:id', function(req, res, next) {
-//   User.findById(req.params.id, function (err, post) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
 
 /* GET CURRENT USER BY VOODOO MAGIC */
 router.get('/curr', function(req, res, next) {
@@ -29,8 +22,17 @@ router.get('/curr', function(req, res, next) {
   res.json(currentUser);
 });
 
+/* GET USER BY ID */
+router.get('/:id', function(req, res, next) {
+  User.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+    console.log(post);
+  });
+});
+
 /* GET SINGLE USER BY LOGIN INFO */
-router.get('/login', function(req, res, next) {
+router.get('/login/t', function(req, res, next) {
   //use mongoose User var to find one user that matches the request, getting back password field
   User.findOne({'username': req.query.username}, function (err, user) {
     if (err) return next(err)

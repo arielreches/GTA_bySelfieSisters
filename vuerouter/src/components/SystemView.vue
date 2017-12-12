@@ -18,35 +18,45 @@
           </template>
         <hr class="my-4">
         <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn>
-        <b-btn variant="danger" @click.stop="Return(system._id)">Delete</b-btn>
+        <b-form @submit="addTag(tag)">
+          <b-form-input v-model.trim="tag" type="text" placeholder="Add new Tag">
+          </b-form-input>
+          <br>
+          <b-btn type="submit">Add Tag</b-btn>
+        </b-form>
       </b-jumbotron>
     </b-col>
   </b-row>
 </template>
 
-
 <script>
+import axios from 'axios'
 
-  import axios from 'axios'
+var system = {}
 
-  var system = {}
-
-  export default {
-    name: 'SystemView',
-    data () {
-      return {
-        system: system
-      }
-    },
-    created () {
-      axios.get(`http://localhost:3000/system/` + this.$route.params.id)
-      .then(response => {
-        this.system = response.data
-        console.log(this.system)
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+export default {
+  name: 'SystemView',
+  data () {
+    return {
+      system: system,
+      tag: ''
+    }
+  },
+  created () {
+    axios.get(`http://localhost:3000/system/` + this.$route.params.id)
+    .then(response => {
+      this.system = response.data
+      console.log(this.system)
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
+  methods: {
+    addTag (tag) {
+      this.system.Tag.push(tag);
+      axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
     }
   }
+}
 </script>
