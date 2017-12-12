@@ -6,7 +6,6 @@
         System Groups
       </h2>
       <b-btn v-b-toggle.createGroupForm variant="primary">Create Group</b-btn>
-      <b-btn variant="primary" @click.stop="test(curruser)">Test</b-btn>
         <b-collapse id="createGroupForm" class="mt-2">
           <b-card>
               <b-form @submit="onSubmit">
@@ -287,9 +286,6 @@ export default {
         params: { id: group._id }
       })
     },
-    test (curruser){
-      
-    }
   }
 }
 </script>
