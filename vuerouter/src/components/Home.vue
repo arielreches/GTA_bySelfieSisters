@@ -158,7 +158,7 @@ export default {
     onSubmit (evt) {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
-      var id   
+      var id 
       axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
         console.log('added group')
@@ -210,9 +210,6 @@ export default {
             this.errors.push(e)
           })
       }
-      })
-      .catch(e => {
-        this.errors.push(e)
       })
       .catch(e => {
         this.errors.push(e)
