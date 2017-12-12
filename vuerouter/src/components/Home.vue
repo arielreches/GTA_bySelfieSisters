@@ -2,6 +2,7 @@
   <b-row>
     <b-col cols="12">
       <div style="padding-left:1%;padding-right:1%;padding-bottom:2%;padding-top:2%;">
+<<<<<<< HEAD
       <h2>
         System Groups
       </h2>
@@ -28,27 +29,60 @@
 
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
+=======
+        <h2>
+          System Groups
+        </h2>
+        <b-btn v-b-toggle.createGroupForm variant="primary">Create Group</b-btn>
+          <b-collapse id="createGroupForm" class="mt-2">
+            <b-card>
+                <b-form @submit="onSubmit">
+                  <div>
+                    <b-form-input v-model="group.name"
+                                  type="text"
+                                  placeholder="Group Name..."
+                                  class = "groupNameInput"></b-form-input>
+                  </div>
+                <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
+                <b-collapse id="collapse1" class="mt-2">
+>>>>>>> d5016c71beb4682cd05907c4b2770a5a387c52cd
                   <b-card>
-                    <form id="UsersInput" style="padding-right:75%;">
-                      <b-form-input v-model="UserSearch" type = "text" placeholder="Search For Users"></b-form-input>
-                    </form>
-                    <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="filteredUsers">
-                    </b-form-checkbox-group>
+                    <form id="SystemsInput" style="padding-right:75%;">
+                      <b-form-input v-model="SystemSearch" type = "text" placeholder="Search For Systems"></b-form-input>
+                    </form>  
+                    <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="filteredSystems"></b-form-checkbox-group>
                   </b-card>
                 </b-collapse><br>
-                <b-button type="submit" variant="primary">Create</b-button>
-              </b-form>
-          </b-card>
-        </b-collapse>
+                  <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
+                  <b-collapse id="collapse2" class="mt-2">
+                    <b-card>
+                      <form id="UsersInput" style="padding-right:75%;">
+                        <b-form-input v-model="UserSearch" type = "text" placeholder="Search For Users"></b-form-input>
+                      </form>
+                      <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="filteredUsers"></b-form-checkbox-group>
+                    </b-card>
+                  </b-collapse><br>
+                  <b-button type="submit" variant="primary">Create</b-button>
+                </b-form>
+            </b-card>
+          </b-collapse>
         </div>
-        <b-table striped hover :items="getGroups" :fields="fields">
-          <template slot="actions" scope="row">
-            <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
-          </template>
-          <template slot="vsystems" scope="row">
-            <b-btn size="sm" @click.stop="viewSystems(row.item)">View Systems</b-btn>
-          </template>
-      </b-table>
+
+        <div style="padding-bottom:5%;">
+          <b-table striped hover :items="getGroups" :fields="fields">
+
+            <template slot="actions" scope="row">
+              <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
+            </template>
+
+            <template slot="vsystems" scope="row">
+              <b-btn size="sm" @click.stop="viewSystems(row.item)">View Systems</b-btn>
+            </template>
+
+          </b-table>
+        </div>
+
+
 </template>
 
 <style>
@@ -95,13 +129,14 @@ export default {
       var holder = [this.systems.length]
       var temp = {}
       for (var i = 0; i < this.systems.length; i++) {
+
         temp["text"]=this.systems[i]["companyName"]
         temp["value"]=this.systems[i]["_id"]
+
         holder[i]=temp
         temp={}
 
       }
-
       this.soptions=holder;
     })
     .catch(e => {
@@ -122,35 +157,24 @@ export default {
 
       }
       this.uoptions=holder
-      
     })
     .catch(e => {
         console.log(e)
     })
-    // axios.get(`http://localhost:3000/group/init`)
-    //   .then(response => {
-    //     this.groups = response.data
-    //     console.log(response)
-    //   })
-    //    .catch(e => {
-    //      console.log(e)
-    //       // this.errors.push(e)
-    // })
+    axios.get(`http://localhost:3000/group/init`)
+      .then(response => {
+        this.groups = response.data
+        console.log(response)
+      })
+       .catch(e => {
+         console.log(e)
+          // this.errors.push(e)
+    })
     console.log(this.users)
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
         this.curruser = response.data
-        axios.get(`http://localhost:3000/user/` + this.curruser._id + '/groups')
-            .then(response => {
-              console.log('curruser populate')
-              console.log(response)
-              this.groups = response.data.Group
-              console.log(this.groups)           
-            })
-            .catch(e => {
-              this.errors.push(e)
-            })  
       })
       .catch(e => {
         this.errors.push(e)
@@ -159,7 +183,15 @@ export default {
   },
   computed: {
       getGroups: function () {
-        return this.groups
+        var holder = this.groups
+        for(var i = 0 ; i < this.groups.length ; i++){
+          for( var j = 0 ; j < this.uoptions.length ; j++){
+            if(holder[i]['groupCreator']==this.uoptions[j]['value']){
+              holder[i]['groupCreator']=this.uoptions[j]['text']
+            }
+          }
+        }
+        return holder
       },
       filteredSystems: function () {
         var articles_array = this.soptions;
@@ -217,7 +249,7 @@ export default {
     onSubmit (evt) {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
-      var id 
+      var id   
       axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
         console.log('added group')
@@ -273,6 +305,9 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+      .catch(e => {
+        this.errors.push(e)
+      })
     },
     details (group){
       this.$router.push({
@@ -285,7 +320,11 @@ export default {
         name: 'SystemList',
         params: { id: group._id }
       })
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> d5016c71beb4682cd05907c4b2770a5a387c52cd
   }
 }
 </script>
