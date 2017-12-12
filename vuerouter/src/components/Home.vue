@@ -5,6 +5,7 @@
         System Groups
       </h2>
       <b-btn v-b-toggle.createGroupForm variant="primary">Create Group</b-btn>
+      <b-btn variant="primary" @click.stop="test(curruser)">Test</b-btn>
         <b-collapse id="createGroupForm" class="mt-2">
           <b-card>
               <b-form @submit="onSubmit">
@@ -128,20 +129,30 @@ export default {
     .catch(e => {
         console.log(e)
     })
-    axios.get(`http://localhost:3000/group/init`)
-      .then(response => {
-        this.groups = response.data
-        console.log(response)
-      })
-       .catch(e => {
-         console.log(e)
-          // this.errors.push(e)
-    })
+    // axios.get(`http://localhost:3000/group/init`)
+    //   .then(response => {
+    //     this.groups = response.data
+    //     console.log(response)
+    //   })
+    //    .catch(e => {
+    //      console.log(e)
+    //       // this.errors.push(e)
+    // })
     console.log(this.users)
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
         this.curruser = response.data
+        axios.get(`http://localhost:3000/user/` + this.curruser._id + '/groups')
+            .then(response => {
+              console.log('curruser populate')
+              console.log(response)
+              this.groups = response.data.Group
+              console.log(this.groups)           
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })  
       })
       .catch(e => {
         this.errors.push(e)
@@ -279,6 +290,9 @@ export default {
         name: 'SystemList',
         params: { id: group._id }
       })
+    },
+    test (curruser){
+      
     }
   }
 }

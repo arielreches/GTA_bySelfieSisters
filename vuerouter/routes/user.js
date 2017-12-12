@@ -46,6 +46,17 @@ router.get('/login/t', function(req, res, next) {
   })
 });
 
+/* GET USER'S GROUPS BY ID */
+router.get('/:id/groups', function(req, res, next) {
+  User.findById(req.params.id).populate('Group').exec(function (err, usergroups) {
+    if (err) return next(err);
+    res.json(usergroups);
+    console.log(usergroups);
+  });
+});
+
+
+
 router.post('/', function(req, res, next) {
   //use mongoose User var to create a user instance in the db
   User.create(req.body, function (err, post) {
