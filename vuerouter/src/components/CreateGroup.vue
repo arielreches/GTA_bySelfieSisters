@@ -5,26 +5,11 @@
         Make new Group
       </h2>
       <b-btn href="/systems">System List</b-btn>
-      <b-form @submit="onSubmit">
-            <ul id="example-1">
-                <li v-for="s in system">
-                        <b-form-checkbox id="checkbox1"
-                          v-model="status"
-                          value="accepted"
-                          unchecked-value="not_accepted">
-                          {{ s.companyName }}
-                        </b-form-checkbox>
-
-                </li>
-            </ul>
-            <ul id="example-2">
-                <li v-for="u in user">
-                    {{ u.username }}
-                    <p>{{ u._id }}</p>
-                </li>
-            </ul>
-        <b-button type="submit" variant="primary">Create</b-button>
-      </b-form>
+            <b-form-checkbox-group stacked v-model="selected" name="systempick" :options="options">
+            </b-form-checkbox-group>
+            <!-- <b-form-checkbox-group stacked v-model="selected" name="userpick" :options="options"> -->
+            <!-- </b-form-checkbox-group> -->
+      <b-btn size="sm" @click.stop="select(selected)">Details</b-btn>
 </template>
 
 <script>
@@ -35,25 +20,48 @@ export default {
   name: 'CreateBook',
   data () {
     return {
-      system: [],
-      user: []
+      selected: [],
+      systems: [],
+      users: [],
+      options: []
     }
   },
   created () {
     axios.get(`http://localhost:3000/system/init`)
     .then(response => {
-      this.system = response.data
+      this.systems = response.data
+      console.log(this.systems[1])
+      console.log(this.systems[1].companyName)
+      var holder = [this.systems.length]
+      var temp = {}
+      for (var i = 0; i < this.systems.length; i++) {
+        // console.log(this.systems[i])
+        temp["text"]=this.systems[i]["companyName"]
+        temp["value"]=this.systems[i]["_id"]
+        // console.log(temp)
+        holder[i]=temp
+        temp={}
+        // console.log(this.systems[i]._id)
+      }
+      console.log(holder)
+      this.options=holder;
+      console.log(this.options)
+      // console.log(temp)
+      // this.options = temp
+      
     })
     .catch(e => {
-      this.errors.push(e)
+      console.log(e);
+      // this.errors.push(e)
     })
     axios.get(`http://localhost:3000/user`)
     .then(response => {
-      this.user = response.data
+      this.users = response.data
     })
     .catch(e => {
       this.errors.push(e)
     })
+    console.log(this.systems)
   },
   methods: {
     onSubmit (evt) {
@@ -68,6 +76,9 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+    },
+    select (selected) {
+      console.log(selected)
     }
   }
 }
