@@ -9,7 +9,7 @@
           <b-card>
               <b-form @submit="onSubmit">
                 <div>
-                  <b-form-input v-model="groupName"
+                  <b-form-input v-model="group.name"
                                 type="text"
                                 placeholder="Group Name..."
                                 class = "groupNameInput"></b-form-input>
@@ -17,7 +17,7 @@
               <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
               <b-collapse id="collapse1" class="mt-2">
                 <b-card>
-                      <b-form-checkbox-group v-model="s_selected" name="flavour1" :options="soptions">
+                      <b-form-checkbox-group v-model="group.systemsIn" name="flavour1" :options="soptions">
                       </b-form-checkbox-group>
                 </b-card>
               </b-collapse><br>
@@ -25,7 +25,7 @@
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
                   <b-card>
-                       <b-form-checkbox-group v-model="u_selected" name="flavour1" :options="uoptions">
+                       <b-form-checkbox-group v-model="group.usersIn" name="flavour1" :options="uoptions">
                       </b-form-checkbox-group>
                       </li>
                   </b-card>
@@ -59,7 +59,9 @@ export default {
       systems: [],
       users: [],
       soptions: [],
-      uoptions: []
+      uoptions: [],
+      group: {},
+      curruser: {}
     }
   },
   created () {
@@ -105,24 +107,39 @@ export default {
 
         console.log("made it")
       }
-      this.uoptions=holder;
+      this.uoptions=holder
       console.log(this.uoptions)
       // this.uoptions = temp
       
     })
     .catch(e => {
         console.log(e)
-    })
+    }),
+    axios.get(`http://localhost:3000/user/curr`)
+      .then(response => {
+        console.log(response.data)
+        this.curruser = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
     console.log(this.users)
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      axios.post(`http://localhost:3000/book`, this.book)
+        console.log(this.group.name)
+        console.log(this.curruser)
+        console.log(this.group.systemsIn)
+        console.log(this.group.usersIn)
+        this.group.groupCreator = this.curruser._id
+        console.log(this.group)
+      axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
+        console.log(response)
+        console.log('made it')
         this.$router.push({
-          name: 'ShowBook',
-          params: { id: response.data._id }
+          //name: 'SystemList'
         })
       })
       .catch(e => {

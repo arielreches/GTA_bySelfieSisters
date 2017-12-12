@@ -41,7 +41,7 @@ app.use('/systems', express.static(path.join(__dirname, 'dist')));
 app.use('/system', system);
 
 app.use('/groups', express.static(path.join(__dirname, 'dist')));
-app.use('/group', system);
+app.use('/group', group);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

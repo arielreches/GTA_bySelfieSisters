@@ -77,19 +77,7 @@ var SystemSchema = new mongoose.Schema({
       }
     }
   },
-  dataRateKBPSAvg: String,
-  iopsAvg: String,
-  iopsMax: String,
-  totalServiceTimeMillis: String,
-  readServicTimeMillis: String,
-  writeServiceTimeMillis: String,
-  delAckPct: String,
-  ssdReadBandwidthMBPS: String,
-  ssdWriteBandwidthMBPS: String,
-  ssdReadservicewidthMBPS: String,
-  ssdWriteServiceTimeMillis: String,
-  cpuAvgMax: String,
-  tags: [String], //will be updated
+  Tag: String, //will be updated
   Group: [{type: mongoose.Schema.ObjectId, ref: 'Group'}],
   updated_date: { type: Date, default: Date.now },
 });
