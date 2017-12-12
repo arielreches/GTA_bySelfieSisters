@@ -83,7 +83,8 @@ export default {
       curruser: {},
       fields: {
           name: {label: 'Group Name', sortable: true, 'class': 'text-center'},
-          groupCreator: {label: 'Creator', sortable: true},
+          groupCreator: {label: 'Creator', sortable: true, 'class': 'text-center'},
+          systemNumber: {label: 'System Number', sortable:true, 'class': 'text-center'},
           vsystems: {label: 'Systems', 'class': 'text-center'},
           actions: {label: 'Action', 'class': 'text-center'}
           //usersIn: {label: 'Members', sortable: true},
@@ -162,7 +163,9 @@ export default {
               holder[i]['groupCreator']=this.uoptions[j]['text']
             }
           }
+          holder[i]['systemNumber']=this.groups[i]['systemsIn'].length
         }
+        console.log(holder)
         return holder
       },
       filteredSystems: function () {
