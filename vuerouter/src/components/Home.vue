@@ -2,34 +2,6 @@
   <b-row>
     <b-col cols="12">
       <div style="padding-left:1%;padding-right:1%;padding-bottom:2%;padding-top:2%;">
-<<<<<<< HEAD
-      <h2>
-        System Groups
-      </h2>
-      <b-btn v-b-toggle.createGroupForm variant="primary">Create Group</b-btn>
-        <b-collapse id="createGroupForm" class="mt-2">
-          <b-card>
-              <b-form @submit="onSubmit">
-                <div>
-                  <b-form-input v-model="group.name"
-                                type="text"
-                                placeholder="Group Name..."
-                                class = "groupNameInput"></b-form-input>
-                </div>
-              <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
-              <b-collapse id="collapse1" class="mt-2">
-                <b-card>
-                  <form id="SystemsInput" style="padding-right:75%;">
-                    <b-form-input v-model="SystemSearch" type = "text" placeholder="Search For Systems"></b-form-input>
-                  </form>  
-                  <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="filteredSystems">
-                  </b-form-checkbox-group>
-                </b-card>
-              </b-collapse><br>
-
-                <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
-                <b-collapse id="collapse2" class="mt-2">
-=======
         <h2>
           System Groups
         </h2>
@@ -45,7 +17,6 @@
                   </div>
                 <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
                 <b-collapse id="collapse1" class="mt-2">
->>>>>>> d5016c71beb4682cd05907c4b2770a5a387c52cd
                   <b-card>
                     <form id="SystemsInput" style="padding-right:75%;">
                       <b-form-input v-model="SystemSearch" type = "text" placeholder="Search For Systems"></b-form-input>
@@ -161,20 +132,21 @@ export default {
     .catch(e => {
         console.log(e)
     })
-    axios.get(`http://localhost:3000/group/init`)
-      .then(response => {
-        this.groups = response.data
-        console.log(response)
-      })
-       .catch(e => {
-         console.log(e)
-          // this.errors.push(e)
-    })
     console.log(this.users)
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
         this.curruser = response.data
+         axios.get(`http://localhost:3000/user/` + this.curruser._id + '/groups')
+             .then(response => {
+               console.log('curruser populate')
+               console.log(response)
+               this.groups = response.data.Group
+               console.log(this.groups)           
+             })
+             .catch(e => {
+               this.errors.push(e)
+            })  
       })
       .catch(e => {
         this.errors.push(e)
@@ -320,11 +292,7 @@ export default {
         name: 'SystemList',
         params: { id: group._id }
       })
-<<<<<<< HEAD
-    },
-=======
     }
->>>>>>> d5016c71beb4682cd05907c4b2770a5a387c52cd
   }
 }
 </script>
