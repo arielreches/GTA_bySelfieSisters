@@ -9,7 +9,7 @@
           {{group.name}}
         </template>
         <template slot="lead">
-          Group Creator: {{user.username}}<br>
+          Group Creator: {{this.group.groupCreator}}<br>
           Systems in Group: {{group.systemsIn}}<br>
           Users in Group: {{group.usersIn}}<br>
         </template>
@@ -38,14 +38,17 @@ export default {
     }
   },
   created () {
+    var creator 
     axios.get(`http://localhost:3000/group/` + this.$route.params.id)
     .then(response => {
       this.group = response.data
+      console.log(this.groupCreator)
+       creator = this.group.groupCreator
     })
     .catch(e => {
       this.errors.push(e)
     })
-    axios.get(`http://localhost:3000/user/` + this.group.groupCreator)
+    axios.get(`http://localhost:3000/user/` + creator)
     .then(response => {
       this.user = response.data
     })

@@ -27,7 +27,7 @@ router.get('/curr', function(req, res, next) {
     console.log('No user logged')
   }
   res.json(currentUser);
-})
+});
 
 /* GET SINGLE USER BY LOGIN INFO */
 router.get('/login', function(req, res, next) {

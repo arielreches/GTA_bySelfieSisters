@@ -157,23 +157,63 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-        console.log(this.group.name)
-        console.log(this.curruser)
-        console.log(this.group.systemsIn)
-        console.log(this.group.usersIn)
-        this.group.groupCreator = this.curruser._id
-        console.log(this.group)
+      this.group.groupCreator = this.curruser._id  
+      var id   
       axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
-        console.log(response)
-        console.log('made it')
-        this.$router.push({
-          name: 'Home'
-        })
+        console.log('added group')
+        id = response.data._id
+        console.log(id)
+        for (var i = 0; i < this.group.systemsIn.length; i++){
+          var crrsys = this.group.systemsIn[i]
+          console.log(crrsys)
+          axios.get(`http://localhost:3000/system/` + crrsys)
+          .then(response => {
+            console.log(response.data)
+            var sys = response.data
+            console.log('made it to systems')
+            sys.Group.push(id)
+            console.log(sys)
+            axios.put(`http://localhost:3000/system/` + sys._id, sys)
+            .then(response => {
+              console.log(response)
+              console.log('updated system')
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })  
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
       })
       .catch(e => {
         this.errors.push(e)
       })
+    // for (var i = 0; i < this.group.usersIn.length; i++){
+    //       var crrusrs = this.group.usersIn[i]
+    //       console.log(crrsys)
+    //       axios.get(`http://localhost:3000/user/` + crrusrs)
+    //       .then(response => {
+    //         console.log(response.data)
+    //         var usr = response.data
+    //         console.log('made it to users')
+    //         usr.groups.push(currsys)
+    //         console.log(sys)
+    //       })
+    //       .catch(e => {
+    //         this.errors.push(e)
+    //       })  
+    //       axios.put(`http://localhost:3000/user/` + crrsys)
+    //       .then(response => {
+    //         console.log(response)
+    //         console.log('updated user')
+    //   })
+    //   .catch(e => {
+    //     this.errors.push(e)
+    //   })
+    // }
     },
     details (group){
       this.$router.push({
