@@ -30,33 +30,33 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  var system = {}
+var system = {}
 
-  export default {
-    name: 'SystemView',
-    data () {
-      return {
-        system: system,
-        tag: ''
-      }
-    },
-    created () {
-      axios.get(`http://localhost:3000/system/` + this.$route.params.id)
-      .then(response => {
-        this.system = response.data
-        console.log(this.system)
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-    },
-    methods: {
-      addTag (tag) {
-        this.system.Tag.push(tag);
-        axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
-      }
+export default {
+  name: 'SystemView',
+  data () {
+    return {
+      system: system,
+      tag: ''
+    }
+  },
+  created () {
+    axios.get(`http://localhost:3000/system/` + this.$route.params.id)
+    .then(response => {
+      this.system = response.data
+      console.log(this.system)
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
+  methods: {
+    addTag (tag) {
+      this.system.Tag.push(tag);
+      axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
     }
   }
+}
 </script>
