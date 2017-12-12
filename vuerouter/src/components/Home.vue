@@ -17,7 +17,12 @@
               <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
               <b-collapse id="collapse1" class="mt-2">
                 <b-card>
-                      <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="soptions">
+                  <form id="SystemsInput">
+                    <b-form-input v-model="SystemSearch" type = "text" placeholder="Search For Systems"></b-form-input>
+                    <!-- <p>Value: {{ this.searchString }}</p> -->
+                  </form>
+                    
+                      <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="filteredSystems">
                       </b-form-checkbox-group>
                 </b-card>
               </b-collapse><br>
@@ -25,7 +30,11 @@
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
                   <b-card>
-                       <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="uoptions">
+                    <form id="UsersInput">
+                      <b-form-input v-model="UserSearch" type = "text" placeholder="Search For Users"></b-form-input>
+                      <!-- <p>Value: {{ this.searchString }}</p> -->
+                    </form>
+                       <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="filteredUsers">
                       </b-form-checkbox-group>
                   </b-card>
                 </b-collapse><br>
@@ -75,55 +84,45 @@ export default {
           actions: {label: 'Action', 'class': 'text-center'}
           //usersIn: {label: 'Members', sortable: true},
          // systemsIn: {label: 'Systems', sortable: true}
-        }
+        },
+      SystemSearch: '',
+      UserSearch:'',
     }
   },
   created () {
     axios.get(`http://localhost:3000/system/init`)
     .then(response => {
       this.systems = response.data
-      // console.log(this.systems[1])
-      // console.log(this.systems[1].companyName)
       var holder = [this.systems.length]
       var temp = {}
       for (var i = 0; i < this.systems.length; i++) {
-        // console.log(this.systems[i])
         temp["text"]=this.systems[i]["companyName"]
         temp["value"]=this.systems[i]["_id"]
-        // console.log(temp)
         holder[i]=temp
         temp={}
-        // console.log(this.systems[i]._id)
+
       }
-      console.log(holder)
+
       this.soptions=holder;
-      console.log(this.soptions)
-      // console.log(temp)
-      // this.options = temp
-      
     })
     .catch(e => {
       console.log(e);
-      // this.errors.push(e)
     })
     axios.get(`http://localhost:3000/user`)
     .then(response => {
       this.users = response.data
-      var holder = [this.users.length]
+      var holder = []
       var temp = {}
-      console.log(this.users.length)
       for (var i = 0; i < this.users.length; i++) {
+
         temp["text"]=this.users[i]["username"]
         temp["value"]=this.users[i]["_id"]
 
         holder[i]=temp
         temp={}
 
-        console.log("made it")
       }
       this.uoptions=holder
-      console.log(this.uoptions)
-      // this.uoptions = temp
       
     })
     .catch(e => {
@@ -152,9 +151,63 @@ export default {
   computed: {
       getGroups: function () {
         return this.groups
+      },
+      filteredSystems: function () {
+        var articles_array = this.soptions;
+        var searchString = this.SystemSearch;
+
+        if(!searchString){
+            return articles_array;
+        }
+        else {
+            searchString = searchString.trim().toLowerCase();
+            articles_array = articles_array.filter(
+                function (item) {
+                    if (item.text.toLowerCase().indexOf(searchString) !== -1 ) {
+                       return item;
+                    }
+                }
+            )
+        }
+        // Return an array with the filtered data.
+        return articles_array;
+      },
+      filteredUsers: function () {
+        var articles_array = this.uoptions;
+        var searchString = this.UserSearch;
+        // console.log(articles_array)
+        // for(var i =0 ; i < articles_array.length;i++)
+        // {
+        //   if(articles_array[i].text==null){
+        //     console.log("null")
+        //     console.log(articles_array[i])
+        //     continue;
+        //   }
+        //   console.log(articles_array[i].text)
+        // }
+
+        articles_array.splice(7, 1);
+
+        if(!searchString){
+            return articles_array;
+        }
+        else {
+            searchString = searchString.trim().toLowerCase();
+            // console.log(articles_array)
+            articles_array = articles_array.filter(
+                function (item) {
+                    if (item.text.toLowerCase().indexOf(searchString) !== -1 ) {
+                       return item;
+                    }
+                }
+            )
+        }
+        // Return an array with the filtered data.
+        return articles_array;
       }
     },
   methods: {
+
     onSubmit (evt) {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
