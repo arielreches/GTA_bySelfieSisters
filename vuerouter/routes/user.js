@@ -13,6 +13,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+// /* GET USER BY ID */
+// router.get('/:id', function(req, res, next) {
+//   User.findById(req.params.id, function (err, post) {
+//     if (err) return next(err);
+//     res.json(post);
+//   });
+// });
+
+/* GET CURRENT USER BY VOODOO MAGIC */
 router.get('/curr', function(req, res, next) {
   if(currentUser === null){
     console.log('No user logged')

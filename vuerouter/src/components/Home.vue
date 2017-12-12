@@ -17,7 +17,7 @@
               <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
               <b-collapse id="collapse1" class="mt-2">
                 <b-card>
-                      <b-form-checkbox-group v-model="group.systemsIn" name="flavour1" :options="soptions">
+                      <b-form-checkbox-group v-model="group.systemsIn" name="systemselect" :options="soptions">
                       </b-form-checkbox-group>
                 </b-card>
               </b-collapse><br>
@@ -25,15 +25,22 @@
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
                   <b-card>
-                       <b-form-checkbox-group v-model="group.usersIn" name="flavour1" :options="uoptions">
+                       <b-form-checkbox-group v-model="group.usersIn" name="userselect" :options="uoptions">
                       </b-form-checkbox-group>
-                      </li>
                   </b-card>
                 </b-collapse><br>
                 <b-button type="submit" variant="primary">Create</b-button>
               </b-form>
           </b-card>
         </b-collapse>
+        <b-table striped hover :items="getGroups" :fields="fields">
+          <template slot="actions" scope="row">
+            <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
+          </template>
+          <template slot="vsystems" scope="row">
+            <b-btn size="sm" @click.stop="viewSystems(row.item)">View Systems</b-btn>
+          </template>
+      </b-table>
 </template>
 
 <style>
@@ -51,17 +58,24 @@
 import axios from 'axios'
 
 export default {
-  name: 'CreateBook',
+  name: 'Home',
   data () {
     return {
-      s_selected: [],
-      u_selected: [],
       systems: [],
       users: [],
       soptions: [],
       uoptions: [],
       group: {},
-      curruser: {}
+      groups: [],
+      curruser: {},
+      fields: {
+          name: {label: 'Group Name', sortable: true, 'class': 'text-center'},
+          groupCreator: {label: 'Creator', sortable: true},
+          vsystems: {label: 'Systems', 'class': 'text-center'},
+          actions: {label: 'Action', 'class': 'text-center'}
+          //usersIn: {label: 'Members', sortable: true},
+         // systemsIn: {label: 'Systems', sortable: true}
+        }
     }
   },
   created () {
@@ -114,7 +128,17 @@ export default {
     })
     .catch(e => {
         console.log(e)
-    }),
+    })
+    axios.get(`http://localhost:3000/group/init`)
+      .then(response => {
+        this.groups = response.data
+        console.log(response)
+      })
+       .catch(e => {
+         console.log(e)
+          // this.errors.push(e)
+    })
+    console.log(this.users)
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
@@ -125,6 +149,11 @@ export default {
       })
     console.log(this.users)
   },
+  computed: {
+      getGroups: function () {
+        return this.groups
+      }
+    },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
@@ -139,15 +168,24 @@ export default {
         console.log(response)
         console.log('made it')
         this.$router.push({
-          //name: 'SystemList'
+          name: 'Home'
         })
       })
       .catch(e => {
         this.errors.push(e)
       })
     },
-    select (selected) {
-      console.log(selected)
+    details (group){
+      this.$router.push({
+        name: 'ShowGroup',
+        params: { id: group._id }
+      })
+    },
+    viewSystems (group){
+      this.$router.push({
+        name: 'SystemList',
+        params: { id: group._id }
+      })
     }
   }
 }

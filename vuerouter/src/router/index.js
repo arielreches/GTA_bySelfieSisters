@@ -11,7 +11,9 @@ import BookList from '@/components/BookList'
 import ShowBook from '@/components/ShowBook'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
-import CreateGroup from '@/components/CreateGroup'
+import Home from '@/components/Home'
+import ShowGroup from '@/components/ShowGroup'
+import EditGroup from '@/components/EditGroup'
 
 Vue.use(Router)
 
@@ -58,9 +60,19 @@ export default new Router({
       component: SystemView
     },
     {
-      path: '/createGroup',
-      name: 'CreateGroup',
-      component: CreateGroup
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/showgroup',
+      name: 'ShowGroup',
+      component: ShowGroup
+    },
+    {
+      path: '/editgroup',
+      name: 'EditGroup',
+      component: EditGroup
     },
     {
       path: '/editbook',

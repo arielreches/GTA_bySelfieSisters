@@ -49,10 +49,32 @@ export default {
     }
   },
   created () {
-    axios.get('http://localhost:3000/system/init')
-      .then(response => {
-        this.systems = response.data
-      })
+    axios.get(`http://localhost:3000/group/` + this.$route.params.id)
+    .then(response => {
+      console.log('In created method in get group now')
+      this.group = response.data
+      console.log(this.group)
+      var holder = []
+      for (var i = 0; i < this.group.systemsIn.length; i++){
+        console.log(this.group.systemsIn[i])
+        axios.get('http://localhost:3000/system/' + this.group.systemsIn[i])
+        .then(response => {
+           holder.push(response.data)
+           console.log('holder in get')
+           console.log(holder)
+          //  this.systems = holder
+          //  console.log(this.systems)
+        })
+        this.systems = holder
+      }
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    // var holder = [this.group.systemsIn.length]
+    // for (var i = 0; i < this.group.systemsIn.length; i++){
+    //   console.log(this.group.systemsIn[i])
+    //}
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
@@ -98,23 +120,21 @@ export default {
   },
   methods: {
       makeActive: function (item) {
-          this.tagName = item;
-          var form = document.getElementById("inputForm");
-          form.reset();
-          this.searchString='';
+        this.tagName = item;
+        var form = document.getElementById("inputForm");
+        form.reset()
+        this.searchString='';
       },
-        },
-  methods: {
-    details (item) {
-      console.log(item)
-      router.push({
-        name: 'SystemView',
-        params: {
-          id: item._id
-        }
-      })
-      console.log(item)
+      details (item) {
+        console.log(item)
+        router.push({
+          name: 'SystemView',
+          params: {
+            id: item._id
+          }
+        })
+        console.log(item)
+      }
     }
   }
-}
 </script>

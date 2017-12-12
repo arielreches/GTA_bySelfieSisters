@@ -66,7 +66,7 @@ export default {
       .then(function (res) {
         var success = res.data // response.data passed from express server
         if (success === 'success') {
-          router.push('systems')// redirect to /systems on success
+          router.push('home')// redirect to /systems on success
         } else {
           alert('Invalid Username and Password')
         }

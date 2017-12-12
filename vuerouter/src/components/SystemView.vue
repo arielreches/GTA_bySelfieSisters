@@ -17,33 +17,36 @@
           Write Service Time: {{system.writeServiceTimeMillis}}
           </template>
         <hr class="my-4">
-        <b-btn variant="success" @click.stop="editbook(book._id)">Add to Group</b-btn>
-        <b-btn variant="danger" @click.stop="deletebook(book._id)">Delete</b-btn>
+        <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn>
+        <b-btn variant="danger" @click.stop="Return(system._id)">Delete</b-btn>
       </b-jumbotron>
     </b-col>
   </b-row>
 </template>
+
+
 <script>
-import axios from 'axios'
 
-var system = {}
+  import axios from 'axios'
 
-export default {
-  name: 'SystemView',
-  data () {
-    return {
-      system: system
+  var system = {}
+
+  export default {
+    name: 'SystemView',
+    data () {
+      return {
+        system: system
+      }
+    },
+    created () {
+      axios.get(`http://localhost:3000/system/` + this.$route.params.id)
+      .then(response => {
+        this.system = response.data
+        console.log(this.system)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
     }
-  },
-  created () {
-    axios.get(`http://localhost:3000/system/` + this.$route.params.id)
-    .then(response => {
-      this.system = response.data
-      console.log(this.system)
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
   }
-}
 </script>
