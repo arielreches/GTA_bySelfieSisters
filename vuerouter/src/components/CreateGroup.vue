@@ -17,32 +17,17 @@
               <b-btn v-b-toggle.collapse1 class="addButton">Add Systems</b-btn>
               <b-collapse id="collapse1" class="mt-2">
                 <b-card>
-                  <ul id="example-1">
-                    <li v-for="s in system">
-                      <b-form-checkbox id="checkbox1"
-                                       v-model="status"
-                                       value="accepted"
-                                       unchecked-value="not_accepted">
-                        {{ s.companyName }}
-                      </b-form-checkbox>
-                    </li>
-                  </ul>
+                      <b-form-checkbox-group v-model="s_selected" name="flavour1" :options="soptions">
+                      </b-form-checkbox-group>
                 </b-card>
               </b-collapse><br>
 
                 <b-btn v-b-toggle.collapse2 class="addButton">Add Users</b-btn>
                 <b-collapse id="collapse2" class="mt-2">
                   <b-card>
-                    <ul id="example-2">
-                      <li v-for="u in user">
-                        <b-form-checkbox id="checkbox2"
-                                         v-model="status"
-                                         value="accepted"
-                                         unchecked-value="not_accepted">
-                          {{ u.username }}
-                        </b-form-checkbox>
+                       <b-form-checkbox-group v-model="u_selected" name="flavour1" :options="uoptions">
+                      </b-form-checkbox-group>
                       </li>
-                    </ul>
                   </b-card>
                 </b-collapse><br>
                 <b-button type="submit" variant="primary">Create</b-button>
@@ -69,18 +54,20 @@ export default {
   name: 'CreateBook',
   data () {
     return {
-      selected: [],
+      s_selected: [],
+      u_selected: [],
       systems: [],
       users: [],
-      options: []
+      soptions: [],
+      uoptions: []
     }
   },
   created () {
     axios.get(`http://localhost:3000/system/init`)
     .then(response => {
       this.systems = response.data
-      console.log(this.systems[1])
-      console.log(this.systems[1].companyName)
+      // console.log(this.systems[1])
+      // console.log(this.systems[1].companyName)
       var holder = [this.systems.length]
       var temp = {}
       for (var i = 0; i < this.systems.length; i++) {
@@ -93,8 +80,8 @@ export default {
         // console.log(this.systems[i]._id)
       }
       console.log(holder)
-      this.options=holder;
-      console.log(this.options)
+      this.soptions=holder;
+      console.log(this.soptions)
       // console.log(temp)
       // this.options = temp
       
@@ -106,11 +93,27 @@ export default {
     axios.get(`http://localhost:3000/user`)
     .then(response => {
       this.users = response.data
+      var holder = [this.users.length]
+      var temp = {}
+      console.log(this.users.length)
+      for (var i = 0; i < this.users.length; i++) {
+        temp["text"]=this.users[i]["username"]
+        temp["value"]=this.users[i]["_id"]
+
+        holder[i]=temp
+        temp={}
+
+        console.log("made it")
+      }
+      this.uoptions=holder;
+      console.log(this.uoptions)
+      // this.uoptions = temp
+      
     })
     .catch(e => {
-      this.errors.push(e)
+        console.log(e)
     })
-    console.log(this.systems)
+    console.log(this.users)
   },
   methods: {
     onSubmit (evt) {
