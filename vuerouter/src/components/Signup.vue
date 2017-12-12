@@ -51,7 +51,7 @@ export default {
         // sends post request with this.user data
         axios.post('http://localhost:3000/user', this.user)
         .then(function (res) {
-          router.push('systems')
+          router.push('home')
         })
       } else {
         alert('Passwords do not match.')
