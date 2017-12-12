@@ -40,6 +40,7 @@ export default {
         companyName: {label: 'Company Name', sortable: true, 'class': 'text-center'},
         systemName: {label: 'System Name', sortable: true},
         model: {label: 'Model', sortable: true},
+        Tag: {label: 'Tags'},
         actions: {label: 'Action', 'class': 'text-center'}
       },
       systems: systems,
@@ -80,6 +81,13 @@ export default {
                     item.systemName.toLowerCase().indexOf(searchString) !== -1 ||
                     item.model.toLowerCase().indexOf(searchString) !== -1) {
                        return item;
+                    }
+                    else if(item.Tag){
+                      for(var i = 0; i < item.Tag.length; i++){
+                        if(item.Tag[i].toLowerCase().indexOf(searchString) !== -1){
+                        return item;
+                      }
+                      }
                     }
                 }
             )
