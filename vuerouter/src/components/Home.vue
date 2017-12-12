@@ -187,33 +187,36 @@ export default {
             this.errors.push(e)
           })
       }
+      for (var i = 0; i < this.group.systemsIn.length; i++){
+          var crrusr = this.group.usersIn[i]
+          console.log(crrusr)
+          axios.get(`http://localhost:3000/user/` + crrusr)
+          .then(response => {
+            console.log(response.data)
+            var usr = response.data
+            console.log('made it to users')
+            usr.Group.push(id)
+            console.log(usr)
+            axios.put(`http://localhost:3000/user/` + usr._id, usr)
+            .then(response => {
+              console.log(response)
+              console.log('updated user')
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })  
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
       })
       .catch(e => {
         this.errors.push(e)
       })
-    // for (var i = 0; i < this.group.usersIn.length; i++){
-    //       var crrusrs = this.group.usersIn[i]
-    //       console.log(crrsys)
-    //       axios.get(`http://localhost:3000/user/` + crrusrs)
-    //       .then(response => {
-    //         console.log(response.data)
-    //         var usr = response.data
-    //         console.log('made it to users')
-    //         usr.groups.push(currsys)
-    //         console.log(sys)
-    //       })
-    //       .catch(e => {
-    //         this.errors.push(e)
-    //       })  
-    //       axios.put(`http://localhost:3000/user/` + crrsys)
-    //       .then(response => {
-    //         console.log(response)
-    //         console.log('updated user')
-    //   })
-    //   .catch(e => {
-    //     this.errors.push(e)
-    //   })
-    // }
+      .catch(e => {
+        this.errors.push(e)
+      })
     },
     details (group){
       this.$router.push({
