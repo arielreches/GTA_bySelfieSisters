@@ -4,6 +4,7 @@
       <h2>
         Hi, {{ msg }}!
       </h2>
+      <b-btn variant="primary" @click.stop="test(groupid)">test</b-btn>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
       <p>Value: {{ this.searchString }}</p>
       <b-table striped hover :items="filteredArticles" :fields="fields">
@@ -30,6 +31,7 @@ import router from '../router'
 
 var systems = []
 var msg = ''
+var group = {}
 
 export default {
   name: 'SystemList',
@@ -44,29 +46,18 @@ export default {
         actions: {label: 'Action', 'class': 'text-center'}
       },
       systems: systems,
-      errors: [],
-      msg: msg
+      errors: [], 
+      msg: msg,
+      groupid: String
     }
   },
   created () {
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id)
+    axios.get(`http://localhost:3000/group/` + this.$route.params.id + '/populate')
     .then(response => {
       console.log('In created method in get group now')
+      console.log(response.data)
       this.group = response.data
-      console.log(this.group)
-      var holder = []
-      for (var i = 0; i < this.group.systemsIn.length; i++){
-        console.log(this.group.systemsIn[i])
-        axios.get('http://localhost:3000/system/' + this.group.systemsIn[i])
-        .then(response => {
-           holder.push(response.data)
-           console.log('holder in get')
-           console.log(holder)
-          //  this.systems = holder
-          //  console.log(this.systems)
-        })
-        this.systems = holder
-      }
+      this.systems = this.group.systemsIn
     })
     .catch(e => {
       this.errors.push(e)
@@ -134,6 +125,16 @@ export default {
           }
         })
         console.log(item)
+      },
+      test (goupid) {
+        console.log(groupid)
+        axios.get(`http://localhost:3000/group/populate` + groupid)
+        .then(response => {
+          console.log(response.data)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
       }
     }
   }
