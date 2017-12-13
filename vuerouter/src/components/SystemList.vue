@@ -6,10 +6,7 @@
       </h2>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
       <p>Value: {{ this.searchString }}</p>
-      <b-table hover :items="filteredArticles" :fields="fields">
-        <template slot="actions" scope="row">
-         <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
-        </template>
+      <b-table @row-clicked='details' hover :items="filteredArticles" :fields="fields">
       </b-table>
       <ul v-if="errors && errors.length">
         <li v-for="error of errors">
@@ -40,7 +37,6 @@ export default {
         systemName: {label: 'System Name', sortable: true},
         model: {label: 'Model', sortable: true},
         Tag: {label: 'Tags'},
-        actions: {label: 'Action', 'class': 'text-center'}
       },
       systems: [],
       errors: [], 
