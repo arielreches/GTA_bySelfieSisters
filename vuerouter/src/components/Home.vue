@@ -165,7 +165,6 @@ export default {
           }
           holder[i]['systemNumber']=this.groups[i]['systemsIn'].length
         }
-        console.log(holder)
         return holder
       },
       filteredSystems: function () {

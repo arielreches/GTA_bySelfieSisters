@@ -10,8 +10,8 @@
         </template>
         <template slot="lead">
           Group Creator: {{this.group.groupCreator}}<br>
-          Systems in Group: {{group.systemsIn}}<br>
-          Users in Group: {{group.usersIn}}<br>
+          Systems in Group: {{this.systems}}<br>
+          Users in Group: {{this.user}}<br>
         </template>
         <hr class="my-4">
         <p>
@@ -34,7 +34,8 @@ export default {
   data () {
     return {
       group: [],
-      user: []
+      user: [],
+      systems: [],
     }
   },
   created () {
@@ -42,18 +43,53 @@ export default {
     axios.get(`http://localhost:3000/group/` + this.$route.params.id)
     .then(response => {
       this.group = response.data
-      console.log(this.groupCreator)
-       creator = this.group.groupCreator
+
+      creator = this.group.groupCreator
+      // console.log("made it")
+      // console.log(response.data)
     })
     .catch(e => {
       this.errors.push(e)
     })
-    axios.get(`http://localhost:3000/user/` + creator)
+    axios.get(`http://localhost:3000/user/`)
     .then(response => {
-      this.user = response.data
+      this.user = this.group.usersIn;
+
+      for(var i = 0 ; i < this.user.length ; i ++ ){
+        console.log(this.user[i])
+        for( var j = 0 ; j < response.data.length ; j ++ ){
+
+          if(this.user[i]==response.data[j]['_id']){
+            console.log(response.data[j]['username'])
+            this.user[i] = response.data[j]['username']
+          }
+          if(this.group.groupCreator == response.data[j]['_id']){
+            this.group.groupCreator = response.data[j]['username']
+          }
+        }
+      }
+      console.log(this.user)
+
     })
     .catch(e => {
+      console.log(e)
       this.errors.push(e)
+    })
+
+    axios.get(`http://localhost:3000/system/init`)
+    .then(response => {
+      this.systems = this.group.systemsIn;
+      for(var i = 0 ; i < this.systems.length ; i ++ ){
+        for( var j = 0 ; j < response.data.length ; j ++ ){
+          if(this.systems[i]==response.data[j]['_id']){
+            this.systems[i] = response.data[j]['companyName']
+          }
+        }
+      }
+      console.log(this.systems)
+    })
+    .catch(e => {
+      console.log(e);
     })
   },
   methods: {
