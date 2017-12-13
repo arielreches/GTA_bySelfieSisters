@@ -40,15 +40,21 @@ export default {
   name: 'SystemView',
   data () {
     return {
+      id:'',
       system: system,
       tags: system.Tag,
       tag: ''
     }
   },
   created () {
+
+    this.id=this.$route.params.groupid
+    console.log(this.id)
+
     axios.get(`http://localhost:3000/system/` + this.$route.params.id)
     .then(response => {
       this.system = response.data
+      console.log("made it")
       console.log(this.system)
     })
     .catch(e => {
@@ -60,6 +66,12 @@ export default {
       this.system.Tag.push(tag)
       axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
       this.$router.push('grouplist')
+    },
+    back(){
+      this.$router.push({
+        name: 'SystemList',
+        params: { id: this.id }
+      })
     }
   }
 }

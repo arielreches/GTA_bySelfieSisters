@@ -34,6 +34,7 @@ export default {
   name: 'SystemList',
   data () {
     return {
+      id: '',
       searchString: '',
       fields: {
         companyName: {label: 'Company Name', sortable: true, 'class': 'text-center'},
@@ -48,6 +49,9 @@ export default {
     }
   },
   created () {
+    
+    this.id=this.$route.params.id
+    console.log(this.id)
     axios.get('http://localhost:3000/system/init')
       .then(response => {
         this.systems = response.data
@@ -109,7 +113,8 @@ export default {
       router.push({
         name: 'SystemView',
         params: {
-          id: item._id
+          id: item._id,
+          groupid: this.id
         }
       })
       console.log(item)

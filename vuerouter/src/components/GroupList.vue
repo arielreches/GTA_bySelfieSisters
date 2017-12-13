@@ -284,12 +284,14 @@ export default {
       })
     },
     details (group){
+      console.log(group._id)
       this.$router.push({
         name: 'ShowGroup',
         params: { id: group._id }
       })
     },
     viewSystems (group){
+      console.log(group._id)
       this.$router.push({
         name: 'SystemList',
         params: { id: group._id }
