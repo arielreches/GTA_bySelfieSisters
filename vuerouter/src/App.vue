@@ -5,7 +5,7 @@
       <img class="navbar-brand" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hewlett_Packard_Enterprise_logo.svg/1000px-Hewlett_Packard_Enterprise_logo.svg.png">
   </div>
   <div class="navbar-header">
-      <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png" href='#/home'>
+    <a href="/#/grouplist"><img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png" href='#/home'></a>
   </div>
   <div class = "info">
         <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='grouplist'>Your Groups</a></li>
