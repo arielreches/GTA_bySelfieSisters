@@ -2,8 +2,8 @@
   <b-row>
     <b-col cols="12">
       <h2>
-        Vue System
-        <b-link href="#/systems">(System List)</b-link>
+        {{system.systemName}} System Details 
+        <b-btn variant='primary' size='sm' @click.stop="back()">Back to Group</b-link>
       </h2>
       <b-jumbotron>
         <template slot="header">
@@ -13,11 +13,13 @@
           Company Name: {{system.companyName}}<br>
           System Model: {{system.model}}<br>
           OS Version: {{system.osVersion}}<br>
+          Tags: {{system.Tag}}<br>
           <template v-if='system.writeServiceTimeMillis != null'>
           Write Service Time: {{system.writeServiceTimeMillis}}
           </template>
+        </template>
         <hr class="my-4">
-        <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn>
+        <!-- <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn> -->
         <b-form @submit="addTag(tag)">
           <b-form-input v-model.trim="tag" type="text" placeholder="Add new Tag">
           </b-form-input>
@@ -33,6 +35,7 @@
 import axios from 'axios'
 
 var system = {}
+var group = {}
 
 export default {
   name: 'SystemView',
