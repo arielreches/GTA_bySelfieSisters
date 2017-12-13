@@ -40,7 +40,7 @@
         </div>
 
         <div style="padding-bottom:5%;">
-          <b-table striped hover :items="getGroups" :fields="fields">
+          <b-table hover :items="getGroups" :fields="fields">
 
             <template slot="actions" scope="row">
               <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>

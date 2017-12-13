@@ -17,7 +17,7 @@
         <p>
           Updated Date: {{group.updated_date}}
         </p>
-        <b-btn href= '#/home'>Home</b-btn>
+        <b-btn variant='primary'href= '#/home'>Home</b-btn>
         <b-btn variant="success" @click.stop="editgroup(group._id)">Edit</b-btn>
         <b-btn variant="danger" @click.stop="deletegroup(group._id)">Delete</b-btn>
       </b-jumbotron>
