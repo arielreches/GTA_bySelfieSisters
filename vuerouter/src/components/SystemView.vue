@@ -56,6 +56,7 @@ export default {
     addTag (tag) {
       this.system.Tag.push(tag);
       axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
+      this.$router.push('home')
     }
   }
 }
