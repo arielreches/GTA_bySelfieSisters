@@ -35,14 +35,13 @@
 import axios from 'axios'
 
 var system = {}
-var group = {}
 
 export default {
   name: 'SystemView',
   data () {
     return {
       system: system,
-      tag: ''
+      tag: '',
     }
   },
   created () {
@@ -57,7 +56,7 @@ export default {
   },
   methods: {
     addTag (tag) {
-      this.system.Tag.push(tag);
+      this.system.Tag.push(tag)
       axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
       this.$router.push('home')
     }

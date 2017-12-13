@@ -2,12 +2,11 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Hi, {{ msg }}!
+        Hi, {{ msg }}! You're viewing {{ groupName }}.
       </h2>
-      <b-btn variant="primary" @click.stop="test(groupid)">test</b-btn>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
       <p>Value: {{ this.searchString }}</p>
-      <b-table striped hover :items="filteredArticles" :fields="fields">
+      <b-table hover :items="filteredArticles" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
@@ -29,8 +28,6 @@
 import axios from 'axios'
 import router from '../router'
 
-var systems = []
-var msg = ''
 var group = {}
 
 export default {
@@ -45,30 +42,24 @@ export default {
         Tag: {label: 'Tags'},
         actions: {label: 'Action', 'class': 'text-center'}
       },
-      systems: systems,
+      systems: [],
       errors: [], 
-      msg: msg,
+      msg: '',
       groupid: String
     }
   },
   created () {
     axios.get(`http://localhost:3000/group/` + this.$route.params.id + '/populate')
     .then(response => {
-      console.log('In created method in get group now')
-      console.log(response.data)
       this.group = response.data
+      this.groupName = this.group.name
       this.systems = this.group.systemsIn
     })
     .catch(e => {
       this.errors.push(e)
     })
-    // var holder = [this.group.systemsIn.length]
-    // for (var i = 0; i < this.group.systemsIn.length; i++){
-    //   console.log(this.group.systemsIn[i])
-    //}
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
-        console.log(response.data)
         this.msg = response.data.username
       })
       .catch(e => {
@@ -117,24 +108,12 @@ export default {
         this.searchString='';
       },
       details (item) {
-        console.log(item)
         router.push({
           name: 'SystemView',
           params: {
             id: item._id
           }
         })
-        console.log(item)
-      },
-      test (goupid) {
-        console.log(groupid)
-        axios.get(`http://localhost:3000/group/populate` + groupid)
-        .then(response => {
-          console.log(response.data)
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
       }
     }
   }
