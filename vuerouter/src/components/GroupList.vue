@@ -38,9 +38,10 @@
             </b-card>
           </b-collapse>
         </div>
-
+        <b-form-input v-model="searchString" type = "text" placeholder="Search groups..."></b-form-input>
+        <p>{{this.searchString}}</p>
         <div style="padding-bottom:5%;">
-          <b-table hover :items="getGroups" :fields="fields">
+          <b-table hover :items="filteredArticles" :fields="fields">
 
             <template slot="actions" scope="row">
               <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
@@ -69,11 +70,15 @@
 <script>
 
 import axios from 'axios'
+import router from '../router'
+
+var groups= []
 
 export default {
   name: 'Home',
   data () {
     return {
+      newGroups: [],
       systems: [],
       users: [],
       soptions: [],
@@ -92,6 +97,8 @@ export default {
         },
       SystemSearch: '',
       UserSearch:'',
+      searchString: '',
+      groups: groups
     }
   },
   created () {
@@ -216,7 +223,29 @@ export default {
         }
         // Return an array with the filtered data.
         return articles_array;
-      }
+      },
+      filteredArticles: function () {
+        var articles_array = this.getGroups;
+        var searchString = this.searchString;
+
+        if(!searchString){
+            return articles_array;
+        }
+        else {
+            searchString = searchString.trim().toLowerCase();
+            articles_array = articles_array.filter(
+                function (item) {
+                  console.log("Made it")
+                    if (item.name.toLowerCase().indexOf(searchString) !== -1 || 
+                    item.groupCreator.toLowerCase().indexOf(searchString) !== -1) {
+                       return item;
+                    }
+                }
+            )
+        }
+        // Return an array with the filtered data.
+        return articles_array;
+    }
     },
   methods: {
 
@@ -294,7 +323,13 @@ export default {
         name: 'SystemList',
         params: { id: group._id }
       })
-    }
+    },
+    makeActive: function (item) {
+          this.tagName = item;
+          var form = document.getElementById("inputForm");
+          form.reset();
+          this.searchString='';
+      }
   }
 }
 </script>
