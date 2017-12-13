@@ -11,7 +11,6 @@
   <b-form-input v-model.trim="user.password" type="password" placeholder="Enter your Password"></b-form-input>
   </br>
   <b-button id='loginButton' type="submit">Log In</b-button>
-
   <router-link to='signup'>Not a GTA User? Click here to sign up.</router-link>
 </div>
 
@@ -66,7 +65,7 @@ export default {
       .then(function (res) {
         var success = res.data // response.data passed from express server
         if (success === 'success') {
-          router.push('home')// redirect to /systems on success
+          router.push('grouplist')// redirect to /grouplist on success
         } else {
           alert('Invalid Username and Password')
         }
