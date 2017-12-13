@@ -6,7 +6,7 @@ import Signup from '@/components/Signup'
 import SystemView from '@/components/SystemView'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
-import Home from '@/components/Home'
+import GroupList from '@/components/GroupList'
 import ShowGroup from '@/components/ShowGroup'
 import EditGroup from '@/components/EditGroup'
 
@@ -50,9 +50,9 @@ export default new Router({
       component: SystemView
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/grouplist',
+      name: 'GroupList',
+      component: GroupList
     },
     {
       path: '/showgroup',
