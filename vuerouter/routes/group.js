@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next) {
 
 /* GET USER'S GROUPS BY ID */
 router.get('/:id/populate', function(req, res, next) {
-  User.findById(req.params.id).populate('groupCreator').populate('usersIn').populate('systemsIn').exec(function (err, data) {
+  Group.findById(req.params.id).populate('groupCreator').populate('usersIn').populate('systemsIn').exec(function (err, data) {
     if (err) return next(err);
     res.json(data);
     console.log(data);
