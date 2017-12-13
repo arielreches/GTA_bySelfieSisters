@@ -3,15 +3,10 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import SystemList from '@/components/SystemList'
 import Signup from '@/components/Signup'
-import DummySystem from '@/components/DummySystem'
 import SystemView from '@/components/SystemView'
-import EditBook from '@/components/EditBook'
-import CreateBook from '@/components/CreateBook'
-import BookList from '@/components/BookList'
-import ShowBook from '@/components/ShowBook'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
-import Home from '@/components/Home'
+import GroupList from '@/components/GroupList'
 import ShowGroup from '@/components/ShowGroup'
 import EditGroup from '@/components/EditGroup'
 
@@ -50,19 +45,14 @@ export default new Router({
       component: SystemList
     },
     {
-      path: '/dummysystem',
-      name: 'DummySystem',
-      component: DummySystem
-    },
-    {
       path: '/systemView',
       name: 'SystemView',
       component: SystemView
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/grouplist',
+      name: 'GroupList',
+      component: GroupList
     },
     {
       path: '/showgroup',
@@ -73,26 +63,6 @@ export default new Router({
       path: '/editgroup',
       name: 'EditGroup',
       component: EditGroup
-    },
-    {
-      path: '/editbook',
-      name: 'EditBook',
-      component: EditBook
-    },
-    {
-      path: '/showbook',
-      name: 'ShowBook',
-      component: ShowBook
-    },
-    {
-      path: '/createbook',
-      name: 'CreateBook',
-      component: CreateBook
-    },
-    {
-      path: '/booklist',
-      name: 'BookList',
-      component: BookList
     }
   ]
 })

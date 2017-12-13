@@ -13,6 +13,7 @@
           Company Name: {{system.companyName}}<br>
           System Model: {{system.model}}<br>
           OS Version: {{system.osVersion}}<br>
+<<<<<<< HEAD
           Recommended OS Version: {{system.recommended.osVersion}}<br>
           Common Provisional Groups (CPGs): {{system.cpgCount}}<br>
           Country/Region of Origin: {{system.location.region + '/' + system.location.country}}<br>
@@ -21,11 +22,17 @@
           <b-button size="sm" :variant="secondary">{{system.Tag[0]}}</b-button>
           <b-button size="sm" :variant="secondary">{{system.Tag[1]}}</b-button>
           <b-button size="sm" :variant="secondary">{{system.Tag[2]}}</b-button><br>
+=======
+          Tags: {{system.Tag}}<br>
+>>>>>>> fb06cb173f609904bb25f08005155c5a0cae29b4
           <template v-if='system.writeServiceTimeMillis != null'>
           Write Service Time: {{system.writeServiceTimeMillis}}
           </template>
         </template>
+<<<<<<< HEAD
         
+=======
+>>>>>>> fb06cb173f609904bb25f08005155c5a0cae29b4
         <hr class="my-4">
         <!-- <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn> -->
         <b-form @submit="addTag(tag)">
@@ -50,8 +57,12 @@ export default {
   data () {
     return {
       system: system,
+<<<<<<< HEAD
       tags: system.Tag,
       tag: ''
+=======
+      tag: '',
+>>>>>>> fb06cb173f609904bb25f08005155c5a0cae29b4
     }
   },
   created () {
@@ -66,12 +77,16 @@ export default {
   },
   methods: {
     addTag (tag) {
+<<<<<<< HEAD
       if (tag == '') {
         alert('Tag field empty!')
         this.$router.push('home')
       }
       else {
       this.system.Tag.push(tag);
+=======
+      this.system.Tag.push(tag)
+>>>>>>> fb06cb173f609904bb25f08005155c5a0cae29b4
       axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
       this.$router.push('home')
       }
