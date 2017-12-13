@@ -8,7 +8,7 @@
       <img class="navbar-brand" src="https://i.imgur.com/sM81cRp.png" href='#/home'>
   </div>
   <div class = "info">
-        <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='home'>Your Groups</a></li>
+        <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='grouplist'>Your Groups</a></li>
         <li v-if="this.noLogout.includes(this.$route.path) === false"><a><router-link to='systems'>Your Systems</a></li>
         <li><a><router-link to='about'>About</router-link></a></li>
         <li><a><router-link to='contact'>Contact</router-link></a></li>

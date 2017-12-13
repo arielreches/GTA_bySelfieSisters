@@ -2,11 +2,10 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Hi, {{ msg }}! You're viewing {{ groupName }}.
+        Hi, {{ msg }}!
       </h2>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
-      <p>Value: {{ this.searchString }}</p>
-      <b-table @row-clicked='details' hover :items="filteredArticles" :fields="fields">
+      <b-table striped hover :items="filteredArticles" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
@@ -28,7 +27,8 @@
 import axios from 'axios'
 import router from '../router'
 
-var group = {}
+var systems = []
+var msg = ''
 
 export default {
   name: 'SystemList',
@@ -42,24 +42,19 @@ export default {
         Tag: {label: 'Tags'},
         actions: {label: 'Action', 'class': 'text-center'}
       },
-      systems: [],
-      errors: [], 
-      msg: '',
-      groupid: String
+      systems: systems,
+      errors: [],
+      msg: msg
     }
   },
   created () {
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id + '/populate')
-    .then(response => {
-      this.group = response.data
-      this.groupName = this.group.name
-      this.systems = this.group.systemsIn
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    axios.get('http://localhost:3000/system/init')
+      .then(response => {
+        this.systems = response.data
+      })
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
+        console.log(response.data)
         this.msg = response.data.username
       })
       .catch(e => {
@@ -89,7 +84,7 @@ export default {
                     else if(item.Tag){
                       for(var i = 0; i < item.Tag.length; i++){
                         if(item.Tag[i].toLowerCase().indexOf(searchString) !== -1){
-                        return item;
+                          return item;
                       }
                       }
                     }
@@ -102,19 +97,23 @@ export default {
   },
   methods: {
       makeActive: function (item) {
-        this.tagName = item;
-        var form = document.getElementById("inputForm");
-        form.reset()
-        this.searchString='';
+          this.tagName = item;
+          var form = document.getElementById("inputForm");
+          form.reset();
+          this.searchString='';
       },
-      details (item) {
-        router.push({
-          name: 'SystemView',
-          params: {
-            id: item._id
-          }
-        })
-      }
+        },
+  methods: {
+    details (item) {
+      console.log(item)
+      router.push({
+        name: 'SystemView',
+        params: {
+          id: item._id
+        }
+      })
+      console.log(item)
     }
   }
+}
 </script>
