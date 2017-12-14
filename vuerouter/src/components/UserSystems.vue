@@ -33,7 +33,7 @@ var msg = ''
 var group = {}
 
 export default {
-  name: 'SystemList',
+  name: 'UserSystems',
   data () {
     return {
       searchString: '',
@@ -41,6 +41,7 @@ export default {
         companyName: {label: 'Company Name', sortable: true, 'class': 'text-center'},
         systemName: {label: 'System Name', sortable: true},
         model: {label: 'Model', sortable: true},
+        Group: {label: 'Groups'},
         Tag: {label: 'Tags'},
         actions: {label: 'Action', 'class': 'text-center'}
       },
@@ -51,20 +52,30 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id + '/populate')
-    .then(response => {
-      console.log('In created method in get group now')
-      console.log(response.data)
-      this.group = response.data
-      this.systems = this.group.systemsIn
+    axios.get(`http://localhost:3000/user/curr`)
+      .then(response => {
+        this.msg = response.data.username
+        this.user = response.data
+        axios.get(`http://localhost:3000/user/` + this.user._id + '/systemsall')
+        .then(response => {
+          console.log('In created method in get group now')
+          console.log(response.data)
+          systems = response.data
+          console.log(Array.from(new Set(systems)))
+          var uniq = Array.from(new Set(systems))
+          console.log(uniq)
+          axios.post(`http://localhost:3000/system/many` , uniq)
+          .then(response => {
+            console.log(response)
+            this.systems = response.data
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
     })
     .catch(e => {
       this.errors.push(e)
     })
-    axios.get(`http://localhost:3000/user/curr`)
-      .then(response => {
-        console.log(response.data)
-        this.msg = response.data.username
       })
       .catch(e => {
         this.errors.push(e)

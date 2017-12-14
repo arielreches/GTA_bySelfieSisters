@@ -224,21 +224,18 @@ export default {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
       var id   
+      // add group
       axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
-        console.log('added group')
         id = response.data._id
-        console.log(id)
+        // for each system in group sytemsIn list, add group id to sytems' group list
         for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrsys = this.group.systemsIn[i]
-          console.log(crrsys)
           axios.get(`http://localhost:3000/system/` + crrsys)
           .then(response => {
             console.log(response.data)
             var sys = response.data
-            console.log('made it to systems')
             sys.Group.push(id)
-            console.log(sys)
             axios.put(`http://localhost:3000/system/` + sys._id, sys)
             .then(response => {
               console.log(response)
@@ -252,6 +249,7 @@ export default {
             this.errors.push(e)
           })
       }
+      //for each user in group, add group id to users Group field
       for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrusr = this.group.usersIn[i]
           console.log(crrusr)

@@ -14,6 +14,7 @@ import Contact from '@/components/Contact'
 import Home from '@/components/Home'
 import ShowGroup from '@/components/ShowGroup'
 import EditGroup from '@/components/EditGroup'
+import UserSystems from '@/components/UserSystems'
 
 Vue.use(Router)
 
@@ -73,6 +74,11 @@ export default new Router({
       path: '/editgroup',
       name: 'EditGroup',
       component: EditGroup
+    },
+    {
+      path: '/usersystems',
+      name: 'UserSystems',
+      component: UserSystems
     },
     {
       path: '/editbook',

@@ -102,10 +102,9 @@ export default {
     deletegroup (groupid) {
       axios.delete('http://localhost:3000/group/' + groupid)
       .then((result) => {
-        this.$router.push({
-          name: 'Home'
-        })
+        this.$router.push('groupList')
       })
+      
       .catch(e => {
         this.errors.push(e)
       })

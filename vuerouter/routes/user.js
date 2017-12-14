@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
+var Group = require('../models/Group.js');
 
 var currentUser = null;
 
@@ -51,10 +52,21 @@ router.get('/:id/groups', function(req, res, next) {
   User.findById(req.params.id).populate('Group').exec(function (err, usergroups) {
     if (err) return next(err);
     res.json(usergroups);
-    console.log(usergroups);
   });
 });
 
+router.get('/:id/systemsall', function(req, res, next) {
+  var systems = []
+  User.findById(req.params.id).populate('Group').exec(function (err, usergroups) {
+    if (err) return next(err);
+    for (i = 0; i < usergroups.Group.length; i++){
+      for (t = 0; t < usergroups.Group[i].systemsIn.length; t++) {
+        systems.push(usergroups.Group[i].systemsIn[t]);
+      }
+    }
+    res.json(systems);
+  });
+});
 
 
 router.post('/', function(req, res, next) {

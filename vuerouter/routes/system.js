@@ -29,7 +29,25 @@ router.put('/:id/tag', function(req, res, next) {
   })
 })
 
+/* GET SYSTEMS'S GROUPS BY ID */
+router.get('/:id/groups', function(req, res, next) {
+  System.findById(req.params.id).populate('Group').exec(function (err, systemgroups) {
+    if (err) return next(err);
+    res.json(systemgroups);
+    console.log(systemgroups);
+  });
+});
 
+/* GET ARRAY OF SYSTEMS */
+router.post('/many', function(req, res, next) {
+  console.log(req.body)
+  System.find({
+    '_id': { $in: req.body}
+  }, function(err, systems){
+     console.log(systems);
+     res.json(systems);
+  });
+});
 
 /* SAVE SYSTEM */
 /* router.post('/', function(req, res, next) {
