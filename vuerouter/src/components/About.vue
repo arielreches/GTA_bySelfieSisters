@@ -24,7 +24,19 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">Brilliant</p>
+            <p class="card-text">If brilliance were a person</p>
+            </b-card>
+        </div>
+        <div class="thing">
+            <b-card title="Stephen Ren"
+                img-src="http://commoncdn.entrata.com/images/jquery/galleria/image-not-found.png"
+                img-alt="Image"
+                img-top
+                tag="article"
+                style="max-width: 40rem;"
+                class="mb-2"
+            >
+            <p class="card-text">Ummm....... 404 who was that guy again?</p>
             </b-card>
         </div>
         <div class="thing">
@@ -36,7 +48,7 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">Well he's hot</p>
+            <p class="card-text">What funds? what student union referrendum? (He's hot)</p>
             </b-card>
         </div>
         <div class="thing">
@@ -60,7 +72,7 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">What a stud</p>
+            <p class="card-text">Well he's hot. god damn he's really hot</p>
             </b-card>
         </div>
         <div class="thing">
