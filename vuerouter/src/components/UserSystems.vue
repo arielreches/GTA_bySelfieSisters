@@ -2,10 +2,9 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Hi, {{ msg }}!
+        {{ msg }}'s Systems
       </h2>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
-      <p>Value: {{ this.searchString }}</p>
       <b-table  hover :items="filteredArticles" :fields="fields">
         <template slot="Group" scope="row">
           <p v-for="group in row.value">
@@ -107,7 +106,14 @@ export default {
                     item.model.toLowerCase().indexOf(searchString) !== -1) {
                        return item;
                     }
-                    else if(item.Tag){
+                    else if(item.Group){
+                      for(var i = 0; i < item.Group.length; i++){
+                        if(item.Group[i].name.toLowerCase().indexOf(searchString) !== -1){
+                          return item;
+                      }
+                      }
+                    }
+                    if(item.Tag){
                       for(var i = 0; i < item.Tag.length; i++){
                         if(item.Tag[i].toLowerCase().indexOf(searchString) !== -1){
                         return item;
