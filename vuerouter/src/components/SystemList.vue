@@ -56,12 +56,12 @@ export default {
     
     this.id=this.$route.params.id
     console.log(this.id)
-    axios.get('http://localhost:3000/group/' + this.$route.params.id + '/populate')
+    axios.get('http://ssgta.herokuapp.com/group/' + this.$route.params.id + '/populate')
       .then(response => {
         this.systems = response.data.systemsIn
         console.log(this.systems)
       })
-    axios.get(`http://localhost:3000/user/curr`)
+    axios.get(`http://ssgta.herokuapp.com/user/curr`)
       .then(response => {
         console.log(response.data)
         this.msg = response.data.username

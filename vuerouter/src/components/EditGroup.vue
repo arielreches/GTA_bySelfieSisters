@@ -31,7 +31,7 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id)
+    axios.get(`http://ssgta.herokuapp.com/group/` + this.$route.params.id)
     .then(response => {
       this.group = response.data
     })
@@ -42,7 +42,7 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      axios.put(`http://localhost:3000/group/` + this.$route.params.id, this.group)
+      axios.put(`http://ssgta.herokuapp.com/group/` + this.$route.params.id, this.group)
       .then(response => {
         this.$router.push({
           name: 'Home',

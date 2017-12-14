@@ -57,11 +57,11 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/user/curr`)
+    axios.get(`http://ssgta.herokuapp.com/user/curr`)
       .then(response => {
         this.msg = response.data.username
         this.user = response.data
-        axios.get(`http://localhost:3000/user/` + this.user._id + '/systemsall')
+        axios.get(`http://ssgta.herokuapp.com/user/` + this.user._id + '/systemsall')
         .then(response => {
           console.log('In created method in get group now')
           console.log(response.data)
@@ -69,7 +69,7 @@ export default {
           console.log(Array.from(new Set(systems)))
           var uniq = Array.from(new Set(systems))
           console.log(uniq)
-          axios.post(`http://localhost:3000/system/many` , uniq)
+          axios.post(`http://ssgta.herokuapp.com/system/many` , uniq)
           .then(response => {
             console.log(response)
             this.systems = response.data

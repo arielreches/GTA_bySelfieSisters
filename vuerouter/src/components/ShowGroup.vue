@@ -40,7 +40,7 @@ export default {
   },
   created () {
     var creator
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id)
+    axios.get(`http://ssgta.herokuapp.com/group/` + this.$route.params.id)
     .then(response => {
       this.group = response.data
 
@@ -51,7 +51,7 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
-    axios.get(`http://localhost:3000/user/`)
+    axios.get(`http://ssgta.herokuapp.com/user/`)
     .then(response => {
       this.user = this.group.usersIn;
 
@@ -76,7 +76,7 @@ export default {
       this.errors.push(e)
     })
 
-    axios.get(`http://localhost:3000/system/init`)
+    axios.get(`http://ssgta.herokuapp.com/system/init`)
     .then(response => {
       this.systems = this.group.systemsIn;
       for(var i = 0 ; i < this.systems.length ; i ++ ){
@@ -100,7 +100,7 @@ export default {
       })
     },
     deletegroup (groupid) {
-      axios.delete('http://localhost:3000/group/' + groupid)
+      axios.delete('http://ssgta.herokuapp.com/group/' + groupid)
       .then((result) => {
         this.$router.push('groupList')
       })

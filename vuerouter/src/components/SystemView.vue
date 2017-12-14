@@ -60,7 +60,7 @@ export default {
     this.id=this.$route.params.groupid
     console.log(this.id)
 
-    axios.get(`http://localhost:3000/system/` + this.$route.params.id)
+    axios.get(`http://ssgta.herokuapp.com/system/` + this.$route.params.id)
     .then(response => {
       this.system = response.data
       console.log("made it")
@@ -74,7 +74,7 @@ export default {
     addTag (tag) {
       this.system.Tag.push(tag)
       this.system.Tag = this.system.Tag.filter(function(n){ return n != ""})
-      axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
+      axios.put('http://ssgta.herokuapp.com/system/' + this.$route.params.id, this.system)
       this.$router.push('grouplist')
     },
     back(){
