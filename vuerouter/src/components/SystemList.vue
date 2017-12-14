@@ -56,9 +56,10 @@ export default {
     
     this.id=this.$route.params.id
     console.log(this.id)
-    axios.get('http://localhost:3000/system/init')
+    axios.get('http://localhost:3000/group/' + this.$route.params.id + '/populate')
       .then(response => {
-        this.systems = response.data
+        this.systems = response.data.systemsIn
+        console.log(this.systems)
       })
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
