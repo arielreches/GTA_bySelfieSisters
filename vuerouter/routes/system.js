@@ -43,7 +43,7 @@ router.post('/many', function(req, res, next) {
   console.log(req.body)
   System.find({
     '_id': { $in: req.body}
-  }, function(err, systems){
+  }).populate('Group').exec(function(err, systems){
      console.log(systems);
      res.json(systems);
   });

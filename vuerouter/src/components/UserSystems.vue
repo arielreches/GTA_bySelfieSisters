@@ -7,6 +7,12 @@
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
       <p>Value: {{ this.searchString }}</p>
       <b-table  hover :items="filteredArticles" :fields="fields">
+        <template slot="Group" scope="row">
+          <p v-for="group in row.value">
+            {{ group.name }}
+          </p>
+          <!-- {{ row.value.name }} -->
+        </template>
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
