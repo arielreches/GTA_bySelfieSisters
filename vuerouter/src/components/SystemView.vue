@@ -12,12 +12,12 @@
         <template slot="lead">
           <hr class="my-4">
           <!-- <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn> -->
-          <b-form @submit="addTag(tag)">
+          <b-form>
             <b-form-input v-model.trim="tag" type="text" placeholder="Add Tag...">
             </b-form-input>
-            <b-btn type="submit" class="addTagButton">Add Tag</b-btn>
+            <b-btn @click.stop="addTag(tag)" class="addTagButton">Add Tag</b-btn>
           </b-form>
-          <span class="attribute">Tags:</span> <b-button v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id" class = "tagButton">
+          <span class="attribute">Tags(Click on a tag to remove!):</span> <b-button @click.stop="removeTag(item)" v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id" class = "tagButton">
             {{item}}
           </b-button><br>
           <span class="attribute">Company Name:</span> {{system.companyName}}<br>
@@ -97,17 +97,33 @@ export default {
       console.log(this.system)
     })
     .catch(e => {
-      this.errors.push(e)
+      console.log(e)
     })
   },
   methods: {
     addTag (tag) {
+      if (tag == '' || this.system.Tag.indexOf(tag) !== -1) {
+        this.tag = '' 
+        alert("Empty tag or it already exists!"
+        )}
+      else {
       this.system.Tag.push(tag)
       this.system.Tag = this.system.Tag.filter(function(n){ return n != ""})
-      axios.put('/system/' + this.$route.params.id, this.system)
-      this.$router.push('grouplist')
-      tag = ""
+      this.system.Tag = Array.from(new Set(this.system.Tag))
+      console.log(this.system._id)
+      axios.put('/system/' + this.system._id, this.system)
+      this.tag = ''
+      }
+      
     },
+    removeTag (remove) {
+      //this.system.Tag = array.splice(this.system.Tag.indexOf(remove, 1))
+      console.log(remove)
+      this.system.Tag = this.system.Tag.filter(function(n){ return n != remove})
+      axios.put('/system/' + this.system._id, this.system)
+    },
+
+
     back(){
       this.$router.push({
         name: 'SystemList',
