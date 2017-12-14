@@ -17,7 +17,7 @@
         <p>
           Updated Date: {{group.updated_date}}
         </p>
-        <b-btn variant='primary'href= '#/home'>Home</b-btn>
+        <b-btn variant='primary'href= '#/grouplist'>Home</b-btn>
         <b-btn variant="success" @click.stop="editgroup(group._id)">Edit</b-btn>
         <b-btn variant="danger" @click.stop="deletegroup(group._id)">Delete</b-btn>
       </b-jumbotron>
@@ -39,7 +39,7 @@ export default {
     }
   },
   created () {
-    var creator 
+    var creator
     axios.get(`http://localhost:3000/group/` + this.$route.params.id)
     .then(response => {
       this.group = response.data
@@ -104,7 +104,7 @@ export default {
       .then((result) => {
         this.$router.push('groupList')
       })
-      
+
       .catch(e => {
         this.errors.push(e)
       })
