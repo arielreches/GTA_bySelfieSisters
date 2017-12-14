@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <b-row>
     <b-col cols="12">
@@ -298,5 +297,3 @@ export default {
 }
 </script>
 
-=======
->>>>>>> 818b90695e6dfd4fbf5314a546a8c3d8ec711418

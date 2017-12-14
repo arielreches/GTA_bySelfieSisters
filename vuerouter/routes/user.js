@@ -73,6 +73,8 @@ router.post('/', function(req, res, next) {
   //use mongoose User var to create a user instance in the db
   User.create(req.body, function (err, post) {
     if (err) return next(err);
+    post["admin"]=false;
+    // console.log(post);
     res.json(post)
   });
 });
