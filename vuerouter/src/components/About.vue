@@ -2,7 +2,7 @@
 
     <div >
       <h2 class = "intro">The Selfie Sisters...</h2>
-      <p class = "intro">Ariel Reches, Jill Hynes, Ryan Mahan, Bhishma "Gaurab" Pant, Forrest Logan, Ross Hahn, Quinn Jackson, Matt Fownes, Jakob Herlitz, Stephen Ren</p>
+      <p class = "intro">Ariel Reches, Jill Hynes, Stephen Ren, Ryan Mahan, Bhishma "Gaurab" Pant, Forrest Logan, Ross Hahn, Quinn Jackson, Matt Fownes, Jakob Herlitz</p>
         <div class="thing">
             <b-card title="Ariel Reches"
                 img-src="https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/12140982_10207993539621723_170863557148227339_o.jpg?oh=6d3bafda2345660cf7d776792f9195dd&oe=5ABB890F"
