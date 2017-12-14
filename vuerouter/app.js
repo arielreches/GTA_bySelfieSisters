@@ -10,7 +10,7 @@ var book = require('./routes/book');
 var user = require('./routes/user');
 var system = require('./routes/system');
 var group = require('./routes/group');
-
+var tag = require('./routes/tag');
 // app uses express as the server. Should be familiar.
 var app = express();
 
@@ -42,6 +42,9 @@ app.use('/system', system);
 
 app.use('/groups', express.static(path.join(__dirname, 'dist')));
 app.use('/group', group);
+
+app.use('/tags', express.static(path.join(__dirname, 'dist')));
+app.use('/tag', tag);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

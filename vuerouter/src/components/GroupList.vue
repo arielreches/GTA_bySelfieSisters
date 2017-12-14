@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 <template>
   <b-row>
     <b-col cols="12">
-      <div style="padding-left:1%;padding-right:1%;padding-bottom:2%;padding-top:2%;">
+      <div style="padding-left:1%;padding-right:1%;padding-bottom:1%;padding-top:2%;">
         <h2>
           System Groups
         </h2>
@@ -39,9 +38,11 @@
             </b-card>
           </b-collapse>
         </div>
-
+        <div style="padding-bottom:1%;padding-left:1%;padding-right:80%;">
+          <b-form-input v-model="searchString" type = "text" placeholder="Search groups..."></b-form-input>
+        </div>
         <div style="padding-bottom:5%;">
-          <b-table hover :items="getGroups" :fields="fields">
+          <b-table hover :items="filteredArticles" :fields="fields">
 
             <template slot="actions" scope="row">
               <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
@@ -70,11 +71,15 @@
 <script>
 
 import axios from 'axios'
+import router from '../router'
+
+var groups= []
 
 export default {
   name: 'Home',
   data () {
     return {
+      newGroups: [],
       systems: [],
       users: [],
       soptions: [],
@@ -93,6 +98,8 @@ export default {
         },
       SystemSearch: '',
       UserSearch:'',
+      searchString: '',
+      groups: groups
     }
   },
   created () {
@@ -217,7 +224,29 @@ export default {
         }
         // Return an array with the filtered data.
         return articles_array;
-      }
+      },
+      filteredArticles: function () {
+        var articles_array = this.getGroups;
+        var searchString = this.searchString;
+
+        if(!searchString){
+            return articles_array;
+        }
+        else {
+            searchString = searchString.trim().toLowerCase();
+            articles_array = articles_array.filter(
+                function (item) {
+                  console.log("Made it")
+                    if (item.name.toLowerCase().indexOf(searchString) !== -1 || 
+                    item.groupCreator.toLowerCase().indexOf(searchString) !== -1) {
+                       return item;
+                    }
+                }
+            )
+        }
+        // Return an array with the filtered data.
+        return articles_array;
+    }
     },
   methods: {
 
@@ -225,18 +254,21 @@ export default {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
       var id   
-      // add group
       axios.post(`http://localhost:3000/group`, this.group)
       .then(response => {
+        console.log('added group')
         id = response.data._id
-        // for each system in group sytemsIn list, add group id to sytems' group list
+        console.log(id)
         for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrsys = this.group.systemsIn[i]
+          console.log(crrsys)
           axios.get(`http://localhost:3000/system/` + crrsys)
           .then(response => {
             console.log(response.data)
             var sys = response.data
+            console.log('made it to systems')
             sys.Group.push(id)
+            console.log(sys)
             axios.put(`http://localhost:3000/system/` + sys._id, sys)
             .then(response => {
               console.log(response)
@@ -250,7 +282,6 @@ export default {
             this.errors.push(e)
           })
       }
-      //for each user in group, add group id to users Group field
       for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrusr = this.group.usersIn[i]
           console.log(crrusr)
@@ -283,20 +314,26 @@ export default {
       })
     },
     details (group){
+      console.log(group._id)
       this.$router.push({
         name: 'ShowGroup',
         params: { id: group._id }
       })
     },
     viewSystems (group){
+      console.log(group._id)
       this.$router.push({
         name: 'SystemList',
         params: { id: group._id }
       })
-    }
+    },
+    makeActive: function (item) {
+          this.tagName = item;
+          var form = document.getElementById("inputForm");
+          form.reset();
+          this.searchString='';
+      }
   }
 }
 </script>
 
-=======
->>>>>>> 818b90695e6dfd4fbf5314a546a8c3d8ec711418

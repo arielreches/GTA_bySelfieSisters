@@ -1,12 +1,15 @@
 <template>
     <b-row>
     <b-col cols="12">
-      <h2>
-        Hi, {{ msg }}!
-      </h2>
-      <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
-      <p>Value: {{ this.searchString }}</p>
-      <b-table  hover :items="filteredArticles" :fields="fields">
+      <div style="padding-left:1%;padding-right:1%;padding-bottom:1%;padding-top:2%;">
+        <h2>
+          Hi, {{ msg }}!
+        </h2>
+        <div style="padding-bottom:1%;padding-right:80%;padding-top:1%;">
+          <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
+        </div>
+      </div>
+      <b-table striped hover :items="filteredArticles" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
         </template>
@@ -30,12 +33,12 @@ import router from '../router'
 
 var systems = []
 var msg = ''
-var group = {}
 
 export default {
   name: 'SystemList',
   data () {
     return {
+      id: '',
       searchString: '',
       fields: {
         companyName: {label: 'Company Name', sortable: true, 'class': 'text-center'},
@@ -45,22 +48,18 @@ export default {
         actions: {label: 'Action', 'class': 'text-center'}
       },
       systems: systems,
-      errors: [], 
-      msg: msg,
-      groupid: String
+      errors: [],
+      msg: msg
     }
   },
   created () {
-    axios.get(`http://localhost:3000/group/` + this.$route.params.id + '/populate')
-    .then(response => {
-      console.log('In created method in get group now')
-      console.log(response.data)
-      this.group = response.data
-      this.systems = this.group.systemsIn
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    
+    this.id=this.$route.params.id
+    console.log(this.id)
+    axios.get('http://localhost:3000/system/init')
+      .then(response => {
+        this.systems = response.data
+      })
     axios.get(`http://localhost:3000/user/curr`)
       .then(response => {
         console.log(response.data)
@@ -93,7 +92,7 @@ export default {
                     else if(item.Tag){
                       for(var i = 0; i < item.Tag.length; i++){
                         if(item.Tag[i].toLowerCase().indexOf(searchString) !== -1){
-                        return item;
+                          return item;
                       }
                       }
                     }
@@ -106,21 +105,24 @@ export default {
   },
   methods: {
       makeActive: function (item) {
-        this.tagName = item;
-        var form = document.getElementById("inputForm");
-        form.reset()
-        this.searchString='';
+          this.tagName = item;
+          var form = document.getElementById("inputForm");
+          form.reset();
+          this.searchString='';
       },
-      details (item) {
-        console.log(item)
-        router.push({
-          name: 'SystemView',
-          params: {
-            id: item._id
-          }
-        })
-        console.log(item)
-      },
+        },
+  methods: {
+    details (item) {
+      console.log(item)
+      router.push({
+        name: 'SystemView',
+        params: {
+          id: item._id,
+          groupid: this.id
+        }
+      })
+      console.log(item)
     }
   }
+}
 </script>
