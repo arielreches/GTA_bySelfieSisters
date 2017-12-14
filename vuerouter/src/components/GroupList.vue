@@ -103,25 +103,6 @@ export default {
     }
   },
   created () {
-    axios.get(`/system/init`)
-    .then(response => {
-      this.systems = response.data
-      var holder = [this.systems.length]
-      var temp = {}
-      for (var i = 0; i < this.systems.length; i++) {
-
-        temp["text"]=this.systems[i]["companyName"]
-        temp["value"]=this.systems[i]["_id"]
-
-        holder[i]=temp
-        temp={}
-
-      }
-      this.soptions=holder;
-    })
-    .catch(e => {
-      console.log(e);
-    })
     axios.get(`/user`)
     .then(response => {
       this.users = response.data
@@ -155,7 +136,36 @@ export default {
              })
              .catch(e => {
                this.errors.push(e)
-            })  
+            })
+    axios.get('/user/' + this.curruser._id + `/systemsall`)
+    .then(response => {
+      console.log(response)
+       var uniq = Array.from(new Set(response.data))
+      axios.post(`/system/many` , uniq)
+          .then(response => {
+            console.log(response)
+            this.systems = response.data
+            console.log(this.systems)
+            var holder = [this.systems.length]
+            var temp = {}
+            for (var i = 0; i < this.systems.length; i++) {
+
+              temp["text"]=this.systems[i]["companyName"]
+              temp["value"]=this.systems[i]["_id"]
+
+              holder[i]=temp
+              temp={}
+
+            }
+            this.soptions=holder;
+                })
+          .catch(e => {
+            this.errors.push(e)
+          })
+    })
+    .catch(e => {
+      console.log(e);
+    })  
       })
       .catch(e => {
         this.errors.push(e)
