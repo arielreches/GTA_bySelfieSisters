@@ -105,7 +105,7 @@ export default {
       this.system.Tag.push(tag)
       this.system.Tag = this.system.Tag.filter(function(n){ return n != ""})
       axios.put('/system/' + this.$route.params.id, this.system)
-      this.$router.push('systemView')
+      this.$router.push('grouplist')
       tag = ""
     },
     back(){
