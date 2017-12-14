@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col cols="12">
-      <div style="padding-left:1%;padding-right:1%;padding-bottom:2%;padding-top:2%;">
+      <div style="padding-left:1%;padding-right:1%;padding-bottom:1%;padding-top:2%;">
         <h2>
           System Groups
         </h2>
@@ -38,8 +38,9 @@
             </b-card>
           </b-collapse>
         </div>
-        <b-form-input v-model="searchString" type = "text" placeholder="Search groups..."></b-form-input>
-        <p>{{this.searchString}}</p>
+        <div style="padding-bottom:1%;padding-left:1%;padding-right:80%;">
+          <b-form-input v-model="searchString" type = "text" placeholder="Search groups..."></b-form-input>
+        </div>
         <div style="padding-bottom:5%;">
           <b-table hover :items="filteredArticles" :fields="fields">
 

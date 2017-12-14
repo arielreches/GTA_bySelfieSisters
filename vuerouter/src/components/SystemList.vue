@@ -1,10 +1,14 @@
 <template>
     <b-row>
     <b-col cols="12">
-      <h2>
-        Hi, {{ msg }}!
-      </h2>
-      <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
+      <div style="padding-left:1%;padding-right:1%;padding-bottom:1%;padding-top:2%;">
+        <h2>
+          Hi, {{ msg }}!
+        </h2>
+        <div style="padding-bottom:1%;padding-right:80%;padding-top:1%;">
+          <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
+        </div>
+      </div>
       <b-table striped hover :items="filteredArticles" :fields="fields">
         <template slot="actions" scope="row">
          <b-btn size="sm" @click.stop="details(row.item)">Details</b-btn>
