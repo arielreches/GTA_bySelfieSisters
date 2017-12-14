@@ -1,6 +1,8 @@
 <template>
 
     <div >
+      <h2 class = "intro">The Selfie Sisters...</h2>
+      <p class = "intro">Ariel Reches, Jill Hynes, Stephen Ren, Ryan Mahan, Bhishma "Gaurab" Pant, Forrest Logan, Ross Hahn, Quinn Jackson, Matt Fownes, Jakob Herlitz</p>
         <div class="thing">
             <b-card title="Ariel Reches"
                 img-src="https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/12140982_10207993539621723_170863557148227339_o.jpg?oh=6d3bafda2345660cf7d776792f9195dd&oe=5ABB890F"
@@ -22,7 +24,19 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">Brilliant</p>
+            <p class="card-text">If brilliance were a person</p>
+            </b-card>
+        </div>
+        <div class="thing">
+            <b-card title="Stephen Ren"
+                img-src="http://commoncdn.entrata.com/images/jquery/galleria/image-not-found.png"
+                img-alt="Image"
+                img-top
+                tag="article"
+                style="max-width: 40rem;"
+                class="mb-2"
+            >
+            <p class="card-text">Ummm....... 404 who was that guy again?</p>
             </b-card>
         </div>
         <div class="thing">
@@ -34,7 +48,7 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">Well he's hot</p>
+            <p class="card-text">What funds? what student union referrendum? (He's hot)</p>
             </b-card>
         </div>
         <div class="thing">
@@ -58,7 +72,7 @@
                 style="max-width: 40rem;"
                 class="mb-2"
             >
-            <p class="card-text">What a stud</p>
+            <p class="card-text">Well he's hot. god damn he's really hot</p>
             </b-card>
         </div>
         <div class="thing">
@@ -120,15 +134,19 @@
         padding-left:5%;
         /* padding-right:50%; */
         padding-top:2%;
-        
+
     }
-    div.bottom{        
+    div.bottom{
         padding-left:5%;
         /* padding-right:50%; */
         padding-top:2%;
         padding-bottom:5%;
     }
-        
+
+    .intro {
+      margin-left: 5px;
+      margin-top: 10px;
+    }
 </style>
 
 

@@ -18,6 +18,7 @@
           Country/Region of Origin: {{system.location.region + '/' + system.location.country}}<br>
           Capacity Percentage(Raw Storage): {{parseInt(system.capacity.total.freePct) + '%' + ' (' + parseInt(system.capacity.total.freeTiB) + ' TiB)'}}<br>
           Tags:<br>
+          
           <b-button v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id">
             {{item}}
           </b-button>
