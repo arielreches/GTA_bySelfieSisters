@@ -103,7 +103,7 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/system/init`)
+    axios.get(`http://ssgta.herokuapp.com/system/init`)
     .then(response => {
       this.systems = response.data
       var holder = [this.systems.length]
@@ -122,7 +122,7 @@ export default {
     .catch(e => {
       console.log(e);
     })
-    axios.get(`http://localhost:3000/user`)
+    axios.get(`http://ssgta.herokuapp.com/user`)
     .then(response => {
       this.users = response.data
       var holder = []

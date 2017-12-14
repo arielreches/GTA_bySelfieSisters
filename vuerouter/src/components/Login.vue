@@ -56,7 +56,7 @@ export default {
     login (evt) {
       evt.preventDefault()
       // send HTTP GET request to /user/login with params of username and password
-      axios.get('http://localhost:3000/user/login/t', {
+      axios.get('http://ssgta-herokuapp.com/user/login/t', {
         params: {
           username: user.username,
           password: user.password
