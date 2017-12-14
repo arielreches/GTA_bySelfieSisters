@@ -13,6 +13,10 @@
           Company Name: {{system.companyName}}<br>
           System Model: {{system.model}}<br>
           OS Version: {{system.osVersion}}<br>
+          Recommended OS Version: {{system.recommended.osVersion}}<br>
+          Common Provisional Groups (CPGs): {{system.cpgCount}}<br>
+          Country/Region of Origin: {{system.location.region + '/' + system.location.country}}<br>
+          Capacity Percentage(Raw Storage): {{parseInt(system.capacity.total.freePct) + '%' + ' (' + parseInt(system.capacity.total.freeTiB) + ' TiB)'}}<br>
           Tags: {{system.Tag}}<br>
           <template v-if='system.writeServiceTimeMillis != null'>
           Write Service Time: {{system.writeServiceTimeMillis}}
@@ -64,6 +68,7 @@ export default {
   methods: {
     addTag (tag) {
       this.system.Tag.push(tag)
+      this.system.Tag = this.system.Tag.filter(function(n){ return n != ""})
       axios.put('http://localhost:3000/system/' + this.$route.params.id, this.system)
       this.$router.push('grouplist')
     },
