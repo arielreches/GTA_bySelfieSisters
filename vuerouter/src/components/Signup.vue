@@ -49,7 +49,7 @@ export default {
       if (this.user.password === this.user.confirmPassword) {
         evt.preventDefault()
         // sends post request with this.user data
-        axios.post('http://localhost:3000/user', this.user)
+        axios.post('/user', this.user)
         .then(function (res) {
           router.push('home')
         })

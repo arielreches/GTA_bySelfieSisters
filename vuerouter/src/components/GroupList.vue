@@ -76,7 +76,7 @@ import router from '../router'
 var groups= []
 
 export default {
-  name: 'Home',
+  name: 'GroupList',
   data () {
     return {
       newGroups: [],
@@ -103,7 +103,7 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/system/init`)
+    axios.get(`/system/init`)
     .then(response => {
       this.systems = response.data
       var holder = [this.systems.length]
@@ -122,7 +122,7 @@ export default {
     .catch(e => {
       console.log(e);
     })
-    axios.get(`http://localhost:3000/user`)
+    axios.get(`/user`)
     .then(response => {
       this.users = response.data
       var holder = []
@@ -142,11 +142,11 @@ export default {
         console.log(e)
     })
     console.log(this.users)
-    axios.get(`http://localhost:3000/user/curr`)
+    axios.get(`/user/curr`)
       .then(response => {
         console.log(response.data)
         this.curruser = response.data
-         axios.get(`http://localhost:3000/user/` + this.curruser._id + '/groups')
+         axios.get(`/user/` + this.curruser._id + '/groups')
              .then(response => {
                console.log('curruser populate')
                console.log(response)
@@ -254,7 +254,7 @@ export default {
       evt.preventDefault()
       this.group.groupCreator = this.curruser._id  
       var id   
-      axios.post(`http://localhost:3000/group`, this.group)
+      axios.post(`/group`, this.group)
       .then(response => {
         console.log('added group')
         id = response.data._id
@@ -262,14 +262,14 @@ export default {
         for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrsys = this.group.systemsIn[i]
           console.log(crrsys)
-          axios.get(`http://localhost:3000/system/` + crrsys)
+          axios.get(`/system/` + crrsys)
           .then(response => {
             console.log(response.data)
             var sys = response.data
             console.log('made it to systems')
             sys.Group.push(id)
             console.log(sys)
-            axios.put(`http://localhost:3000/system/` + sys._id, sys)
+            axios.put(`/system/` + sys._id, sys)
             .then(response => {
               console.log(response)
               console.log('updated system')
@@ -285,14 +285,14 @@ export default {
       for (var i = 0; i < this.group.systemsIn.length; i++){
           var crrusr = this.group.usersIn[i]
           console.log(crrusr)
-          axios.get(`http://localhost:3000/user/` + crrusr)
+          axios.get(`/user/` + crrusr)
           .then(response => {
             console.log(response.data)
             var usr = response.data
             console.log('made it to users')
             usr.Group.push(id)
             console.log(usr)
-            axios.put(`http://localhost:3000/user/` + usr._id, usr)
+            axios.put(`/user/` + usr._id, usr)
             .then(response => {
               console.log(response)
               console.log('updated user')
