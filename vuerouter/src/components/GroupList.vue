@@ -135,14 +135,17 @@ export default {
                console.log(this.groups)           
              })
              .catch(e => {
-               this.errors.push(e)
+               console.log(e)
             })
     axios.get('/user/' + this.curruser._id + `/systemsall`)
     .then(response => {
+      console.log("systemsall response")
       console.log(response)
        var uniq = Array.from(new Set(response.data))
+       console.log(uniq)
       axios.post(`/system/many` , uniq)
           .then(response => {
+            console.log('sytems /many entry')
             console.log(response)
             this.systems = response.data
             console.log(this.systems)
@@ -160,7 +163,7 @@ export default {
             this.soptions=holder;
                 })
           .catch(e => {
-            this.errors.push(e)
+            console.log(e)
           })
     })
     .catch(e => {
@@ -168,7 +171,7 @@ export default {
     })  
       })
       .catch(e => {
-        this.errors.push(e)
+        console.log(e)
       })
     console.log(this.users)
   },

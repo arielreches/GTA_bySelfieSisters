@@ -1,14 +1,15 @@
 <template>
 <div>
 <b-form @submit="login">
-  <div class = fun-border>
+  <!-- <div class = fun-border>
   <div align = "center"><font face = "Times New Roman" size = "7" color = "black">
   <i>The <br>
     <font color = "red">G</font>raphical <br>
     <font color = "blue">T</font>agging <br><font color = "green">A</font>pplication</i>
 </font>
 </div>
-</div>
+</div> -->
+<h1 class = "header">Graphical Tagging Application</h1></br>
 <div class = "login">
   <h1>Sign In To Your Account</h1>
   </br>
@@ -30,6 +31,10 @@
 </template>
 
 <style>
+.header{
+    padding-left: 15%;
+    padding-right: 15%;
+}
 
 .login {
     padding-left: 35%;

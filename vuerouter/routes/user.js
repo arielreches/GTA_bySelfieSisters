@@ -64,6 +64,7 @@ router.get('/:id/systemsall', function(req, res, next) {
         systems.push(usergroups.Group[i].systemsIn[t]);
       }
     }
+    console.log(systems)
     res.json(systems);
   });
 });
@@ -73,7 +74,7 @@ router.post('/', function(req, res, next) {
   //use mongoose User var to create a user instance in the db
   User.create(req.body, function (err, post) {
     if (err) return next(err);
-    post["admin"]=false;
+ //   post["admin"]=false;
     // console.log(post);
     res.json(post)
   });

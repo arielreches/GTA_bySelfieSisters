@@ -89,6 +89,31 @@ export default {
                 console.log("group post")
                 console.log(response.data)
                 groupid = response.data._id
+                console.log('added group')
+        console.log(groupid)
+        for (var i = 0; i < group.systemsIn.length; i++){
+          var crrsys = group.systemsIn[i]
+          console.log(crrsys)
+          axios.get(`/system/` + crrsys)
+          .then(response => {
+            console.log(response.data)
+            var sys = response.data
+            console.log('made it to systems')
+            sys.Group.push(groupid)
+            console.log(sys)
+            axios.put(`/system/` + sys._id, sys)
+            .then(response => {
+              console.log(response)
+              console.log('updated system')
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })  
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
                 user.Group.push(groupid)
                 axios.put(`/user/` + user._id, user)
                 .then(response => {
