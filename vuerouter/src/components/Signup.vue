@@ -51,7 +51,7 @@ export default {
         // sends post request with this.user data
         axios.post('/user', this.user)
         .then(function (res) {
-          router.push('home')
+          router.push('grouplist')
         })
       } else {
         alert('Passwords do not match.')
