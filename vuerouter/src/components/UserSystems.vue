@@ -59,7 +59,7 @@ export default {
   created () {
     axios.get(`/user/curr`)
       .then(response => {
-        this.msg = response.data.username
+        this.msg = response.data.firstName
         this.user = response.data
         axios.get(`/user/` + this.user._id + '/systemsall')
         .then(response => {

@@ -64,7 +64,7 @@ export default {
     axios.get(`/user/curr`)
       .then(response => {
         console.log(response.data)
-        this.msg = response.data.username
+        this.msg = response.data.firstName
       })
       .catch(e => {
         this.errors.push(e)
