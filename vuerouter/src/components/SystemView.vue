@@ -17,11 +17,15 @@
           Common Provisional Groups (CPGs): {{system.cpgCount}}<br>
           Country/Region of Origin: {{system.location.region + '/' + system.location.country}}<br>
           Capacity Percentage(Raw Storage): {{parseInt(system.capacity.total.freePct) + '%' + ' (' + parseInt(system.capacity.total.freeTiB) + ' TiB)'}}<br>
-          Tags: {{system.Tag}}<br>
+          Tags:<br>
+          <b-button v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id">
+            {{item}}
+          </b-button>
           <template v-if='system.writeServiceTimeMillis != null'>
           Write Service Time: {{system.writeServiceTimeMillis}}
           </template>
         </template>
+
         <hr class="my-4">
         <!-- <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn> -->
         <b-form @submit="addTag(tag)">
