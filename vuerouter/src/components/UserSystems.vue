@@ -2,7 +2,7 @@
     <b-row>
     <b-col cols="12">
       <h2>
-        Hi, {{ msg }}!
+        {{ msg }}'s Systems
       </h2>
       <b-form-input v-model="searchString" type = "text" placeholder="Search..."></b-form-input>
       <p>Value: {{ this.searchString }}</p>
