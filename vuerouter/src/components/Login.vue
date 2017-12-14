@@ -10,7 +10,7 @@
   </br>
   <b-form-input v-model.trim="user.password" type="password" placeholder="Enter your Password"></b-form-input>
   </br>
-  <b-button id='loginButton' type="submit">Log In</b-button>
+  <b-button id='loginButton' type="submit">Log In</b-button></br>
   <router-link to='signup'>Not a GTA User? Click here to sign up.</router-link>
 </div>
 

@@ -12,10 +12,10 @@
         <template slot="lead">
           <hr class="my-4">
           <!-- <b-btn variant="success" @click.stop="addtoGroup(system._id)">Add to Group</b-btn> -->
-          <b-form @submit="addTag(tag)">
+          <b-form>
             <b-form-input v-model.trim="tag" type="text" placeholder="Add Tag...">
             </b-form-input>
-            <b-btn type="submit" class="addTagButton">Add Tag</b-btn>
+            <b-btn @click.stop="addTag(tag)" class="addTagButton">Add Tag</b-btn>
           </b-form>
           <span class="attribute">Tags:</span> <b-button v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id" class = "tagButton">
             {{item}}
@@ -97,16 +97,26 @@ export default {
       console.log(this.system)
     })
     .catch(e => {
-      this.errors.push(e)
+      console.log(e)
     })
   },
   methods: {
     addTag (tag) {
       this.system.Tag.push(tag)
       this.system.Tag = this.system.Tag.filter(function(n){ return n != ""})
-      axios.put('/system/' + this.$route.params.id, this.system)
-      this.$router.push('systemView')
-      tag = ""
+      console.log(this.system._id)
+      axios.put('/system/' + this.system._id, this.system)
+      // .then(response => {
+      //         this.$router.push({
+      //   name: 'SystemView',
+      //   params: { id: this.id }
+      // })
+      // })
+      // .catch (e => {
+      //   console.log(e)
+      // })
+      this.tag = ""
+      
     },
     back(){
       this.$router.push({
