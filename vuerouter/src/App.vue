@@ -15,6 +15,15 @@
         <li v-if="this.noLogout.includes(this.$route.path) === false"><router-link to='login'>Logout</router-link</a></li>
       </ul>
     </div>
+  <div v-if= "this.noLogout.includes(this.$route.path) === false">
+    <div class= fun-border>
+    <font face = "Times New Roman" size = "7" color = "black">
+  <i>The <font color = "red">G</font>
+  <font color = "blue">T</font>
+  <font color = "green">A</font></i>
+</font>
+  </div>
+  </div>
 </b-navbar>
 <footer class="container-fluid text-center">
   <small>Copyright &copy 2017 by Selfie Sisters</small>
@@ -35,6 +44,9 @@ export default {
 </script>
 
 <style>
+.fun-border{
+  border: medium solid green;
+}
 a:hover {
   color: #00b187 !important
 }

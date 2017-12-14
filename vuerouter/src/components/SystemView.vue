@@ -17,7 +17,8 @@
             </b-form-input>
             <b-btn @click.stop="addTag(tag)" class="addTagButton">Add Tag</b-btn>
           </b-form>
-          <span class="attribute">Tags(Click on a tag to remove!):</span> <b-button @click.stop="removeTag(item)" v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id" class = "tagButton">
+          <span class="attribute">Tags  (Click on a tag to remove it from this system!):</span><br>
+           <b-button @click.stop="removeTag(item)" v-for="item in system.Tag" size="small" variant="outline-success" :key="item.id" class = "tagButton">
             {{item}}
           </b-button><br>
           <span class="attribute">Company Name:</span> {{system.companyName}}<br>

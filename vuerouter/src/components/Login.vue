@@ -1,7 +1,14 @@
 <template>
 <div>
 <b-form @submit="login">
-
+  <div class = fun-border>
+  <div align = "center"><font face = "Times New Roman" size = "7" color = "black">
+  <i>The <br>
+    <font color = "red">G</font>raphical <br>
+    <font color = "blue">T</font>agging <br><font color = "green">A</font>pplication</i>
+</font>
+</div>
+</div>
 <div class = "login">
   <h1>Sign In To Your Account</h1>
   </br>
@@ -23,10 +30,15 @@
 </template>
 
 <style>
+
 .login {
     padding-left: 35%;
     padding-right: 35%;
     padding-top: 10%;
+}
+
+.fun-border{
+  border: medium solid green;
 }
 #loginButton:hover {
   background-color: #03BE74;
